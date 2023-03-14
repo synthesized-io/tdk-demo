@@ -1,0 +1,38 @@
+default_config:
+  mode: GENERATION
+
+tables:
+  - table_name_with_schema: "public.country"
+    target_row_number: 200
+
+  - table_name_with_schema: "public.language"
+    target_row_number: 100
+
+  - table_name_with_schema: "public.city"
+    target_row_number: 20_000
+
+  - table_name_with_schema: "public.address"
+    target_row_number: 100_000
+
+  - table_name_with_schema: "public.store"
+    target_row_number: 100_000
+
+  - table_name_with_schema: "public.staff"
+    target_row_number: 100_000
+    
+  - table_name_with_schema: "public.customer"
+    target_row_number: 100_000
+
+  - table_name_with_schema: "public.film"
+    target_row_number: 10_000
+
+  - table_name_with_schema: "public.inventory"
+    target_row_number: 100_000
+    
+  - table_name_with_schema: "public.rental"
+    target_row_number: 100_000
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: "DROP_AND_CREATE"
+cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+safety_mode: "RELAXED"

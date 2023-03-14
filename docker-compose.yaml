@@ -1,0 +1,47 @@
+version: '3.5'
+
+services:
+
+  input_db:
+    container_name: input_db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    volumes:
+       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/pagila-schema.sql
+    ports:
+      - "6000:5432"
+    restart: unless-stopped
+
+
+  output_db:
+    container_name: output_db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    ports:
+      - "6001:5432"
+    restart: unless-stopped
+
+
+  tdk:
+    container_name: tdk
+    image: synthesizedio/synthesized-tdk-cli:latest
+    environment:
+      SYNTHESIZED_INPUT_URL: jdbc:postgresql://input_db:5432/postgres
+      SYNTHESIZED_INPUT_USERNAME: postgres
+      SYNTHESIZED_INPUT_PASSWORD: postgres
+      SYNTHESIZED_OUTPUT_URL: jdbc:postgresql://output_db:5432/postgres
+      SYNTHESIZED_OUTPUT_USERNAME: postgres
+      SYNTHESIZED_OUTPUT_PASSWORD: postgres
+      SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+    volumes:
+      - ./config.yaml:/app/config.yaml
+    depends_on:
+      - input_db
+      - output_db
+    restart: on-failure
