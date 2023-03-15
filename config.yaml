@@ -1,6 +1,6 @@
 default_config:
   mode: GENERATION
-  target_row_number: 100_000
+  target_row_number: 10_000
 
 tables:
   - table_name_with_schema: "public.country"
@@ -15,7 +15,7 @@ tables:
     target_row_number: 100
 
   - table_name_with_schema: "public.city"
-    target_row_number: 20_000
+    target_row_number: 1_000
     transformations:
       - columns: [ "city" ]
         params:
@@ -24,44 +24,38 @@ tables:
 
 
   - table_name_with_schema: "public.address"
-    target_row_number: 20_000
-    # transformations:
-    #   - columns: [ "address", "address2" ]
-    #     params:
-    #       type: address_generator
-    #       column_templates: [
-    #         "${street_name}, ${house_number}, ${flat_number}, ${zip_code}",
-    #         "${country}, ${city}, ${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
-    #       ]
+    target_row_number: 10_000
+    transformations:
+      - columns: [ "address", "address2" ]
+        params:
+          type: address_generator
+          column_templates: [
+            "${street_name}, ${house_number}, ${flat_number}, ${zip_code}",
+            "${country}, ${city}, ${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
+          ]
 
 
   - table_name_with_schema: "public.store"
-    target_row_number: 100_000
+    target_row_number: 5_000
 
   - table_name_with_schema: "public.staff"
-    target_row_number: 100_000
+    target_row_number: 10_000
     transformations:
-      - columns: ["first_name", "last_name"]
+      - columns: ["first_name", "last_name", "email"]
         params:
           type: person_generator
-          column_templates: ["${first_name}", "${last_name}"]
+          column_templates: ["${first_name}", "${last_name}", "${email}"]
 
-    
+
   - table_name_with_schema: "public.customer"
     target_row_number: 100_000
     transformations:
-      - columns: ["first_name", "last_name"]
+      - columns: ["first_name", "last_name", "email"]
         params:
           type: person_generator
-          column_templates: ["${first_name}", "${last_name}"]
+          column_templates: ["${first_name}", "${last_name}", "${email}"]
 
 
-  - table_name_with_schema: "public.film"
-    target_row_number: 10_000
-
-  - table_name_with_schema: "public.inventory"
-    target_row_number: 100_000
-    
   - table_name_with_schema: "public.rental"
     target_row_number: 100_000
 

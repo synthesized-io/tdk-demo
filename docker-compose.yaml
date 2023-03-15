@@ -39,6 +39,7 @@ services:
       SYNTHESIZED_OUTPUT_USERNAME: postgres
       SYNTHESIZED_OUTPUT_PASSWORD: postgres
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=75.0
     volumes:
       - ./config.yaml:/app/config.yaml
     depends_on:
