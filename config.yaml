@@ -1,27 +1,60 @@
 default_config:
   mode: GENERATION
+  target_row_number: 100_000
 
 tables:
   - table_name_with_schema: "public.country"
     target_row_number: 200
+    transformations:
+      - columns: [ "country" ]
+        params:
+          type: address_generator
+          column_templates: [ "${country}" ]
 
   - table_name_with_schema: "public.language"
     target_row_number: 100
 
   - table_name_with_schema: "public.city"
     target_row_number: 20_000
+    transformations:
+      - columns: [ "city" ]
+        params:
+          type: address_generator
+          column_templates: [ "${city}" ]
+
 
   - table_name_with_schema: "public.address"
-    target_row_number: 100_000
+    target_row_number: 20_000
+    # transformations:
+    #   - columns: [ "address", "address2" ]
+    #     params:
+    #       type: address_generator
+    #       column_templates: [
+    #         "${street_name}, ${house_number}, ${flat_number}, ${zip_code}",
+    #         "${country}, ${city}, ${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
+    #       ]
+
 
   - table_name_with_schema: "public.store"
     target_row_number: 100_000
 
   - table_name_with_schema: "public.staff"
     target_row_number: 100_000
+    transformations:
+      - columns: ["first_name", "last_name"]
+        params:
+          type: person_generator
+          column_templates: ["${first_name}", "${last_name}"]
+
     
   - table_name_with_schema: "public.customer"
     target_row_number: 100_000
+    transformations:
+      - columns: ["first_name", "last_name"]
+        params:
+          type: person_generator
+          column_templates: ["${first_name}", "${last_name}"]
+
 
   - table_name_with_schema: "public.film"
     target_row_number: 10_000
