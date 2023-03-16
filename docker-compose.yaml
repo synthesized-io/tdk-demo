@@ -39,7 +39,10 @@ services:
       SYNTHESIZED_OUTPUT_USERNAME: postgres
       SYNTHESIZED_OUTPUT_PASSWORD: postgres
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
-      JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=75.0
+      JAVA_TOOL_OPTIONS: >
+        -XX:MaxRAMPercentage=75.0
+        -Dlogging.level.io.synthesized.testingsuite=INFO
+        -Dlogging.level.io.synthesized.testingsuite.executor.lite.execution.coroutine.ExecutionBuilder=ERROR
     volumes:
       - ./config.yaml:/app/config.yaml
     depends_on:
