@@ -507,24 +507,24 @@ ALTER TABLE public.film_category OWNER TO postgres;
 -- Name: actor_info; Type: VIEW; Schema: public; Owner: postgres
 --
 
--- CREATE VIEW public.actor_info AS
---  SELECT a.actor_id,
---     a.first_name,
---     a.last_name,
---     public.group_concat(DISTINCT ((c.name || ': '::text) || ( SELECT public.group_concat(f.title) AS group_concat
---            FROM ((public.film f
---              JOIN public.film_category fc_1 ON ((f.film_id = fc_1.film_id)))
---              JOIN public.film_actor fa_1 ON ((f.film_id = fa_1.film_id)))
---           WHERE ((fc_1.category_id = c.category_id) AND (fa_1.actor_id = a.actor_id))
---           GROUP BY fa_1.actor_id))) AS film_info
---    FROM (((public.actor a
---      LEFT JOIN public.film_actor fa ON ((a.actor_id = fa.actor_id)))
---      LEFT JOIN public.film_category fc ON ((fa.film_id = fc.film_id)))
---      LEFT JOIN public.category c ON ((fc.category_id = c.category_id)))
---   GROUP BY a.actor_id, a.first_name, a.last_name;
+CREATE VIEW public.actor_info AS
+ SELECT a.actor_id,
+    a.first_name,
+    a.last_name,
+    public.group_concat(DISTINCT ((c.name || ': '::text) || ( SELECT public.group_concat(f.title) AS group_concat
+           FROM ((public.film f
+             JOIN public.film_category fc_1 ON ((f.film_id = fc_1.film_id)))
+             JOIN public.film_actor fa_1 ON ((f.film_id = fa_1.film_id)))
+          WHERE ((fc_1.category_id = c.category_id) AND (fa_1.actor_id = a.actor_id))
+          GROUP BY fa_1.actor_id))) AS film_info
+   FROM (((public.actor a
+     LEFT JOIN public.film_actor fa ON ((a.actor_id = fa.actor_id)))
+     LEFT JOIN public.film_category fc ON ((fa.film_id = fc.film_id)))
+     LEFT JOIN public.category c ON ((fc.category_id = c.category_id)))
+  GROUP BY a.actor_id, a.first_name, a.last_name;
 
 
--- ALTER TABLE public.actor_info OWNER TO postgres;
+ALTER TABLE public.actor_info OWNER TO postgres;
 
 --
 -- Name: address_address_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -617,26 +617,26 @@ ALTER TABLE public.country OWNER TO postgres;
 -- Name: customer_list; Type: VIEW; Schema: public; Owner: postgres
 --
 
--- CREATE VIEW public.customer_list AS
---  SELECT cu.customer_id AS id,
---     ((cu.first_name || ' '::text) || cu.last_name) AS name,
---     a.address,
---     a.postal_code AS "zip code",
---     a.phone,
---     city.city,
---     country.country,
---         CASE
---             WHEN cu.activebool THEN 'active'::text
---             ELSE ''::text
---         END AS notes,
---     cu.store_id AS sid
---    FROM (((public.customer cu
---      JOIN public.address a ON ((cu.address_id = a.address_id)))
---      JOIN public.city ON ((a.city_id = city.city_id)))
---      JOIN public.country ON ((city.country_id = country.country_id)));
+CREATE VIEW public.customer_list AS
+ SELECT cu.customer_id AS id,
+    ((cu.first_name || ' '::text) || cu.last_name) AS name,
+    a.address,
+    a.postal_code AS "zip code",
+    a.phone,
+    city.city,
+    country.country,
+        CASE
+            WHEN cu.activebool THEN 'active'::text
+            ELSE ''::text
+        END AS notes,
+    cu.store_id AS sid
+   FROM (((public.customer cu
+     JOIN public.address a ON ((cu.address_id = a.address_id)))
+     JOIN public.city ON ((a.city_id = city.city_id)))
+     JOIN public.country ON ((city.country_id = country.country_id)));
 
 
--- ALTER TABLE public.customer_list OWNER TO postgres;
+ALTER TABLE public.customer_list OWNER TO postgres;
 
 --
 -- Name: film_list; Type: VIEW; Schema: public; Owner: postgres
@@ -767,7 +767,7 @@ CREATE TABLE public.payment (
     PRIMARY KEY (
         -- payment_date, 
         payment_id
-    )
+)
 ) 
 -- PARTITION BY RANGE (payment_date)
 ;
@@ -936,7 +936,7 @@ CREATE MATERIALIZED VIEW public.rental_by_category AS
   WITH NO DATA;
 
 
--- ALTER TABLE public.rental_by_category OWNER TO postgres;
+ALTER TABLE public.rental_by_category OWNER TO postgres;
 
 --
 -- Name: sales_by_film_category; Type: VIEW; Schema: public; Owner: postgres
@@ -955,7 +955,7 @@ CREATE VIEW public.sales_by_film_category AS
   ORDER BY (sum(p.amount)) DESC;
 
 
--- ALTER TABLE public.sales_by_film_category OWNER TO postgres;
+ALTER TABLE public.sales_by_film_category OWNER TO postgres;
 
 --
 -- Name: staff_staff_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -1040,7 +1040,7 @@ CREATE VIEW public.sales_by_store AS
   ORDER BY cy.country, c.city;
 
 
--- ALTER TABLE public.sales_by_store OWNER TO postgres;
+ALTER TABLE public.sales_by_store OWNER TO postgres;
 
 --
 -- Name: staff_list; Type: VIEW; Schema: public; Owner: postgres
@@ -1061,7 +1061,7 @@ CREATE VIEW public.staff_list AS
      JOIN public.country ON ((city.country_id = country.country_id)));
 
 
--- ALTER TABLE public.staff_list OWNER TO postgres;
+ALTER TABLE public.staff_list OWNER TO postgres;
 
 --
 -- Name: payment_p2022_01; Type: TABLE ATTACH; Schema: public; Owner: postgres
