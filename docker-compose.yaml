@@ -43,8 +43,9 @@ services:
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
       JAVA_TOOL_OPTIONS: >
         -XX:MaxRAMPercentage=75.0
-        -Dlogging.level.io.synthesized.testingsuite=INFO
-        -Dlogging.level.io.synthesized.testingsuite.executor.lite.execution.coroutine.ExecutionBuilder=ERROR
+        -Dlogging.level.io.synthesized.testingsuite=ERROR
+        -Dlogging.level.com.zaxxer.hikari=ERROR
+        -Dlogging.level.org.reflections=ERROR
     volumes:
       - ./config.yaml:/app/config.yaml
     depends_on:
