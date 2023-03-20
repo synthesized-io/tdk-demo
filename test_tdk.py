@@ -1,7 +1,3 @@
-def test_run_tdk(host):
-    cmd = host.run('docker-compose run tdk')
-    assert cmd.rc == 0
-    
 def test_input_address_isempty(host):
     cmd = host.run('docker-compose exec input_db bash -c "psql -U postgres -t -c \'SELECT COUNT(*) FROM address\'"')
     assert int(cmd.stdout) == 0

@@ -28,6 +28,10 @@ jobs:
         run: |
           docker-compose pull
           docker-compose build
+          
+      - name: Run the workflow
+        run: |
+          docker-compose run tdk
       
-      - name: Test with testinfra
+      - name: Verify results
         run: py.test -v test_tdk.py
