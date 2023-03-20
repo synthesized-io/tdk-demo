@@ -26,7 +26,7 @@ jobs:
 
       - name: Build docker-compose
         run: |
-          docker-compose publl
+          docker-compose pull
           docker-compose build
       
       - name: Test with testinfra
