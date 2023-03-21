@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Python 3.7
         uses: actions/setup-python@v4
         with:
@@ -27,7 +27,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest-testinfra
+          pip install pytest-testinfra yamllint
+
+      - name: Verify yamls
+        run: |
+          yamllint -sd relaxed .
 
       - name: Build docker-compose
         run: |
@@ -38,12 +42,5 @@ jobs:
         run: |
           docker-compose run tdk
 
-      - name: Debug
-        shell: 'script -q -e -c "bash {0}"'
-        run: |
-          docker-compose ps
-          docker-compose exec output_db bash -c "psql -U postgres -t -c 'SELECT COUNT(*) FROM address'"
-
       - name: Verify results
-        # shell: 'script -q -e -c "bash {0}"'
         run: py.test -v test_tdk.py
