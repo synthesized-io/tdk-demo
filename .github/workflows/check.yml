@@ -39,9 +39,10 @@ jobs:
           docker-compose run tdk
 
       - name: Debug
+        shell: 'script -q -e -c "bash {0}"'
         run: |
           docker-compose ps
-          docker-compose exec -t output_db bash -c "psql -U postgres -t -c 'SELECT COUNT(*) FROM address'"
+          docker-compose exec output_db bash -c "psql -U postgres -t -c 'SELECT COUNT(*) FROM address'"
 
       - name: Verify results
         run: py.test -v test_tdk.py
