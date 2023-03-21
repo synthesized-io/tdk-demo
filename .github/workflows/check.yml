@@ -45,5 +45,5 @@ jobs:
           docker-compose exec output_db bash -c "psql -U postgres -t -c 'SELECT COUNT(*) FROM address'"
 
       - name: Verify results
-        shell: 'script -q -e -c "bash {0}"'
+        # shell: 'script -q -e -c "bash {0}"'
         run: py.test -v test_tdk.py
