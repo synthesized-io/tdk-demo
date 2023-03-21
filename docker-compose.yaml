@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
     volumes:
-       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/pagila-schema.sql
+      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/pagila-schema.sql
     ports:
       - "6000:5432"
     restart: unless-stopped
@@ -24,7 +24,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
     volumes:
-       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/pagila-schema.sql
+      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/pagila-schema.sql
     ports:
       - "6001:5432"
     restart: unless-stopped
@@ -32,7 +32,8 @@ services:
 
   tdk:
     container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    build:
+      context: .
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:postgresql://input_db:5432/postgres
       SYNTHESIZED_INPUT_USERNAME: postgres
@@ -52,3 +53,6 @@ services:
       - input_db
       - output_db
     restart: on-failure
+    command: >
+      sh -c "wait4ports -q -t 60 tcp://input_db:5432 tcp://output_db:5432
+      ; cd /app ; java org.springframework.boot.loader.JarLauncher"

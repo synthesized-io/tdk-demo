@@ -22,18 +22,17 @@ tables:
           type: address_generator
           column_templates: [ "${city}" ]
 
-
   - table_name_with_schema: "public.address"
     target_row_number: 10_000
     transformations:
       - columns: [ "address", "address2" ]
         params:
           type: address_generator
-          column_templates: [
-            "${street_name}, ${house_number}, ${flat_number}, ${zip_code}",
-            "${country}, ${city}, ${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
-          ]
-
+          column_templates:
+            - "${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
+            - >
+              ${country}, ${city}, ${street_name}, ${house_number},
+              ${flat_number}, ${zip_code}
 
   - table_name_with_schema: "public.store"
     target_row_number: 5_000
@@ -46,7 +45,6 @@ tables:
           type: person_generator
           column_templates: ["${first_name}", "${last_name}", "${email}"]
 
-
   - table_name_with_schema: "public.customer"
     target_row_number: 100_000
     transformations:
@@ -55,29 +53,26 @@ tables:
           type: person_generator
           column_templates: ["${first_name}", "${last_name}", "${email}"]
 
-
   - table_name_with_schema: "public.film"
     target_row_number: 10_000
     transformations:
-    - columns:
-      - "rating"
-      params:
-        type: "categorical_generator"
-        categories:
-          type: string
-          values:
-          - "G"
-          - "PG"
-          - "PG-13"
-          - "R"
-          - "NC-17"
-        probabilities:
-        - 0.5
-        - 0.2
-        - 0.1
-        - 0.1
-        - 0.1
-
+      - columns: ["rating"]
+        params:
+          type: "categorical_generator"
+          categories:
+            type: string
+            values:
+              - "G"
+              - "PG"
+              - "PG-13"
+              - "R"
+              - "NC-17"
+          probabilities:
+            - 0.5
+            - 0.2
+            - 0.1
+            - 0.1
+            - 0.1
 
   - table_name_with_schema: "public.rental"
     target_row_number: 100_000
