@@ -28,3 +28,13 @@ docker exec -it output_db sh -c \
  100000
 (1 row)
 ```
+
+After that, we can mofigy the `config.yaml` file and run data generation again:
+```
+docker-compose run tdk
+```
+
+Then we can shut down the databases:
+```
+docker-compose down
+```
