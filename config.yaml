@@ -61,7 +61,7 @@ tables:
           type: "categorical_generator"
           categories:
             type: string
-            values: ["G",  "PG", "PG-13", "R", "NC-17"]
+            values: ["G", "PG", "PG-13", "R", "NC-17"]
           probabilities: [0.5, 0.2, 0.1, 0.1, 0.1]
 
   - table_name_with_schema: "public.rental"
