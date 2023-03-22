@@ -1,10 +1,10 @@
 # tdk-docker-demo
 
-A very simple (but no less powerful) demo to data generation for a legendary Pagila DB schema using TDK.
+A simple (but no less powerful) demo for data generation for the legendary Pagila database schema using Synthesized TDK.
 
-[Pagila](https://github.com/devrimgunduz/pagila) is a example database provided a standard schema that can be used for examples in books, tutorials, articles, samples, etc.
+[Pagila](https://github.com/devrimgunduz/pagila) is a sample database schema that can be used in tutorials, articles, demos, etc.
 
-[TDK](https://docs.synthesized.io/tdk/latest/?utm_source=habr&utm_medium=devrel&utm_campaign=datagen) is a DevOps' best friend for database masking and generation.
+[Synthesized TDK](https://docs.synthesized.io/tdk/latest/?utm_source=habr&utm_medium=devrel&utm_campaign=datagen) provides database generation and masking capabilities.
 
 
 ## How to start
@@ -15,7 +15,7 @@ cd tdk-docker-demo
 docker-compose run tdk
 ```
 
-When the program completes its execution (and control returns to the command line) we be able to connect to the output DB (using `6001` exposed port and `postgres` as a value for `user`, `password` and `db_name` parameters) and examine our sythsized data. Or you can connect to the output DB directly in the docker container using psql:
+When the program completes its execution (and control returns to the command line), we will be able to connect to the output database using the exposed port `6001` and `postgres` as the values for the `user`, `password`, and `db_name` parameters, and examine our synthesized data. Or you can connect to the output database directly in the Docker container using psql:
 ```
 docker exec -it output_db sh -c \
   "psql -U postgres -d postgres -c \"select count(1) from rental\""
@@ -28,7 +28,7 @@ docker exec -it output_db sh -c \
 (1 row)
 ```
 
-After that, we can mofigy the `config.yaml` file and run data generation again:
+After that, we can modify the `config.yaml` file and run data generation again:
 ```
 docker-compose run tdk
 ```
