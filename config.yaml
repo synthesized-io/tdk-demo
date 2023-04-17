@@ -63,9 +63,23 @@ tables:
             type: string
             values: ["G", "PG", "PG-13", "R", "NC-17"]
           probabilities: [0.5, 0.2, 0.1, 0.1, 0.1]
+      - columns: ["fulltext"]
+        params:
+          type: null_generator
 
   - table_name_with_schema: "public.rental"
     target_row_number: 100_000
+
+  - table_name_with_schema: "public.payment"
+    transformations:
+      - columns: [ "payment_date" ]
+        params:
+          type: "date_generator"
+          mean: 2022-03-01T12:00:00Z
+          std: 7776000000
+          min: 2022-01-01T12:00:00Z
+          max: 2022-07-01T12:00:00Z
+
 
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "DO_NOT_CREATE"

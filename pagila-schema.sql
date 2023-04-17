@@ -764,13 +764,9 @@ CREATE TABLE public.payment (
     rental_id integer NOT NULL,
     amount numeric(5,2) NOT NULL,
     payment_date timestamp with time zone NOT NULL,
-    PRIMARY KEY (
-        -- payment_date, 
-        payment_id
+    PRIMARY KEY (payment_date, payment_id)
 )
-) 
--- PARTITION BY RANGE (payment_date)
-;
+PARTITION BY RANGE (payment_date);
 
 
 ALTER TABLE public.payment OWNER TO postgres;
@@ -779,113 +775,113 @@ ALTER TABLE public.payment OWNER TO postgres;
 -- Name: payment_p2022_01; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_01 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_01 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_01 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_01 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_02; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_02 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_02 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_02 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_02 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_03; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_03 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_03 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_03 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_03 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_04; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_04 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_04 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_04 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_04 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_05; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_05 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_05 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_05 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_05 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_06; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_06 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_06 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_06 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_06 OWNER TO postgres;
 
 --
 -- Name: payment_p2022_07; Type: TABLE; Schema: public; Owner: postgres
 --
 
--- CREATE TABLE public.payment_p2022_07 (
---     payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
---     customer_id integer NOT NULL,
---     staff_id integer NOT NULL,
---     rental_id integer NOT NULL,
---     amount numeric(5,2) NOT NULL,
---     payment_date timestamp with time zone NOT NULL
--- );
+CREATE TABLE public.payment_p2022_07 (
+    payment_id integer DEFAULT nextval('public.payment_payment_id_seq'::regclass) NOT NULL,
+    customer_id integer NOT NULL,
+    staff_id integer NOT NULL,
+    rental_id integer NOT NULL,
+    amount numeric(5,2) NOT NULL,
+    payment_date timestamp with time zone NOT NULL
+);
 
 
--- ALTER TABLE public.payment_p2022_07 OWNER TO postgres;
+ALTER TABLE public.payment_p2022_07 OWNER TO postgres;
 
 --
 -- Name: rental_rental_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -1067,49 +1063,49 @@ ALTER TABLE public.staff_list OWNER TO postgres;
 -- Name: payment_p2022_01; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_01 FOR VALUES FROM ('2022-01-01 00:00:00+00') TO ('2022-02-01 00:00:00+00');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_01 FOR VALUES FROM ('2022-01-01 00:00:00+00') TO ('2022-02-01 00:00:00+00');
 
 
 --
 -- Name: payment_p2022_02; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_02 FOR VALUES FROM ('2022-02-01 00:00:00+00') TO ('2022-03-01 00:00:00+00');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_02 FOR VALUES FROM ('2022-02-01 00:00:00+00') TO ('2022-03-01 00:00:00+00');
 
 
 --
 -- Name: payment_p2022_03; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_03 FOR VALUES FROM ('2022-03-01 00:00:00+00') TO ('2022-04-01 01:00:00+01');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_03 FOR VALUES FROM ('2022-03-01 00:00:00+00') TO ('2022-04-01 01:00:00+01');
 
 
 --
 -- Name: payment_p2022_04; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_04 FOR VALUES FROM ('2022-04-01 01:00:00+01') TO ('2022-05-01 01:00:00+01');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_04 FOR VALUES FROM ('2022-04-01 01:00:00+01') TO ('2022-05-01 01:00:00+01');
 
 
 --
 -- Name: payment_p2022_05; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_05 FOR VALUES FROM ('2022-05-01 01:00:00+01') TO ('2022-06-01 01:00:00+01');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_05 FOR VALUES FROM ('2022-05-01 01:00:00+01') TO ('2022-06-01 01:00:00+01');
 
 
 --
 -- Name: payment_p2022_06; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_06 FOR VALUES FROM ('2022-06-01 01:00:00+01') TO ('2022-07-01 01:00:00+01');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_06 FOR VALUES FROM ('2022-06-01 01:00:00+01') TO ('2022-07-01 01:00:00+01');
 
 
 --
 -- Name: payment_p2022_07; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_07 FOR VALUES FROM ('2022-07-01 01:00:00+01') TO ('2022-08-01 01:00:00+01');
+ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_07 FOR VALUES FROM ('2022-07-01 01:00:00+01') TO ('2022-08-01 01:00:00+01');
 
 
 --
@@ -1291,84 +1287,84 @@ CREATE INDEX idx_fk_original_language_id ON public.film USING btree (original_la
 -- Name: idx_fk_payment_p2022_01_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_01_customer_id ON public.payment_p2022_01 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_01_customer_id ON public.payment_p2022_01 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_01_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_01_staff_id ON public.payment_p2022_01 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_01_staff_id ON public.payment_p2022_01 USING btree (staff_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_02_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_02_customer_id ON public.payment_p2022_02 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_02_customer_id ON public.payment_p2022_02 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_02_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_02_staff_id ON public.payment_p2022_02 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_02_staff_id ON public.payment_p2022_02 USING btree (staff_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_03_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_03_customer_id ON public.payment_p2022_03 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_03_customer_id ON public.payment_p2022_03 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_03_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_03_staff_id ON public.payment_p2022_03 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_03_staff_id ON public.payment_p2022_03 USING btree (staff_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_04_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_04_customer_id ON public.payment_p2022_04 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_04_customer_id ON public.payment_p2022_04 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_04_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_04_staff_id ON public.payment_p2022_04 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_04_staff_id ON public.payment_p2022_04 USING btree (staff_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_05_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_05_customer_id ON public.payment_p2022_05 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_05_customer_id ON public.payment_p2022_05 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_05_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_05_staff_id ON public.payment_p2022_05 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_05_staff_id ON public.payment_p2022_05 USING btree (staff_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_06_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_06_customer_id ON public.payment_p2022_06 USING btree (customer_id);
+CREATE INDEX idx_fk_payment_p2022_06_customer_id ON public.payment_p2022_06 USING btree (customer_id);
 
 
 --
 -- Name: idx_fk_payment_p2022_06_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX idx_fk_payment_p2022_06_staff_id ON public.payment_p2022_06 USING btree (staff_id);
+CREATE INDEX idx_fk_payment_p2022_06_staff_id ON public.payment_p2022_06 USING btree (staff_id);
 
 
 --
@@ -1417,42 +1413,42 @@ CREATE UNIQUE INDEX idx_unq_rental_rental_date_inventory_id_customer_id ON publi
 -- Name: payment_p2022_01_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_01_customer_id_idx ON public.payment_p2022_01 USING btree (customer_id);
+CREATE INDEX payment_p2022_01_customer_id_idx ON public.payment_p2022_01 USING btree (customer_id);
 
 
 --
 -- Name: payment_p2022_02_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_02_customer_id_idx ON public.payment_p2022_02 USING btree (customer_id);
+CREATE INDEX payment_p2022_02_customer_id_idx ON public.payment_p2022_02 USING btree (customer_id);
 
 
 --
 -- Name: payment_p2022_03_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_03_customer_id_idx ON public.payment_p2022_03 USING btree (customer_id);
+CREATE INDEX payment_p2022_03_customer_id_idx ON public.payment_p2022_03 USING btree (customer_id);
 
 
 --
 -- Name: payment_p2022_04_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_04_customer_id_idx ON public.payment_p2022_04 USING btree (customer_id);
+CREATE INDEX payment_p2022_04_customer_id_idx ON public.payment_p2022_04 USING btree (customer_id);
 
 
 --
 -- Name: payment_p2022_05_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_05_customer_id_idx ON public.payment_p2022_05 USING btree (customer_id);
+CREATE INDEX payment_p2022_05_customer_id_idx ON public.payment_p2022_05 USING btree (customer_id);
 
 
 --
 -- Name: payment_p2022_06_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX payment_p2022_06_customer_id_idx ON public.payment_p2022_06 USING btree (customer_id);
+CREATE INDEX payment_p2022_06_customer_id_idx ON public.payment_p2022_06 USING btree (customer_id);
 
 
 --
@@ -1667,144 +1663,144 @@ ALTER TABLE ONLY public.inventory
 -- Name: payment_p2022_01 payment_p2022_01_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_01
---     ADD CONSTRAINT payment_p2022_01_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_01
+    ADD CONSTRAINT payment_p2022_01_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_01 payment_p2022_01_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_01
---     ADD CONSTRAINT payment_p2022_01_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_01
+    ADD CONSTRAINT payment_p2022_01_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_01 payment_p2022_01_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_01
---     ADD CONSTRAINT payment_p2022_01_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_01
+    ADD CONSTRAINT payment_p2022_01_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
 -- Name: payment_p2022_02 payment_p2022_02_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_02
---     ADD CONSTRAINT payment_p2022_02_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_02
+    ADD CONSTRAINT payment_p2022_02_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_02 payment_p2022_02_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_02
---     ADD CONSTRAINT payment_p2022_02_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_02
+    ADD CONSTRAINT payment_p2022_02_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_02 payment_p2022_02_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_02
---     ADD CONSTRAINT payment_p2022_02_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_02
+    ADD CONSTRAINT payment_p2022_02_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
 -- Name: payment_p2022_03 payment_p2022_03_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_03
---     ADD CONSTRAINT payment_p2022_03_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_03
+    ADD CONSTRAINT payment_p2022_03_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_03 payment_p2022_03_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_03
---     ADD CONSTRAINT payment_p2022_03_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_03
+    ADD CONSTRAINT payment_p2022_03_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_03 payment_p2022_03_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_03
---     ADD CONSTRAINT payment_p2022_03_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_03
+    ADD CONSTRAINT payment_p2022_03_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
 -- Name: payment_p2022_04 payment_p2022_04_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_04
---     ADD CONSTRAINT payment_p2022_04_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_04
+    ADD CONSTRAINT payment_p2022_04_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_04 payment_p2022_04_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_04
---     ADD CONSTRAINT payment_p2022_04_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_04
+    ADD CONSTRAINT payment_p2022_04_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_04 payment_p2022_04_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_04
---     ADD CONSTRAINT payment_p2022_04_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_04
+    ADD CONSTRAINT payment_p2022_04_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
 -- Name: payment_p2022_05 payment_p2022_05_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_05
---     ADD CONSTRAINT payment_p2022_05_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_05
+    ADD CONSTRAINT payment_p2022_05_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_05 payment_p2022_05_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_05
---     ADD CONSTRAINT payment_p2022_05_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_05
+    ADD CONSTRAINT payment_p2022_05_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_05 payment_p2022_05_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_05
---     ADD CONSTRAINT payment_p2022_05_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_05
+    ADD CONSTRAINT payment_p2022_05_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
 -- Name: payment_p2022_06 payment_p2022_06_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_06
---     ADD CONSTRAINT payment_p2022_06_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
+ALTER TABLE ONLY public.payment_p2022_06
+    ADD CONSTRAINT payment_p2022_06_customer_id_fkey FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 
 --
 -- Name: payment_p2022_06 payment_p2022_06_rental_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_06
---     ADD CONSTRAINT payment_p2022_06_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
+ALTER TABLE ONLY public.payment_p2022_06
+    ADD CONSTRAINT payment_p2022_06_rental_id_fkey FOREIGN KEY (rental_id) REFERENCES public.rental(rental_id);
 
 
 --
 -- Name: payment_p2022_06 payment_p2022_06_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
--- ALTER TABLE ONLY public.payment_p2022_06
---     ADD CONSTRAINT payment_p2022_06_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
+ALTER TABLE ONLY public.payment_p2022_06
+    ADD CONSTRAINT payment_p2022_06_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
 
 --
