@@ -465,7 +465,7 @@ CREATE TABLE public.film (
     language_id integer NOT NULL,
     original_language_id integer,
     rental_duration smallint DEFAULT 3 NOT NULL,
-    -- rental_rate numeric(4,2) DEFAULT 4.99 NOT NULL,
+    rental_rate numeric(4,2) DEFAULT 4.99 NOT NULL,
     length smallint,
     replacement_cost numeric(5,2) DEFAULT 19.99 NOT NULL,
     rating text DEFAULT 'G'::public.mpaa_rating,

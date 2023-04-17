@@ -63,9 +63,6 @@ tables:
             type: string
             values: ["G", "PG", "PG-13", "R", "NC-17"]
           probabilities: [0.5, 0.2, 0.1, 0.1, 0.1]
-      - columns: ["fulltext"]
-        params:
-          type: null_generator
 
   - table_name_with_schema: "public.rental"
     target_row_number: 100_000
