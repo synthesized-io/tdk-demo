@@ -1,26 +1,3 @@
--- # Licence
-
--- Copyright (c) Devrim Gündüz <devrim@gunduz.org>
-
---  Permission is hereby granted, free of charge, to any person obtaining a copy
---  of this software and associated documentation files (the "Software"), to deal
---  in the Software without restriction, including without limitation the rights
---  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
---  copies of the Software, and to permit persons to whom the Software is
---  furnished to do so, subject to the following conditions:
-
---  The above copyright notice and this permission notice shall be included in
---  all copies or substantial portions of the Software.
-
---  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
---  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
---  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
---  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
---  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
---  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
---  THE SOFTWARE.
-
-
 --
 -- PostgreSQL database dump
 --
@@ -468,10 +445,10 @@ CREATE TABLE public.film (
     rental_rate numeric(4,2) DEFAULT 4.99 NOT NULL,
     length smallint,
     replacement_cost numeric(5,2) DEFAULT 19.99 NOT NULL,
-    rating text DEFAULT 'G'::public.mpaa_rating,
+    rating public.mpaa_rating DEFAULT 'G'::public.mpaa_rating,
     last_update timestamp with time zone DEFAULT now() NOT NULL,
-    special_features text[]
-    -- fulltext tsvector NOT NULL
+    special_features text[],
+    fulltext tsvector NOT NULL
 );
 
 
@@ -642,24 +619,24 @@ ALTER TABLE public.customer_list OWNER TO postgres;
 -- Name: film_list; Type: VIEW; Schema: public; Owner: postgres
 --
 
--- CREATE VIEW public.film_list AS
---  SELECT film.film_id AS fid,
---     film.title,
---     film.description,
---     category.name AS category,
---     film.rental_rate AS price,
---     film.length,
---     film.rating,
---     public.group_concat(((actor.first_name || ' '::text) || actor.last_name)) AS actors
---    FROM ((((public.category
---      LEFT JOIN public.film_category ON ((category.category_id = film_category.category_id)))
---      LEFT JOIN public.film ON ((film_category.film_id = film.film_id)))
---      JOIN public.film_actor ON ((film.film_id = film_actor.film_id)))
---      JOIN public.actor ON ((film_actor.actor_id = actor.actor_id)))
---   GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
+CREATE VIEW public.film_list AS
+ SELECT film.film_id AS fid,
+    film.title,
+    film.description,
+    category.name AS category,
+    film.rental_rate AS price,
+    film.length,
+    film.rating,
+    public.group_concat(((actor.first_name || ' '::text) || actor.last_name)) AS actors
+   FROM ((((public.category
+     LEFT JOIN public.film_category ON ((category.category_id = film_category.category_id)))
+     LEFT JOIN public.film ON ((film_category.film_id = film.film_id)))
+     JOIN public.film_actor ON ((film.film_id = film_actor.film_id)))
+     JOIN public.actor ON ((film_actor.actor_id = actor.actor_id)))
+  GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
 
 
--- ALTER TABLE public.film_list OWNER TO postgres;
+ALTER TABLE public.film_list OWNER TO postgres;
 
 --
 -- Name: inventory_inventory_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -720,24 +697,24 @@ ALTER TABLE public.language OWNER TO postgres;
 -- Name: nicer_but_slower_film_list; Type: VIEW; Schema: public; Owner: postgres
 --
 
--- CREATE VIEW public.nicer_but_slower_film_list AS
---  SELECT film.film_id AS fid,
---     film.title,
---     film.description,
---     category.name AS category,
---     film.rental_rate AS price,
---     film.length,
---     film.rating,
---     public.group_concat((((upper("substring"(actor.first_name, 1, 1)) || lower("substring"(actor.first_name, 2))) || upper("substring"(actor.last_name, 1, 1))) || lower("substring"(actor.last_name, 2)))) AS actors
---    FROM ((((public.category
---      LEFT JOIN public.film_category ON ((category.category_id = film_category.category_id)))
---      LEFT JOIN public.film ON ((film_category.film_id = film.film_id)))
---      JOIN public.film_actor ON ((film.film_id = film_actor.film_id)))
---      JOIN public.actor ON ((film_actor.actor_id = actor.actor_id)))
---   GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
+CREATE VIEW public.nicer_but_slower_film_list AS
+ SELECT film.film_id AS fid,
+    film.title,
+    film.description,
+    category.name AS category,
+    film.rental_rate AS price,
+    film.length,
+    film.rating,
+    public.group_concat((((upper("substring"(actor.first_name, 1, 1)) || lower("substring"(actor.first_name, 2))) || upper("substring"(actor.last_name, 1, 1))) || lower("substring"(actor.last_name, 2)))) AS actors
+   FROM ((((public.category
+     LEFT JOIN public.film_category ON ((category.category_id = film_category.category_id)))
+     LEFT JOIN public.film ON ((film_category.film_id = film.film_id)))
+     JOIN public.film_actor ON ((film.film_id = film_actor.film_id)))
+     JOIN public.actor ON ((film_actor.actor_id = actor.actor_id)))
+  GROUP BY film.film_id, film.title, film.description, category.name, film.rental_rate, film.length, film.rating;
 
 
--- ALTER TABLE public.nicer_but_slower_film_list OWNER TO postgres;
+ALTER TABLE public.nicer_but_slower_film_list OWNER TO postgres;
 
 --
 -- Name: payment_payment_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -1224,7 +1201,7 @@ ALTER TABLE ONLY public.store
 -- Name: film_fulltext_idx; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE INDEX film_fulltext_idx ON public.film USING gist (fulltext);
+CREATE INDEX film_fulltext_idx ON public.film USING gist (fulltext);
 
 
 --
@@ -1399,7 +1376,7 @@ CREATE INDEX idx_title ON public.film USING btree (title);
 -- Name: idx_unq_manager_staff_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
--- CREATE UNIQUE INDEX idx_unq_manager_staff_id ON public.store USING btree (manager_staff_id);
+CREATE UNIQUE INDEX idx_unq_manager_staff_id ON public.store USING btree (manager_staff_id);
 
 
 --
@@ -1462,7 +1439,7 @@ CREATE UNIQUE INDEX rental_category ON public.rental_by_category USING btree (ca
 -- Name: film film_fulltext_trigger; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
--- CREATE TRIGGER film_fulltext_trigger BEFORE INSERT OR UPDATE ON public.film FOR EACH ROW EXECUTE FUNCTION tsvector_update_trigger('fulltext', 'pg_catalog.english', 'title', 'description');
+CREATE TRIGGER film_fulltext_trigger BEFORE INSERT OR UPDATE ON public.film FOR EACH ROW EXECUTE FUNCTION tsvector_update_trigger('fulltext', 'pg_catalog.english', 'title', 'description');
 
 
 --
