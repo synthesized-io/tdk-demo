@@ -22,7 +22,8 @@ jobs:
       - name: Number generated entries / 10
         # Otherwise it is impossible to execute it on GHA runner
         run: |
-          sed -i.bak -E 's/(: +[1-9](0|_)+)0/\1/g' config_generation_from_scratch.tdk.yaml
+          sed -i.bak -E 's/(: +[1-9](0|_)+)0/\1/g' \
+            config_generation_from_scratch.tdk.yaml
 
       - name: Install dependencies
         run: |
