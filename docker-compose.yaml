@@ -2,17 +2,6 @@ version: '3.5'
 
 services:
 
-  input_db:
-    container_name: input_db
-    image: postgres:15
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    volumes:
-      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
-        #- ./pagila-data.sql:/docker-entrypoint-initdb.d/2.sql
-    ports: [ "6000:5432" ]
-
   output_db:
     container_name: output_db
     image: postgres:15
@@ -47,7 +36,7 @@ services:
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./config_generation_from_scratch.tdk.yaml:/app/config.yaml
+      - ./${CONFIG_FILE}:/app/config.yaml
       - ./banner.txt:/app/banner.txt
         #- ./data:/app/data
     depends_on:

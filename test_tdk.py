@@ -8,7 +8,7 @@ import pytest
     "store"
 ])
 def test_input_db_isempty(host, table):
-    cmd = host.run('docker-compose exec -T input_db bash -c "psql -U postgres -t -c \'SELECT COUNT(*) FROM %s\'"' % table)
+    cmd = host.run('docker-compose -f empty-input-db.yaml exec -T input_db bash -c "psql -U postgres -t -c \'SELECT COUNT(*) FROM %s\'"' % table)
     assert int(cmd.stdout) == 0
 
 @pytest.mark.parametrize("table,expected",   [
@@ -19,5 +19,5 @@ def test_input_db_isempty(host, table):
     ("store", 1000)
 ])
 def test_output_db_is_not_empty(host, table, expected):
-    cmd = host.run('docker-compose exec -T output_db bash -c "psql -U postgres -t -c \'SELECT COUNT(*) FROM %s\'"' % table)
+    cmd = host.run('docker-compose -f docker-compose.yaml -f empty-input-db.yaml exec -T output_db bash -c "psql -U postgres -t -c \'SELECT COUNT(*) FROM %s\'"' % table)
     assert int(cmd.stdout) == expected

@@ -7,10 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
 
+  check:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -18,13 +17,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.7
-
-        #      - name: Number generated entries / 10
-        # Otherwise it is impossible to execute it on GHA runner
-        #        run: |
-        #          sed -i.bak -E 's/(: +[1-9](0|_)+)0/\1/g' \
-        #            config_generation_from_scratch.tdk.yaml
-        #          cat config_generation_from_scratch.tdk.yaml
 
       - name: Install dependencies
         run: |
@@ -35,14 +27,49 @@ jobs:
         run: |
           yamllint -sd relaxed .
 
+
+  generation_from_scratch:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.7
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest-testinfra yamllint
+
       - name: Build docker-compose
         run: |
-          docker-compose pull
-          docker-compose build
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml pull
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml build
 
       - name: Run the workflow
         run: |
-          docker-compose run tdk
+          export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml run tdk
 
       - name: Verify results
         run: py.test -v test_tdk.py
+
+
+  masking:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml pull
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_masking.tdk.yaml
+          docker-compose -f docker-compose.yaml -f empty-input-db.yaml run tdk
