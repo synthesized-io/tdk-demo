@@ -66,10 +66,44 @@ jobs:
 
       - name: Build docker-compose
         run: |
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml pull
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml build
+          docker-compose -f docker-compose.yaml -f input-db.yaml pull
+          docker-compose -f docker-compose.yaml -f input-db.yaml build
 
       - name: Run the workflow
         run: |
           export CONFIG_FILE=config_masking.tdk.yaml
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml run tdk
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+
+  subsetting:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose -f docker-compose.yaml -f input-db.yaml pull
+          docker-compose -f docker-compose.yaml -f input-db.yaml build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_subsetting.tdk.yaml
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+
+  generation:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose -f docker-compose.yaml -f input-db.yaml pull
+          docker-compose -f docker-compose.yaml -f input-db.yaml build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_generation.tdk.yaml
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
