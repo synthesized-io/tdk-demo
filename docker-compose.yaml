@@ -12,6 +12,7 @@ services:
       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6001:5432" ]
 
+
   tdk:
     container_name: tdk
     build:
@@ -45,10 +46,9 @@ services:
       sh -c "wait4ports -q -t 60 tcp://input_db:5432 tcp://output_db:5432
       ; cd /app ; java org.springframework.boot.loader.JarLauncher"
 
+
   check:
     container_name: check
     image: sodadata/soda-core
     volumes:
       - ./soda:/sodacl
-    command: >
-      scan -d output_db -c /sodacl/configuration.yaml /sodacl/checks.yaml

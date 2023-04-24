@@ -1,0 +1,16 @@
+dataset: film
+column: rating
+distribution_type: categorical
+distribution_reference:
+  weights:
+  - 0.5
+  - 0.2
+  - 0.1
+  - 0.1
+  - 0.1
+  bins:
+  - G
+  - PG
+  - NC-17
+  - PG-13
+  - R
