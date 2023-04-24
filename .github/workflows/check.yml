@@ -75,7 +75,8 @@ jobs:
           docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
       - name: Verify results
-        run: docker-compose -f docker-compose.yaml -f empty-input-db.yaml run check
+        run: docker-compose -f docker-compose.yaml -f empty-input-db.yaml \
+          run check
 
 
   subsetting:
