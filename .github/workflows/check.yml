@@ -61,7 +61,7 @@ jobs:
           run check
           scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
+          /sodacl/checks_for_empty_input_db.yaml
 
       - name: Verify output data
         run: >
@@ -105,7 +105,7 @@ jobs:
           run check
           scan -d output_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks.yaml
+          /sodacl/checks_for_masking.yaml
 
 
   subsetting:
