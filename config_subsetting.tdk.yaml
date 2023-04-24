@@ -1,9 +1,14 @@
 default_config:
   mode: KEEP
   use_working_directory: true
-  target_ratio: 0.8
 
 tables:
+
+  - table_name_with_schema: "public.rental"
+    target_ratio: 0.1
+
+  - table_name_with_schema: "public.payment"
+    target_ratio: 0.1
 
   - table_name_with_schema: "public.film"
     transformations:
