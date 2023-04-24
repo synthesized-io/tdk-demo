@@ -37,7 +37,6 @@ services:
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
       - ./${CONFIG_FILE}:/app/config.yaml
-      - ./banner.txt:/app/banner.txt
         #- ./data:/app/data
     depends_on:
       - input_db
