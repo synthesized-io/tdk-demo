@@ -47,4 +47,3 @@ checks for rental:
 
 checks for store:
   - row_count same as store in input_db
-
