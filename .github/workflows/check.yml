@@ -61,7 +61,7 @@ jobs:
           run check
           scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_empty_db.yaml
+          /sodacl/checks_for_input_db.yaml
 
       - name: Verify output data
         run: >
@@ -89,10 +89,19 @@ jobs:
           export CONFIG_FILE=config_masking.tdk.yaml
           docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
+      - name: Verify input data
+        run: >
+          docker-compose
+          -f docker-compose.yaml -f input-db.yaml
+          run check
+          scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
       - name: Verify output data
         run: >
           docker-compose
-          -f docker-compose.yaml -f empty-input-db.yaml
+          -f docker-compose.yaml -f input-db.yaml
           run check
           scan -d output_db
           -c /sodacl/configuration.yaml
@@ -115,6 +124,15 @@ jobs:
           export CONFIG_FILE=config_subsetting.tdk.yaml
           docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
+      - name: Verify input data
+        run: >
+          docker-compose
+          -f docker-compose.yaml -f input-db.yaml
+          run check
+          scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
 
   generation:
     needs: check
@@ -131,3 +149,12 @@ jobs:
         run: |
           export CONFIG_FILE=config_generation.tdk.yaml
           docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose
+          -f docker-compose.yaml -f input-db.yaml
+          run check
+          scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
