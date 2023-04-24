@@ -1,0 +1,7 @@
+checks for staff:
+  - row_count same as staff in input_db
+  - invalid_percent(email) = 0:
+      valid format: email
+
+checks for film:
+  - row_count same as film in input_db

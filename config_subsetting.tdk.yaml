@@ -1,7 +1,7 @@
 default_config:
   mode: KEEP
   use_working_directory: true
-  target_ratio: 0.6
+  target_ratio: 0.8
 
 tables:
 
