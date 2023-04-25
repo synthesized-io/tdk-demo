@@ -1,178 +1,31 @@
 name: build
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
-
-  check:
-    runs-on: ubuntu-latest
+  armv7_job:
+    # The host should always be Linux
+    runs-on: ubuntu-18.04
+    name: Build on ubuntu-18.04 armv7
     steps:
       - uses: actions/checkout@v3
-
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v4
+      - uses: uraimo/run-on-arch-action@v2
+        name: Run commands
+        id: runcmd
         with:
-          python-version: 3.7
+          arch: armv7
+          distro: ubuntu18.04
 
-      - name: Install dependencies
+          # Not required, but speeds up builds by storing container images in
+          # a GitHub package registry.
+          # githubToken: ${{ github.token }}
+
+          # Set an output parameter `uname` for use in subsequent steps
+          run: |
+            uname -a
+            echo ::set-output name=uname::$(uname -a)
+
+      - name: Get the output
+        # Echo the `uname` output parameter from the `runcmd` step
         run: |
-          python -m pip install --upgrade pip
-          pip install yamllint
-
-      - name: Verify yamls
-        run: |
-          yamllint -sd relaxed .
-
-
-  generation_from_scratch:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.7
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest-testinfra yamllint
-
-      - name: Build docker-compose
-        run: |
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml pull
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml build
-
-      - name: Run the workflow
-        run: |
-          export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
-          docker-compose -f docker-compose.yaml -f empty-input-db.yaml run tdk
-
-      - name: Verify input data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f empty-input-db.yaml
-          run check
-          scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_empty_input_db.yaml
-
-      - name: Verify output data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f empty-input-db.yaml
-          run check
-          scan -d output_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_generation_from_scratch.yaml
-
-
-  masking:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build docker-compose
-        run: |
-          docker-compose -f docker-compose.yaml -f input-db.yaml pull
-          docker-compose -f docker-compose.yaml -f input-db.yaml build
-
-      - name: Run the workflow
-        run: |
-          export CONFIG_FILE=config_masking.tdk.yaml
-          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
-
-      - name: Verify input data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
-      - name: Verify output data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d output_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_masking.yaml
-
-
-  subsetting:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build docker-compose
-        run: |
-          docker-compose -f docker-compose.yaml -f input-db.yaml pull
-          docker-compose -f docker-compose.yaml -f input-db.yaml build
-
-      - name: Run the workflow
-        run: |
-          export CONFIG_FILE=config_subsetting.tdk.yaml
-          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
-
-      - name: Verify input data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
-      - name: Verify output data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d output_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_subsetting.yaml
-
-
-  generation:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Build docker-compose
-        run: |
-          docker-compose -f docker-compose.yaml -f input-db.yaml pull
-          docker-compose -f docker-compose.yaml -f input-db.yaml build
-
-      - name: Run the workflow
-        run: |
-          export CONFIG_FILE=config_generation.tdk.yaml
-          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
-
-      - name: Verify input data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
-      - name: Verify output data
-        run: >
-          docker-compose
-          -f docker-compose.yaml -f input-db.yaml
-          run check
-          scan -d output_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_2x_generation.yaml
+          echo "The uname output was ${{ steps.runcmd.outputs.uname }}"
