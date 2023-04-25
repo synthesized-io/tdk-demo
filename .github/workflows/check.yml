@@ -133,6 +133,15 @@ jobs:
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_input_db.yaml
 
+      - name: Verify output data
+        run: >
+          docker-compose
+          -f docker-compose.yaml -f input-db.yaml
+          run check
+          scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_subsetting.yaml
+
 
   generation:
     needs: check
@@ -158,3 +167,12 @@ jobs:
           scan -d input_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose
+          -f docker-compose.yaml -f input-db.yaml
+          run check
+          scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_2x_generation.yaml
