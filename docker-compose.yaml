@@ -2,6 +2,16 @@ version: '3.5'
 
 services:
 
+  input_db:
+    container_name: input_db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
+    ports: [ "6000:5432" ]
+
   output_db:
     container_name: output_db
     image: postgres:15
