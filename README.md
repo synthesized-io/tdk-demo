@@ -46,21 +46,21 @@ docker-compose down
 
 ```
 export CONFIG_FILE=config_generation.tdk.yaml
-docker-compose -f input-db.yaml run tdk
+docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 ```
 
 ### Masking of the existing data
 
 ```
 export CONFIG_FILE=config_masking.tdk.yaml
-docker-compose -f input-db.yaml run tdk
+docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 ```
 
 ### Subsetting of the existing data
 
 ```
 export CONFIG_FILE=config_subsetting.tdk.yaml
-docker-compose -f input-db.yaml run tdk
+docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 ```
 
 ## Troubleshooting and advises

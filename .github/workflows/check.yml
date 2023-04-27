@@ -71,7 +71,7 @@ jobs:
       - name: Run the workflow
         run: |
           export CONFIG_FILE=config_masking.tdk.yaml
-          docker-compose -f input-db.yaml run tdk
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
       - name: Verify input data
         run: >
@@ -100,7 +100,7 @@ jobs:
       - name: Run the workflow
         run: |
           export CONFIG_FILE=config_subsetting.tdk.yaml
-          docker-compose -f input-db.yaml run tdk
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
       - name: Verify input data
         run: >
@@ -129,7 +129,7 @@ jobs:
       - name: Run the workflow
         run: |
           export CONFIG_FILE=config_generation.tdk.yaml
-          docker-compose -f input-db.yaml run tdk
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
 
       - name: Verify input data
         run: >
