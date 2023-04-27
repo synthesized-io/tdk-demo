@@ -1,0 +1,30 @@
+default_config:
+  mode: MASKING
+
+tables:
+
+  - table_name_with_schema: "public.film"
+    transformations:
+      - columns: ["fulltext"]
+        mapping:
+          read: "?::text"
+          write: "?::tsvector"
+        params:
+          type: formatted_string_generator
+          pattern: "\\+44[0-9]{10}"
+      - columns: ["rating"]
+        mapping:
+          read: "?::text"
+          write: "?::mpaa_rating"
+        params:
+          type: "categorical_generator"
+          categories:
+            type: string
+            values: ["PG-13", "NC-17", "R", "PG", "G"]
+          probabilities: [0.223, 0.21, 0.195, 0.194, 0.178]
+
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: "DO_NOT_CREATE"
+cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+safety_mode: "RELAXED"

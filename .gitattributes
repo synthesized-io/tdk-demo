@@ -1,5 +1,2 @@
-*.sql linguist-detectable
-*.sql linguist-language=sql
-
 *.yaml linguist-detectable=true
 *.yaml linguist-language=YAML

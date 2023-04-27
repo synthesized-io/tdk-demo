@@ -7,10 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
 
+  yamllint:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
 
@@ -19,19 +18,21 @@ jobs:
         with:
           python-version: 3.7
 
-      - name: Number generated entries / 10
-        # Otherwise it is impossible to execute it on GHA runner
-        run: |
-          sed -i.bak -E 's/(: +[1-9](0|_)+)0/\1/g' config.yaml
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest-testinfra yamllint
+          pip install yamllint
 
       - name: Verify yamls
         run: |
           yamllint -sd relaxed .
+
+
+  generation_from_scratch:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
 
       - name: Build docker-compose
         run: |
@@ -40,7 +41,104 @@ jobs:
 
       - name: Run the workflow
         run: |
+          export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
           docker-compose run tdk
 
-      - name: Verify results
-        run: py.test -v test_tdk.py
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_empty_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_generation_from_scratch.yaml
+
+
+  masking:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_masking.tdk.yaml
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_masking.yaml
+
+
+  subsetting:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_subsetting.tdk.yaml
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_subsetting.yaml
+
+
+  generation:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_generation.tdk.yaml
+          docker-compose -f docker-compose.yaml -f input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_2x_generation.yaml
