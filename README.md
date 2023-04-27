@@ -9,9 +9,12 @@ A simple (but no less powerful) demo for data generation for the legendary Pagil
 
 ## How to start
 
+### Generation of the empty database from scratch
+
 ```
 git clone https://github.com/synthesized-io/tdk-docker-demo
 cd tdk-docker-demo
+export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
 docker-compose run tdk
 ```
 
@@ -28,12 +31,34 @@ docker exec -it output_db sh -c \
 (1 row)
 ```
 
-After that, we can modify the `config.yaml` file and run data generation again:
+After that, you can modify an existing config or write your own `config.yaml` file and run data generation again:
 ```
+export CONFIG_FILE=config.yaml
 docker-compose run tdk
 ```
 
 Then we can shut down the databases:
 ```
 docker-compose down
+```
+
+### Generation based on the existing data
+
+```
+export CONFIG_FILE=config_generation.tdk.yaml
+docker-compose -f input-db.yaml run tdk
+```
+
+### Masking of the existing data
+
+```
+export CONFIG_FILE=config_masking.tdk.yaml
+docker-compose -f input-db.yaml run tdk
+```
+
+### Subsetting of the existing data
+
+```
+export CONFIG_FILE=config_subsetting.tdk.yaml
+docker-compose -f input-db.yaml run tdk
 ```
