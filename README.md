@@ -1,4 +1,4 @@
-# tdk-docker-demo
+# pagila-tdk-demo
 
 A simple (but no less powerful) demo for data generation (masking and subsetting as well) for the legendary Pagila database schema using Synthesized TDK.
 
