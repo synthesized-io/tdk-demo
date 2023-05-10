@@ -23,6 +23,19 @@ services:
     ports: [ "6001:5432" ]
 
 
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+    ports:
+      - "8888:80"
+
+
   tdk:
     container_name: tdk
     build:
@@ -52,6 +65,7 @@ services:
     depends_on:
       - input_db
       - output_db
+      - pgadmin
     command: >
       sh -c "wait4ports -q -t 60 tcp://input_db:5432 tcp://output_db:5432
       ; cd /app ; java org.springframework.boot.loader.JarLauncher"
