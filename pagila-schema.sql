@@ -478,6 +478,7 @@ CREATE TABLE public.film (
           read: "?::text"
           write: "?::tsvector"
 
+     (Also uncomment film_fulltext_trigger below.)
      */
     fulltext text NOT NULL
 );
@@ -1469,9 +1470,9 @@ CREATE UNIQUE INDEX rental_category ON public.rental_by_category USING btree (ca
 --
 -- Name: film film_fulltext_trigger; Type: TRIGGER; Schema: public; Owner: postgres
 --
-
+/*
 CREATE TRIGGER film_fulltext_trigger BEFORE INSERT OR UPDATE ON public.film FOR EACH ROW EXECUTE FUNCTION tsvector_update_trigger('fulltext', 'pg_catalog.english', 'title', 'description');
-
+*/
 
 --
 -- Name: actor last_updated; Type: TRIGGER; Schema: public; Owner: postgres
