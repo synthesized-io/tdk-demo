@@ -478,7 +478,7 @@ CREATE TABLE public.film (
           read: "?::text"
           write: "?::tsvector"
 
-     (Also uncomment film_fulltext_trigger below.)
+     (Also uncomment film_fulltext_trigger and film_fulltext_idx below.)
      */
     fulltext text NOT NULL
 );
@@ -1232,9 +1232,9 @@ ALTER TABLE ONLY public.store
 --
 -- Name: film_fulltext_idx; Type: INDEX; Schema: public; Owner: postgres
 --
-
+/*
 CREATE INDEX film_fulltext_idx ON public.film USING gist (fulltext);
-
+*/
 
 --
 -- Name: idx_actor_last_name; Type: INDEX; Schema: public; Owner: postgres
