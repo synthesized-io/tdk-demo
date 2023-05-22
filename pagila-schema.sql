@@ -445,10 +445,41 @@ CREATE TABLE public.film (
     rental_rate numeric(4,2) DEFAULT 4.99 NOT NULL,
     length smallint,
     replacement_cost numeric(5,2) DEFAULT 19.99 NOT NULL,
+    /*
+
     rating public.mpaa_rating DEFAULT 'G'::public.mpaa_rating,
+
+    This is commented out as without specific mapping TDK won't be able to write to this field.
+
+    If you still want to use enum type here, you should add the following to all the respective transformations:
+
+      - columns: ["rating"]
+        mapping:
+          read: "?::text"
+          write: "?::mpaa_rating"
+
+    In order to fully automate the treating of PostgreSQL enum types in TDK, the following should be fixed in jOOQ:
+
+    https://github.com/jOOQ/jOOQ/issues/7941
+     */
+    rating VARCHAR(16) DEFAULT 'G',
     last_update timestamp with time zone DEFAULT now() NOT NULL,
     special_features text[],
+
+    /*
     fulltext tsvector NOT NULL
+
+    This is commented out as without specific mapping TDK won't be able to write to this field.
+
+    If you still want to use tsvector type here, you should add the following to all the respective transformations:
+
+      - columns: ["fulltext"]
+        mapping:
+          read: "?::text"
+          write: "?::tsvector"
+
+     */
+    fulltext text NOT NULL
 );
 
 
