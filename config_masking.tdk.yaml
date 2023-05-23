@@ -5,10 +5,6 @@ tables:
 
   - table_name_with_schema: "public.film"
     transformations:
-      - columns: ["fulltext"]
-        params:
-          type: formatted_string_generator
-          pattern: "\\+44[0-9]{10}"
       - columns: ["rating"]
         params:
           type: "categorical_generator"
