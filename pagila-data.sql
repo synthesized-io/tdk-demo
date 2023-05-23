@@ -30356,7 +30356,7 @@ COPY public.rental (rental_id, rental_date, inventory_id, customer_id, return_da
 -- Data for Name: payment_p2022_01; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_01 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_01*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16051	269	1	98	0.99	2022-01-29 01:58:52.222594+00
 16065	274	1	147	2.99	2022-01-25 12:14:16.895377+00
 16109	297	2	143	0.99	2022-01-28 00:49:49.128218+00
@@ -31087,7 +31087,7 @@ COPY public.payment_p2022_01 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_02; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_02 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_02*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16056	270	1	193	1.99	2022-02-03 01:49:30.663659+00
 16075	278	1	1092	4.99	2022-02-14 16:08:09.981165+00
 16077	279	2	1019	0.99	2022-02-09 21:43:26.740315+00
@@ -33496,7 +33496,7 @@ COPY public.payment_p2022_02 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_03; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_03 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_03*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16053	269	2	703	0.99	2022-03-02 19:51:40.813503+00
 16058	271	1	1096	8.99	2022-03-19 06:19:47.019162+00
 16059	272	1	33	0.99	2022-03-12 13:32:36.628975+00
@@ -36217,7 +36217,7 @@ COPY public.payment_p2022_03 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_04; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_04 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_04*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16066	274	1	208	4.99	2022-04-15 13:28:07.452161+01
 16069	274	2	474	2.99	2022-04-27 19:46:10.151444+01
 16074	277	2	308	6.99	2022-04-04 11:51:07.496345+01
@@ -38772,7 +38772,7 @@ COPY public.payment_p2022_04 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_05; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_05 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_05*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16055	269	2	1099	2.99	2022-05-20 16:54:02.174545+01
 16057	270	1	1040	4.99	2022-05-11 10:27:17.752545+01
 16067	274	2	301	2.99	2022-05-11 04:38:43.477404+01
@@ -41457,7 +41457,7 @@ COPY public.payment_p2022_05 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_06; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_06 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_06*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16050	269	2	7	1.99	2022-06-21 08:41:50.707316+01
 16052	269	2	678	6.99	2022-06-26 23:37:21.783785+01
 16054	269	1	750	4.99	2022-06-02 04:29:53.30199+01
@@ -44119,7 +44119,7 @@ COPY public.payment_p2022_06 (payment_id, customer_id, staff_id, rental_id, amou
 -- Data for Name: payment_p2022_07; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.payment_p2022_07 (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
+COPY public.payment /*_p2022_07*/ (payment_id, customer_id, staff_id, rental_id, amount, payment_date) FROM stdin;
 16061	272	1	1041	6.99	2022-07-19 07:32:02.911937+01
 16064	273	2	980	0.99	2022-07-07 08:15:37.160099+01
 16071	275	2	336	2.99	2022-07-04 10:47:03.440928+01

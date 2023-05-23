@@ -775,11 +775,17 @@ CREATE TABLE public.payment (
     payment_date timestamp with time zone NOT NULL,
     PRIMARY KEY (payment_date, payment_id)
 )
-PARTITION BY RANGE (payment_date);
+/*
+Remove partitioning, as subsetting of partitioned table involves usage of working_directory TDK
+
+PARTITION BY RANGE (payment_date)
+*/
+;
 
 
 ALTER TABLE public.payment OWNER TO postgres;
 
+/*
 --
 -- Name: payment_p2022_01; Type: TABLE; Schema: public; Owner: postgres
 --
@@ -891,7 +897,7 @@ CREATE TABLE public.payment_p2022_07 (
 
 
 ALTER TABLE public.payment_p2022_07 OWNER TO postgres;
-
+*/
 --
 -- Name: rental_rental_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -1068,6 +1074,7 @@ CREATE VIEW public.staff_list AS
 
 ALTER TABLE public.staff_list OWNER TO postgres;
 
+/*
 --
 -- Name: payment_p2022_01; Type: TABLE ATTACH; Schema: public; Owner: postgres
 --
@@ -1115,7 +1122,7 @@ ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_06 FOR VAL
 --
 
 ALTER TABLE ONLY public.payment ATTACH PARTITION public.payment_p2022_07 FOR VALUES FROM ('2022-07-01 01:00:00+01') TO ('2022-08-01 01:00:00+01');
-
+*/
 
 --
 -- Name: actor actor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
@@ -1291,7 +1298,7 @@ CREATE INDEX idx_fk_language_id ON public.film USING btree (language_id);
 
 CREATE INDEX idx_fk_original_language_id ON public.film USING btree (original_language_id);
 
-
+/*
 --
 -- Name: idx_fk_payment_p2022_01_customer_id; Type: INDEX; Schema: public; Owner: postgres
 --
@@ -1375,7 +1382,7 @@ CREATE INDEX idx_fk_payment_p2022_06_customer_id ON public.payment_p2022_06 USIN
 
 CREATE INDEX idx_fk_payment_p2022_06_staff_id ON public.payment_p2022_06 USING btree (staff_id);
 
-
+*/
 --
 -- Name: idx_fk_store_id; Type: INDEX; Schema: public; Owner: postgres
 --
@@ -1418,6 +1425,7 @@ CREATE UNIQUE INDEX idx_unq_manager_staff_id ON public.store USING btree (manage
 CREATE UNIQUE INDEX idx_unq_rental_rental_date_inventory_id_customer_id ON public.rental USING btree (rental_date, inventory_id, customer_id);
 
 
+/*
 --
 -- Name: payment_p2022_01_customer_id_idx; Type: INDEX; Schema: public; Owner: postgres
 --
@@ -1459,7 +1467,7 @@ CREATE INDEX payment_p2022_05_customer_id_idx ON public.payment_p2022_05 USING b
 
 CREATE INDEX payment_p2022_06_customer_id_idx ON public.payment_p2022_06 USING btree (customer_id);
 
-
+*/
 --
 -- Name: rental_category; Type: INDEX; Schema: public; Owner: postgres
 --
@@ -1668,6 +1676,7 @@ ALTER TABLE ONLY public.inventory
     ADD CONSTRAINT inventory_store_id_fkey FOREIGN KEY (store_id) REFERENCES public.store(store_id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
+/*
 --
 -- Name: payment_p2022_01 payment_p2022_01_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
@@ -1811,7 +1820,7 @@ ALTER TABLE ONLY public.payment_p2022_06
 ALTER TABLE ONLY public.payment_p2022_06
     ADD CONSTRAINT payment_p2022_06_staff_id_fkey FOREIGN KEY (staff_id) REFERENCES public.staff(staff_id);
 
-
+*/
 --
 -- Name: rental rental_customer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
