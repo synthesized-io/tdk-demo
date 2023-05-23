@@ -142,3 +142,28 @@ jobs:
           docker-compose run check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_2x_generation.yaml
+
+  simplified:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+
+      - name: Run the docker-compose
+        run: docker-compose -f pagila-simplified.yaml up -d
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_empty_input_db.yaml
