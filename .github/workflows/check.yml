@@ -158,12 +158,12 @@ jobs:
 
       - name: Verify input data
         run: >
-          docker-compose run check scan -d input_db
+          docker-compose -f pagila-simplified.yaml run check scan -d input_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_input_db.yaml
 
       - name: Verify output data
         run: >
-          docker-compose run check scan -d output_db
+          docker-compose run -f pagila-simplified.yaml check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_empty_input_db.yaml
