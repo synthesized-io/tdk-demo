@@ -142,3 +142,43 @@ jobs:
           docker-compose run check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_2x_generation.yaml
+
+  simplified:
+    needs: yamllint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install wait4x
+        run: |
+          curl -#LO https://github.com/$wait4x
+          tar --one-top-level -xvf wait4x-linux-amd64.tar.gz
+          cp ./wait4x-linux-amd64/wait4x /usr/local/bin/wait4x
+        env:
+          wait4x: atkrad/wait4x/releases/latest/download/wait4x-linux-amd64.tar.gz
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+
+      - name: Run the docker-compose
+        run: docker-compose -f pagila-simplified.yaml up -d
+
+      - name: Wait for databases
+        run: |
+          wait4x postgresql $url:6000/postgres?sslmode=disable
+          wait4x postgresql $url:6001/postgres?sslmode=disable
+        env:
+          url: postgres://postgres:postgres@localhost
+
+      - name: Verify input data
+        run: >
+          docker-compose -f pagila-simplified.yaml run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run -f pagila-simplified.yaml check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_empty_input_db.yaml
