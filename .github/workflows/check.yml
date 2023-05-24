@@ -149,12 +149,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install wait4x
+        run: |
+          curl -#LO https://github.com/atkrad/wait4x/releases/latest/download/wait4x-linux-amd64.tar.gz
+          tar --one-top-level -xvf wait4x-linux-amd64.tar.gz
+          cp ./wait4x-linux-amd64/wait4x /usr/local/bin/wait4x
+
       - name: Build docker-compose
         run: |
           docker-compose pull
 
       - name: Run the docker-compose
         run: docker-compose -f pagila-simplified.yaml up -d
+      
+      - name: Wait for databases
+        run: |
+          wait4x postgresql postgres://postgres:postgres@localhost:6000/postgres
+          wait4x postgresql postgres://postgres:postgres@localhost:6001/postgres
 
       - name: Verify input data
         run: >
