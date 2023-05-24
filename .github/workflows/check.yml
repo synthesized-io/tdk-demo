@@ -166,8 +166,10 @@ jobs:
 
       - name: Wait for databases
         run: |
-          wait4x postgresql postgres://postgres:postgres@localhost:6000/postgres
-          wait4x postgresql postgres://postgres:postgres@localhost:6001/postgres
+          wait4x postgresql $url:6000/postgres?sslmode=disable
+          wait4x postgresql $url:6001/postgres?sslmode=disable
+        env:
+          url: postgres://postgres:postgres@localhost
 
       - name: Verify input data
         run: >
