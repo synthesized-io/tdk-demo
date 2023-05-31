@@ -27,7 +27,6 @@ jobs:
         run: |
           yamllint -sd relaxed .
 
-
   generation_from_scratch:
     needs: yamllint
     runs-on: ubuntu-latest
@@ -55,7 +54,6 @@ jobs:
           docker-compose run check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_generation_from_scratch.yaml
-
 
   masking:
     needs: yamllint
@@ -85,7 +83,6 @@ jobs:
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_masking.yaml
 
-
   subsetting:
     needs: yamllint
     runs-on: ubuntu-latest
@@ -114,7 +111,6 @@ jobs:
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_subsetting.yaml
 
-
   generation:
     needs: yamllint
     runs-on: ubuntu-latest
@@ -142,4 +138,3 @@ jobs:
           docker-compose run check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_2x_generation.yaml
-
