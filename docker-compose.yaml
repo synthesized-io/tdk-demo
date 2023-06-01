@@ -11,6 +11,12 @@ services:
     volumes:
       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6000:5432" ]
+    healthcheck:
+      test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
 
   output_db:
     container_name: output_db
@@ -21,7 +27,12 @@ services:
     volumes:
       - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6001:5432" ]
-
+    healthcheck:
+      test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
 
   pgadmin:
     container_name: pgadmin
@@ -38,8 +49,7 @@ services:
 
   tdk:
     container_name: tdk
-    build:
-      context: .
+    image: synthesizedio/synthesized-tdk-cli:latest
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:postgresql://input_db:5432/postgres
       SYNTHESIZED_INPUT_USERNAME: postgres
@@ -61,15 +71,13 @@ services:
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
       - ./${CONFIG_FILE}:/app/config.yaml
-        #- ./data:/app/data
+      - ./banner.txt:/app/banner.txt
     depends_on:
-      - input_db
-      - output_db
-      - pgadmin
-    command: >
-      sh -c "wait4ports -q -t 60 tcp://input_db:5432 tcp://output_db:5432
-      ; cd /app ; java org.springframework.boot.loader.JarLauncher"
-
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+    
 
   check:
     container_name: check
