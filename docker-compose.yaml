@@ -77,7 +77,6 @@ services:
         condition: service_healthy
       output_db:
         condition: service_healthy
-    
 
   check:
     container_name: check
