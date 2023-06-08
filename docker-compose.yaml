@@ -73,6 +73,8 @@ services:
       - ./${CONFIG_FILE}:/app/config.yaml
       - ./banner.txt:/app/banner.txt
     depends_on:
+      pgadmin:
+        condition: service_started
       input_db:
         condition: service_healthy
       output_db:
