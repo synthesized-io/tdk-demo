@@ -1,0 +1,25 @@
+# default_config:
+#   mode: KEEP
+
+
+
+# default_config:
+#   mode: "GENERATION"
+#   target_row_number: 10
+
+# table_truncation_mode: TRUNCATE
+# schema_creation_mode: DROP_AND_CREATE
+# cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+# safety_mode: "RELAXED"
+# global_seed: 42
+
+
+
+default_config:
+  mode: MASKING
+
+cycle_resolution_strategy: DELETE_NOT_REQUIRED
+table_truncation_mode: TRUNCATE
+schema_creation_mode: DO_NOT_CREATE
+safety_mode: RELAXED
+global_seed: 42

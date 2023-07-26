@@ -1,0 +1,17 @@
+data_sources:
+  default_source:
+    jdbc_url: jdbc:mysql://localhost:6000/sakila
+    user:
+      type: raw
+      value: root
+    password:
+      type: raw
+      value: admin
+  default_target:
+    jdbc_url: jdbc:mysql://localhost:6001/sakila
+    user:
+      type: raw
+      value: root
+    password:
+      type: raw
+      value: admin

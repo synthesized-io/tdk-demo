@@ -1,0 +1,161 @@
+version: '3.5'
+
+services:
+
+  vault:
+    image: hashicorp/vault
+    command: server -dev
+    ports:
+      - "9200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: 1234
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+
+
+  vault-client:
+    image: hashicorp/vault
+    command:
+      - /bin/sh
+      - -c
+      - |
+        while ! $$(vault status &> /dev/null); do echo "Trying to connect to vault"; sleep 2; done
+        sleep 2
+        vault login $${VAULT_DEV_ROOT_TOKEN_ID}
+        vault auth enable approle
+
+        vault kv put secret/postgres-source-simple-user username=simple_pg_user password=postgres
+        vault kv put secret/postgres-target-simple-user username=simple_pg_user password=postgres
+
+        vault secrets enable database
+
+        vault write database/config/postgres_source \
+            plugin_name=postgresql-database-plugin \
+            connection_url="postgresql://{{username}}:{{password}}@input_db:5432/postgres" \
+            allowed_roles="postgres-source-static-role,postgres-source-dynamic-role" \
+            username="postgres" \
+            password="postgres"
+        vault write database/config/postgres_target \
+            plugin_name=postgresql-database-plugin \
+            connection_url="postgresql://{{username}}:{{password}}@output_db:5432/postgres" \
+            allowed_roles="postgres-target-static-role,postgres-target-dynamic-role" \
+            username="postgres" \
+            password="postgres"
+
+        vault write database/static-roles/postgres-source-static-role \
+            db_name=postgres_source \
+            username="static_vault_pg_user" \
+            rotation_period=86400
+        vault write database/static-roles/postgres-target-static-role \
+            db_name=postgres_target \
+            username="static_vault_pg_user" \
+            rotation_period=86400
+
+        vault write database/roles/postgres-source-dynamic-role \
+            db_name="postgres_source" \
+            creation_statements=" \
+              create role \"{{name}}\" with login password '{{password}}' valid until '{{expiration}}'; \
+              grant connect on database postgres to \"{{name}}\"; \
+              grant usage on schema foo TO \"{{name}}\"; \
+              grant select on all tables in schema \"foo\" to \"{{name}}\";" \
+            default_ttl="1h" \
+            max_ttl="24h"
+        vault write database/roles/postgres-target-dynamic-role \
+            db_name="postgres_target" \
+            creation_statements=" \
+              create role \"{{name}}\" with login password '{{password}}' valid until '{{expiration}}'; \
+              grant create on database postgres to \"{{name}}\"; \
+              grant usage, create on schema foo TO \"{{name}}\"; \
+              grant truncate, select, insert on all tables in schema \"foo\" to \"{{name}}\";" \
+            default_ttl="1h" \
+            max_ttl="24h"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "1234"
+      VAULT_ADDR: "http://vault:8200"
+      DBUSER: "postgres"
+      DBPASS: "postgres"
+      ROLE_ID: "1234"
+    depends_on:
+      - input_db
+      - output_db
+
+
+  input_db:
+    container_name: input_db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./create_users.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./create_schema.sql:/docker-entrypoint-initdb.d/2.sql
+    ports: [ "6000:5432" ]
+    healthcheck:
+      test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
+
+  output_db:
+    container_name: output_db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./create_users.sql:/docker-entrypoint-initdb.d/1.sql
+    ports: [ "6001:5432" ]
+    healthcheck:
+      test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
+
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./pgadmin/servers.json:/pgadmin4/servers.json
+    ports:
+      - "8888:80"
+
+
+  # tdk:
+  #   container_name: tdk
+  #   image: synthesizedio/synthesized-tdk-cli:latest
+  #   environment:
+  #     ORACLE_SID: ''
+  #     SYNTHESIZED_INPUT_URL: jdbc:postgresql://input_db:5432/postgres
+  #     SYNTHESIZED_INPUT_USERNAME: postgres
+  #     SYNTHESIZED_INPUT_PASSWORD: postgres
+  #     SYNTHESIZED_OUTPUT_URL: jdbc:postgresql://output_db:5432/postgres
+  #     SYNTHESIZED_OUTPUT_USERNAME: postgres
+  #     SYNTHESIZED_OUTPUT_PASSWORD: postgres
+  #     SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+  #     TDK_WORKINGDIRECTORY_PATH: /app/data
+  #     TDK_WORKINGDIRECTORY_ENABLED: "true"
+  #     JAVA_TOOL_OPTIONS: >
+  #       -Dlogging.level.io.synthesized.testingsuite.executor.lite.LiteTransformer=INFO
+  #       -Dlogging.level.io.synthesized.testingsuite=WARN
+  #       -Dlogging.level.com.zaxxer.hikari=WARN
+  #       -Dlogging.level.org.reflections=WARN
+  #       -XX:+UseContainerSupport
+  #       -XX:MaxRAMPercentage=80.0
+  #       -Dspring.main.banner-mode=CONSOLE
+  #       -Dspring.banner.location=file:/app/banner.txt
+  #   volumes:
+  #     - ./${CONFIG_FILE}:/app/config.yaml
+  #     - ./banner.txt:/app/banner.txt
+  #   depends_on:
+  #     pgadmin:
+  #       condition: service_started
+  #     input_db:
+  #       condition: service_healthy
+  #     output_db:
+  #       condition: service_healthy

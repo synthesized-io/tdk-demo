@@ -1,0 +1,54 @@
+{
+    "Servers": {
+        "1": {
+            "Name": "simple_pg_user",
+            "Group": "Source DB",
+            "Host": "input_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "simple_pg_user"
+        },
+        "2": {
+            "Name": "static_vault_pg_user",
+            "Group": "Source DB",
+            "Host": "input_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "static_vault_pg_user"
+        },
+        "3": {
+            "Name": "dynamic_vault_pg_user",
+            "Group": "Source DB",
+            "Host": "input_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "We dont know current user name for the dynamic Vault role"
+        },
+
+        "4": {
+            "Name": "simple_pg_user",
+            "Group": "Target DB",
+            "Host": "output_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "simple_pg_user"
+        },
+
+        "5": {
+            "Name": "static_vault_pg_user",
+            "Group": "Target DB",
+            "Host": "output_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "static_vault_pg_user"
+        },
+        "6": {
+            "Name": "dynamic_vault_pg_user",
+            "Group": "Target DB",
+            "Host": "input_db",
+            "Port": 5432,
+            "MaintenanceDB": "postgres",
+            "Username": "We dont know current user name for the dynamic Vault role"
+        }        
+    }
+}

@@ -1,0 +1,25 @@
+data_sources:
+  default_source:
+    jdbc_url: jdbc:postgresql://localhost:6000/postgres
+    user:
+      type: vault
+      storage: database
+      path: creds/postgres-source-dynamic-role
+      secret: username
+    password:
+      type: vault
+      storage: database
+      path: creds/postgres-source-dynamic-role
+      secret: password
+  default_target:
+    jdbc_url: jdbc:postgresql://localhost:6001/postgres
+    user:
+      type: vault
+      storage: database
+      path: creds/postgres-target-dynamic-role
+      secret: username
+    password:
+      type: vault
+      storage: database
+      path: creds/postgres-target-dynamic-role
+      secret: password

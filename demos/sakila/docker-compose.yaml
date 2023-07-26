@@ -1,0 +1,75 @@
+version: '3.5'
+
+services:
+
+  input_db:
+    container_name: input_db
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: sakila
+      MYSQL_USERNAME: root
+    volumes:
+      - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./sakila-data.sql:/docker-entrypoint-initdb.d/2.sql
+    ports: [ "6000:3306" ]
+    healthcheck:
+      test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  output_db:
+    container_name: output_db
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: sakila
+      MYSQL_USERNAME: root
+    volumes:
+      - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
+    ports: [ "6001:3306" ]
+    healthcheck:
+      test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+  # TODO add adminer
+
+  tdk:
+    container_name: tdk
+    image: synthesizedio/synthesized-tdk-cli:v1.29.0
+    environment:
+      SYNTHESIZED_INPUT_URL: jdbc:mysql://input_db:3306/sakila
+      SYNTHESIZED_INPUT_USERNAME: root
+      SYNTHESIZED_INPUT_PASSWORD: admin
+      SYNTHESIZED_OUTPUT_URL: jdbc:mysql://output_db:3306/sakila
+      SYNTHESIZED_OUTPUT_USERNAME: root
+      SYNTHESIZED_OUTPUT_PASSWORD: admin
+      SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+      TDK_WORKINGDIRECTORY_PATH: /app/data
+      TDK_WORKINGDIRECTORY_ENABLED: "true"
+      JAVA_TOOL_OPTIONS: >
+        -Dlogging.level.io.synthesized.testingsuite.executor.lite.LiteTransformer=INFO
+        -Dlogging.level.io.synthesized.testingsuite=WARN
+        -Dlogging.level.com.zaxxer.hikari=WARN
+        -Dlogging.level.org.reflections=WARN
+        -XX:+UseContainerSupport
+        -XX:MaxRAMPercentage=80.0
+        -Dspring.main.banner-mode=CONSOLE
+    volumes:
+      - ./config.tdk.yaml:/app/config.yaml
+        #- ./data:/app/data
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
+
+  # check:
+  #   container_name: check
+  #   image: sodadata/soda-core
+  #   volumes:
+  #     - ./soda:/sodacl
