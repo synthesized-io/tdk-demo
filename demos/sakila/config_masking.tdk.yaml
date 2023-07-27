@@ -1,0 +1,7 @@
+default_config:
+  mode: MASKING
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: "DO_NOT_CREATE"
+cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+safety_mode: "RELAXED"

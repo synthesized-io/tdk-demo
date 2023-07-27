@@ -11,7 +11,7 @@ services:
       MYSQL_USERNAME: root
     volumes:
       - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
-      - ./sakila-data.sql:/docker-entrypoint-initdb.d/2.sql
+      # - ./sakila-data.sql:/docker-entrypoint-initdb.d/2.sql
     ports: [ "6000:3306" ]
     healthcheck:
       test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
