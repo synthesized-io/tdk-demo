@@ -9,11 +9,14 @@ A simple (but no less powerful) demo for data generation (masking and subsetting
 
 ## How to start
 
-### Generation of the empty database from scratch
-
 ```
 git clone https://github.com/synthesized-io/pagila-tdk-demo
 cd pagila-tdk-demo
+```
+
+### Generation of the empty database from scratch
+
+```
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
 docker-compose run tdk
 ```
