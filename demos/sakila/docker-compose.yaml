@@ -11,7 +11,6 @@ services:
       MYSQL_USERNAME: root
     volumes:
       - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
-      # - ./sakila-data.sql:/docker-entrypoint-initdb.d/2.sql
     ports: [ "6000:3306" ]
     healthcheck:
       test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
@@ -58,9 +57,10 @@ services:
         -XX:+UseContainerSupport
         -XX:MaxRAMPercentage=80.0
         -Dspring.main.banner-mode=CONSOLE
+        -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./config.tdk.yaml:/app/config.yaml
-        #- ./data:/app/data
+      - ./${CONFIG_FILE}:/app/config.yaml
+      - ../../banner.txt:/app/banner.txt
     depends_on:
       input_db:
         condition: service_healthy

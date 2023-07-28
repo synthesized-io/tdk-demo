@@ -1,8 +1,11 @@
+= TDK Sakila Demo
+
 
 == How to start
 
-
 === Masking of the existing data
+
+image::masking.gif[]
 
 [source,bash]
 ----
@@ -48,6 +51,8 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 
 
 === Subsetting of the existing data
+
+image::subsetting.gif[]
 
 [source,bash]
 ----
