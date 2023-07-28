@@ -9,9 +9,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       PGDATA: /data/postgres
     volumes:
-       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-       - ./pagila-schema.sql:/home/pagila-schema.sql
-       - ./sql:/home/sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./pagila-schema.sql:/home/pagila-schema.sql
+      - ./sql:/home/sql
     ports:
       - "5432:5432"
     restart: unless-stopped
