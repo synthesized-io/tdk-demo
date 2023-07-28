@@ -85,9 +85,7 @@ tables:
         params:
           type: "date_generator"
           mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+          std: 2d 4h 45m 12s 434ms
 
 
 table_truncation_mode: "TRUNCATE"
