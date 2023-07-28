@@ -14,60 +14,10 @@ services:
 
   vault-client:
     image: hashicorp/vault
-    command:
-      - /bin/sh
-      - -c
-      - |
-        while ! $$(vault status &> /dev/null); do echo "Trying to connect to vault"; sleep 2; done
-        sleep 2
-        vault login $${VAULT_DEV_ROOT_TOKEN_ID}
-        vault auth enable approle
+    command: sh /vault/run_vault.sh
+    volumes:
+      - ./run_vault.sh:/vault/run_vault.sh
 
-        vault kv put secret/postgres-source-simple-user username=simple_pg_user password=postgres
-        vault kv put secret/postgres-target-simple-user username=simple_pg_user password=postgres
-
-        vault secrets enable database
-
-        vault write database/config/postgres_source \
-            plugin_name=postgresql-database-plugin \
-            connection_url="postgresql://{{username}}:{{password}}@input_db:5432/postgres" \
-            allowed_roles="postgres-source-static-role,postgres-source-dynamic-role" \
-            username="postgres" \
-            password="postgres"
-        vault write database/config/postgres_target \
-            plugin_name=postgresql-database-plugin \
-            connection_url="postgresql://{{username}}:{{password}}@output_db:5432/postgres" \
-            allowed_roles="postgres-target-static-role,postgres-target-dynamic-role" \
-            username="postgres" \
-            password="postgres"
-
-        vault write database/static-roles/postgres-source-static-role \
-            db_name=postgres_source \
-            username="static_vault_pg_user" \
-            rotation_period=86400
-        vault write database/static-roles/postgres-target-static-role \
-            db_name=postgres_target \
-            username="static_vault_pg_user" \
-            rotation_period=86400
-
-        vault write database/roles/postgres-source-dynamic-role \
-            db_name="postgres_source" \
-            creation_statements=" \
-              create role \"{{name}}\" with login password '{{password}}' valid until '{{expiration}}'; \
-              grant connect on database postgres to \"{{name}}\"; \
-              grant usage on schema foo TO \"{{name}}\"; \
-              grant select on all tables in schema \"foo\" to \"{{name}}\";" \
-            default_ttl="1h" \
-            max_ttl="24h"
-        vault write database/roles/postgres-target-dynamic-role \
-            db_name="postgres_target" \
-            creation_statements=" \
-              create role \"{{name}}\" with login password '{{password}}' valid until '{{expiration}}'; \
-              grant create on database postgres to \"{{name}}\"; \
-              grant usage, create on schema foo TO \"{{name}}\"; \
-              grant truncate, select, insert on all tables in schema \"foo\" to \"{{name}}\";" \
-            default_ttl="1h" \
-            max_ttl="24h"
     environment:
       VAULT_DEV_ROOT_TOKEN_ID: "1234"
       VAULT_ADDR: "http://vault:8200"
@@ -113,17 +63,17 @@ services:
       retries: 30
 
 
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: postgres
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-    volumes:
-      - ./pgadmin/servers.json:/pgadmin4/servers.json
-    ports:
-      - "8888:80"
+  # pgadmin:
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+  #     PGADMIN_DEFAULT_PASSWORD: postgres
+  #     PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #   volumes:
+  #     - ./pgadmin/servers.json:/pgadmin4/servers.json
+  #   ports:
+  #     - "8888:80"
 
 
   # tdk:

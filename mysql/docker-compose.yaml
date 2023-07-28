@@ -13,9 +13,13 @@ services:
       - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6000:3306" ]
     healthcheck:
-      test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
-      interval: 2s
-      timeout: 2s
+      test: >
+        mysql $$MYSQL_DATABASE
+        --user=$$MYSQL_USERNAME
+        --password=$$MYSQL_ROOT_PASSWORD
+        --execute "select 1;"
+      interval: 3s
+      timeout: 3s
       retries: 10
 
   output_db:
@@ -29,12 +33,14 @@ services:
       - ./sakila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6001:3306" ]
     healthcheck:
-      test: mysql $$MYSQL_DATABASE --user=$$MYSQL_USERNAME --password=$$MYSQL_ROOT_PASSWORD --execute "select 1;"
-      interval: 2s
-      timeout: 2s
+      test: >
+        mysql $$MYSQL_DATABASE
+        --user=$$MYSQL_USERNAME
+        --password=$$MYSQL_ROOT_PASSWORD
+        --execute "select 1;"
+      interval: 3s
+      timeout: 3s
       retries: 10
-
-  # TODO add adminer
 
   tdk:
     container_name: tdk
