@@ -74,8 +74,8 @@ services:
         condition: service_healthy
 
 
-  # check:
-  #   container_name: check
-  #   image: sodadata/soda-core
-  #   volumes:
-  #     - ./soda:/sodacl
+  check:
+    container_name: check
+    image: sodadata/soda-core
+    volumes:
+      - ./soda:/sodacl

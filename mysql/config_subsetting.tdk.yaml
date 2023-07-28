@@ -7,6 +7,9 @@ tables:
   - table_name_with_schema: "sakila.rental"
     target_ratio: 0.1
 
+  - table_name_with_schema: "sakila.payment"
+    target_ratio: 0.1
+
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: DO_NOT_CREATE
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
