@@ -52,7 +52,8 @@ jobs:
       - name: Run the workflow
         run: |
           export CONFIG_FILE=config_masking.tdk.yaml
-          docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+          docker-compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run tdk
 
       - name: Verify input data
         run: >
