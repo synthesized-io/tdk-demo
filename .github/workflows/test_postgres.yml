@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 defaults:
- run:
-  working-directory: ./postgres
+  run:
+    working-directory: ./postgres
 
 jobs:
 
@@ -31,7 +31,7 @@ jobs:
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_empty_input_db.yaml
+          /sodacl/checks_for_empty_docker-compose-input-db.yaml
 
       - name: Verify output data
         run: >
@@ -58,7 +58,7 @@ jobs:
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
+          /sodacl/checks_for_docker-compose-input-db.yaml
 
       - name: Verify output data
         run: >
@@ -85,7 +85,7 @@ jobs:
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
+          /sodacl/checks_for_docker-compose-input-db.yaml
 
       - name: Verify output data
         run: >
@@ -112,7 +112,7 @@ jobs:
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
+          /sodacl/checks_for_docker-compose-input-db.yaml
 
       - name: Verify output data
         run: >
