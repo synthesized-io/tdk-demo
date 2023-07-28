@@ -58,12 +58,41 @@ docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 
 ### Masking of the existing data
 
+![masking demo](masking.gif)
+
 ```
 export CONFIG_FILE=config_masking.tdk.yaml
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
+Execute `control_query.sql` script on the original database:
+
+```
+usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
+
+ first_name | last_name |              email              | payments | amount
+------------+-----------+---------------------------------+----------+--------
+ ELEANOR    | HUNT      | ELEANOR.HUNT@sakilacustomer.org |       46 | 216.54
+ KARL       | SEAL      | KARL.SEAL@sakilacustomer.org    |       45 | 221.55
+ CLARA      | SHAW      | CLARA.SHAW@sakilacustomer.org   |       42 | 195.58
+```
+
+Execute `control_query.sql` script on the masked database:
+
+```
+usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
+
+ first_name | last_name |              email              | payments | amount
+------------+-----------+---------------------------------+----------+--------
+ NVTPDAF    | VTKI      | HOEDJRR.RWAA@jczrgdfhirscic.kko |       46 | 296.06
+ MGPI       | AMKL      | QYBQ.VMFS@kywmemvfqskdwg.tqx    |       45 | 297.24
+ BKNOQJ     | ZWDQ      | ZFALHK.JDGW@iiczrtrkgemxtr.lmy  |       42 | 251.95
+```
+
+
 ### Subsetting of the existing data
+
+![subsetting demo](subsetting.gif)
 
 ```
 export CONFIG_FILE=config_subsetting.tdk.yaml
