@@ -80,9 +80,17 @@ docker-compose down
 ### Generation based on the existing data
 
 ```shell
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml up input_db output_db -d
+tdk \
+    --inventory-file inventory.yaml \
+    --config-file ./config_generation.tdk.yaml
+```
+
+```shell
 export CONFIG_FILE=config_generation.tdk.yaml
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
+
 
 ### Masking of the existing data
 

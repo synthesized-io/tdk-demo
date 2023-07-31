@@ -46,6 +46,15 @@ services:
     ports:
       - "8888:80"
 
+  databases:
+    container_name: databases
+    image: docker/whalesay
+    command: cowsay "Both databases have been started and are ready for TDK exercises!"
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
 
   tdk:
     container_name: tdk
@@ -73,8 +82,6 @@ services:
       - ./${CONFIG_FILE}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
     depends_on:
-      pgadmin:
-        condition: service_started
       input_db:
         condition: service_healthy
       output_db:
