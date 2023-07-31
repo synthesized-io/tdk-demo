@@ -44,7 +44,7 @@ services:
 
   tdk:
     container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:v1.29.0
+    image: synthesizedio/synthesized-tdk-cli:latest
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:mysql://input_db:3306/sakila
       SYNTHESIZED_INPUT_USERNAME: root
@@ -66,7 +66,7 @@ services:
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
       - ./${CONFIG_FILE}:/app/config.yaml
-      - ../../banner.txt:/app/banner.txt
+      - ../banner.txt:/app/banner.txt
     depends_on:
       input_db:
         condition: service_healthy

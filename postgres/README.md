@@ -11,10 +11,12 @@ A simple (but no less powerful) demo for data generation (masking and subsetting
 
 ```shell
 git clone https://github.com/synthesized-io/pagila-tdk-demo
-cd pagila-tdk-demo
+cd pagila-tdk-demo/postgres
 ```
 
 ### Generation of the empty database from scratch
+
+![generation from scratch demo](generation_from_scratch.gif)
 
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
@@ -38,6 +40,29 @@ docker exec -it output_db sh -c \
 ```
 
 Alternatively, you can use the embedded [pgAdmin 4](https://www.pgadmin.org/download). Simply go to http://localhost:8888/browser and explore the two preconfigured database connections (use `postgres` as the password).
+
+But we prefer [usql](https://github.com/xo/usql) for interacting with different types of databases.
+
+Execute `control_query.sql` script on the original database:
+
+```shell
+usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
+
+(0 rows)
+```
+
+Execute `control_query.sql` script on the resulted database:
+
+```shell
+usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
+
+ first_name | last_name |              email               | payments | amount  
+------------+-----------+----------------------------------+----------+---------
+ Ok         | McKenzie  | mckenzie6536@gusikowskiolson.com |        2 | 354.34 
+ Shay       | Waters    | waters4146@wildermangroup.com    |        2 | 1179.42 
+ Tuan       | Kohler    | kohler7036@kulaskling.com        |        2 | 401.85 
+(3 rows)
+```
 
 After that, you can modify an existing config or write your own `config.yaml` file and run data generation again:
 
@@ -78,18 +103,20 @@ usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
  ELEANOR    | HUNT      | ELEANOR.HUNT@sakilacustomer.org |       46 | 216.54
  KARL       | SEAL      | KARL.SEAL@sakilacustomer.org    |       45 | 221.55
  CLARA      | SHAW      | CLARA.SHAW@sakilacustomer.org   |       42 | 195.58
+(3 rows)
 ```
 
 Execute `control_query.sql` script on the masked database:
 
 ```shell
-usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
+usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 
- first_name | last_name |              email              | payments | amount
+ first_name | last_name |              email              | payments | amount 
 ------------+-----------+---------------------------------+----------+--------
- NVTPDAF    | VTKI      | HOEDJRR.RWAA@jczrgdfhirscic.kko |       46 | 296.06
- MGPI       | AMKL      | QYBQ.VMFS@kywmemvfqskdwg.tqx    |       45 | 297.24
- BKNOQJ     | ZWDQ      | ZFALHK.JDGW@iiczrtrkgemxtr.lmy  |       42 | 251.95
+ NVTPDAF    | VTKI      | HOEDJRR.RWAA@jczrgdfhirscic.kko |       46 | 296.23 
+ MGPI       | AMKL      | QYBQ.VMFS@kywmemvfqskdwg.tqx    |       45 | 297.42 
+ BKNOQJ     | ZWDQ      | ZFALHK.JDGW@iiczrtrkgemxtr.lmy  |       42 | 252.13
+(3 rows)
 ```
 
 
@@ -100,4 +127,30 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 ```shell
 export CONFIG_FILE=config_subsetting.tdk.yaml
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+```
+
+Execute `control_query.sql` script on the original database:
+
+```shell
+usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
+
+ first_name | last_name |              email              | payments | amount
+------------+-----------+---------------------------------+----------+--------
+ ELEANOR    | HUNT      | ELEANOR.HUNT@sakilacustomer.org |       46 | 216.54
+ KARL       | SEAL      | KARL.SEAL@sakilacustomer.org    |       45 | 221.55
+ CLARA      | SHAW      | CLARA.SHAW@sakilacustomer.org   |       42 | 195.58
+(3 rows)
+```
+
+Execute `control_query.sql` script on the masked database:
+
+```shell
+usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
+
+ first_name | last_name |              email               | payments | amount 
+------------+-----------+----------------------------------+----------+--------
+ JUSTIN     | NGO       | JUSTIN.NGO@sakilacustomer.org    |        8 | 23.92 
+ CLYDE      | TOBIAS    | CLYDE.TOBIAS@sakilacustomer.org  |        7 | 29.93 
+ THEODORE   | CULP      | THEODORE.CULP@sakilacustomer.org |        7 | 28.93 
+(3 rows)
 ```
