@@ -49,7 +49,9 @@ services:
   databases:
     container_name: databases
     image: docker/whalesay
-    command: cowsay "Both databases have been started and are ready for TDK exercises!"
+    command: >
+      cowsay
+        "Both databases have been started and are ready for TDK exercises!"
     depends_on:
       input_db:
         condition: service_healthy
@@ -84,10 +86,8 @@ services:
       - ../banner.txt:/app/banner.txt
       - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
     depends_on:
-      input_db:
-        condition: service_healthy
-      output_db:
-        condition: service_healthy
+      databases:
+        condition: service_completed_successfully
 
   check:
     container_name: check
