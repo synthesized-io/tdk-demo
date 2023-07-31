@@ -79,6 +79,8 @@ docker-compose down
 
 ### Generation based on the existing data
 
+![generation demo](generation.gif)
+
 ```shell
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml up input_db output_db -d
 tdk \
