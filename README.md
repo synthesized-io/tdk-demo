@@ -1,6 +1,9 @@
 # tdk-demo
 
 
+https://github.com/synthesized-io/pagila-data-generation
+https://www.synthesized.io/post/test-data-generation-there-and-back
+
 We use usql becuase ...
 
 

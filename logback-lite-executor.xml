@@ -1,0 +1,12 @@
+<included>
+  <variable
+    name="liteExecutor.stdoutMessagePattern"
+    value="%msg%n"
+  />
+  <!-- same as "liteExecutor.stdoutMessagePattern" above, only with coloring/highlighting removed,
+       as those only pollute the output file -->
+  <variable
+    name="liteExecutor.fileMessagePattern"
+    value="%msg%n"
+  />
+</included>
