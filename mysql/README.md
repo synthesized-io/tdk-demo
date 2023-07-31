@@ -8,7 +8,7 @@
 ![masking demo](masking.gif)
 
 ```shell
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml up input_db output_db -d
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
 tdk \
     --inventory-file inventory.yaml \
     --config-file ./config_masking.tdk.yaml
@@ -50,7 +50,7 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 ![subsetting demo](subsetting.gif)
 
 ```shell
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml up input_db output_db -d
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
 tdk \
     --inventory-file inventory.yaml \
     --config-file ./config_subsetting.tdk.yaml

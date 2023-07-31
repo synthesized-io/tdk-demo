@@ -42,6 +42,19 @@ services:
       timeout: 3s
       retries: 10
 
+
+  databases:
+    container_name: databases
+    image: docker/whalesay
+    command: >
+      cowsay
+        "Both databases have been started and are ready for TDK exercises!"
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
   tdk:
     container_name: tdk
     image: synthesizedio/synthesized-tdk-cli:latest
@@ -60,6 +73,7 @@ services:
         -Dlogging.level.io.synthesized.testingsuite=WARN
         -Dlogging.level.com.zaxxer.hikari=WARN
         -Dlogging.level.org.reflections=WARN
+        -Dlogging.level.org.jooq=WARN
         -XX:+UseContainerSupport
         -XX:MaxRAMPercentage=80.0
         -Dspring.main.banner-mode=CONSOLE
@@ -67,11 +81,10 @@ services:
     volumes:
       - ./${CONFIG_FILE}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
+      - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
     depends_on:
-      input_db:
-        condition: service_healthy
-      output_db:
-        condition: service_healthy
+      databases:
+        condition: service_completed_successfully
 
 
   check:

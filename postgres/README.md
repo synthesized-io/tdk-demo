@@ -82,7 +82,7 @@ docker-compose down
 ![generation demo](generation.gif)
 
 ```shell
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml up input_db output_db -d
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
 tdk \
     --inventory-file inventory.yaml \
     --config-file ./config_generation.tdk.yaml
