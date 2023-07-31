@@ -65,6 +65,7 @@ services:
         -Dlogging.level.io.synthesized.testingsuite=WARN
         -Dlogging.level.com.zaxxer.hikari=WARN
         -Dlogging.level.org.reflections=WARN
+        -Dlogging.level.org.jooq=WARN
         -XX:+UseContainerSupport
         -XX:MaxRAMPercentage=80.0
         -Dspring.main.banner-mode=CONSOLE
@@ -72,6 +73,7 @@ services:
     volumes:
       - ./${CONFIG_FILE}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
+      - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
     depends_on:
       pgadmin:
         condition: service_started
