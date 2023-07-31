@@ -8,8 +8,6 @@ clear
 
 pe "# Start databases ..."
 pe "${SPIN_DATABASES_UP}"
-# pe "docker-compose -f docker-compose.yaml run tdk"
-# docker-compose up -d input_db output_db &> /dev/null
 
 pe "# Check the ORIGINAL database with control sql-query ..."
 pe "usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql"
@@ -26,5 +24,3 @@ p ""
 docker-compose down &> /dev/null
 
 exit
-
-
