@@ -68,7 +68,7 @@ services:
     image: docker/whalesay
     command: >
       cowsay
-        "Both databases and Hashicorp Vault have 
+        "Both databases and Hashicorp Vault have
         been started and are ready for TDK exercises!"
     depends_on:
       vault-client:
