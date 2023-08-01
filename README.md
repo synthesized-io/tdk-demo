@@ -1,10 +1,26 @@
-# tdk-demo
+# TDK Demo
 
+A simple (but no less powerful) demo for data generation, masking and subsetting for different databases and options using [Synthesized TDK](https://docs.synthesized.io/tdk/latest/?utm_source=github&utm_medium=devrel&utm_campaign=datagen).
+
+
+## Preamble
 
 https://github.com/synthesized-io/pagila-data-generation
 https://www.synthesized.io/post/test-data-generation-there-and-back
 
-We use usql becuase ...
+
+## Demos
+
+- [TDK + PostgreSQL](postgres/README.md)
+- [TDK + MySQL](mysql/README.md)
+- [TDK + Oracle]()
+- [TDK + PostgreSQL+Vault](postgres-vault/README.md)
+
+
+## Tools
+
+- [Synthesized TDK](https://docs.synthesized.io/tdk/latest/?utm_source=github&utm_medium=devrel&utm_campaign=datagen) provides database generation and masking capabilities.
+- [usql](https://github.com/xo/usql) - Universal command-line interface for SQL databases.
 
 
 ## Troubleshooting and advises

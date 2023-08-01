@@ -1,26 +1,32 @@
-# pagila-tdk-demo
-
-A simple (but no less powerful) demo for data generation (masking and subsetting as well) for the legendary Pagila database schema using Synthesized TDK.
-
-[Pagila](https://github.com/devrimgunduz/pagila) is a sample database schema that can be used in tutorials, articles, demos, etc.
-
-[Synthesized TDK](https://docs.synthesized.io/tdk/latest/?utm_source=habr&utm_medium=devrel&utm_campaign=datagen) provides database generation and masking capabilities.
+# TDK PostgreSQL Demo
 
 
-## How to start
+[Pagila](https://github.com/devrimgunduz/pagila) is a sample database schema that can be used in MySQL tutorials, articles, demos, etc.
 
 ```shell
 git clone https://github.com/synthesized-io/pagila-tdk-demo
 cd pagila-tdk-demo/postgres
 ```
 
-### Generation of the empty database from scratch
+Prepare an [inventory file](https://docs.synthesized.io/tdk/latest/user_guide/reference/inventory) - [inventory.yaml](inventory.yaml).
+
+
+## Generation of the empty database from scratch
 
 ![generation from scratch demo](generation_from_scratch.gif)
 
+Run TDK using Docker image:
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
 docker-compose run tdk
+```
+
+Or run TDK CLI directly:
+```shell
+docker-compose -f docker-compose.yaml run databases
+tdk \
+    --inventory-file inventory.yaml \
+    --config-file ./config_generation_from_scratch.tdk.yaml
 ```
 
 When the program completes its execution (and control returns to the command line), we will be able to connect to the output database using the exposed port `6001` and `postgres` as the values for the `user`, `password`, and `db_name` parameters, and examine our synthesized data.
@@ -30,9 +36,7 @@ Or you can connect to the output database directly in the Docker container using
 ```shell
 docker exec -it output_db sh -c \
   "psql -U postgres -d postgres -c \"select count(1) from rental\""
-```
 
-```shell
  count
 --------
  20000
@@ -43,7 +47,7 @@ Alternatively, you can use the embedded [pgAdmin 4](https://www.pgadmin.org/down
 
 But we prefer [usql](https://github.com/xo/usql) for interacting with different types of databases.
 
-Execute `control_query.sql` script on the original database:
+Execute [`control_query.sql`](control_query.sql) script on the original database and ensure that there is no data:
 
 ```shell
 usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
@@ -51,7 +55,7 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 (0 rows)
 ```
 
-Execute `control_query.sql` script on the resulted database:
+Execute the `control_query.sql` script on the resulting database to ensure that we have realistic and beautiful data:
 
 ```shell
 usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
@@ -77,10 +81,18 @@ Then we can shut down the databases:
 docker-compose down
 ```
 
-### Generation based on the existing data
+
+## Generation based on the existing data
 
 ![generation demo](generation.gif)
 
+Run TDK using Docker image:
+```shell
+export CONFIG_FILE=config_generation.tdk.yaml
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+```
+
+Or run TDK CLI directly:
 ```shell
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
 tdk \
@@ -88,19 +100,23 @@ tdk \
     --config-file ./config_generation.tdk.yaml
 ```
 
-```shell
-export CONFIG_FILE=config_generation.tdk.yaml
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
-```
 
-
-### Masking of the existing data
+## Masking of the existing data
 
 ![masking demo](masking.gif)
 
+Run TDK using Docker image:
 ```shell
 export CONFIG_FILE=config_masking.tdk.yaml
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+```
+
+Or run TDK CLI directly:
+```shell
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
+tdk \
+    --inventory-file inventory.yaml \
+    --config-file ./config_masking.tdk.yaml
 ```
 
 Execute `control_query.sql` script on the original database:
@@ -130,13 +146,22 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 ```
 
 
-### Subsetting of the existing data
+## Subsetting of the existing data
 
 ![subsetting demo](subsetting.gif)
 
+Run TDK using Docker image:
 ```shell
 export CONFIG_FILE=config_subsetting.tdk.yaml
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+```
+
+Or run TDK CLI directly:
+```shell
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run databases
+tdk \
+    --inventory-file inventory.yaml \
+    --config-file ./config_subsetting.tdk.yaml
 ```
 
 Execute `control_query.sql` script on the original database:
