@@ -1,6 +1,6 @@
 data_sources:
   default_source:
-    jdbc_url: jdbc:postgresql://localhost:6000/postgres
+    jdbc_url: jdbc:postgresql://input_db:5432/postgres
     user:
       type: vault
       storage: database
@@ -12,7 +12,7 @@ data_sources:
       path: static-creds/postgres-source-static-role
       secret: password
   default_target:
-    jdbc_url: jdbc:postgresql://localhost:6001/postgres
+    jdbc_url: jdbc:postgresql://output_db:5432/postgres
     user:
       type: vault
       storage: database

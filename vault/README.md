@@ -2,26 +2,26 @@
 
 Run Vault server and databases:
 ```
-docker-compose up -d
+docker-compose run databases
 ``` 
 
 ## 1. Run TDK with simple Vault secrets
-```
-tdk \
-    --inventory-file inventory_simple_secret.yaml \
-    --config-file config.tdk.yaml
+
+```shell
+export INVENTORY_FILE=inventory_simple_secret.yaml
+docker-compose run tdk
 ```
 
 ## 2. Run TDK with static database roles
-```
-tdk \
-    --inventory-file inventory_static_users.yaml \
-    --config-file ./config.tdk.yaml
+
+```shell
+export INVENTORY_FILE=inventory_static_users.yaml
+docker-compose run tdk
 ```
 
 ## 3. Run TDK with dynamic database roles
-```
-tdk \
-    --inventory-file inventory_dynamic_users.yaml \
-    --config-file ./config.tdk.yaml
+
+```shell
+export INVENTORY_FILE=inventory_dynamic_users.yaml
+docker-compose run tdk
 ```
