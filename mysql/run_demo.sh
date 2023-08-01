@@ -19,7 +19,7 @@ pe "docker-compose -f docker-compose.yaml run tdk"
 pe "# Check the RESULTED database with control sql-query ..."
 pe "usql mysql://root:admin@localhost:6001/sakila -f control_query.sql"
 
-PROMPT_TIMEOUT=5
+PROMPT_TIMEOUT=10
 wait
 
 p ""
