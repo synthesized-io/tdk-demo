@@ -1,3 +1,2 @@
-${AnsiColor.GREEN}Welcome to the Synthesized TDK ${application.version}${AnsiColor.GREEN}
-${AnsiColor.DEFAULT}
+${AnsiColor.GREEN}Welcome to the Synthesized TDK ${application.version}${AnsiColor.GREEN}${AnsiColor.DEFAULT}
 Transformation has been started ...
