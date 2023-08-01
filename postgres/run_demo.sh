@@ -19,7 +19,7 @@ pe "docker-compose -f docker-compose.yaml run tdk"
 pe "# Check the RESULTED database with control sql-query ..."
 pe "usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql"
 
-PROMPT_TIMEOUT=10
+PROMPT_TIMEOUT=20
 wait
 
 p ""
