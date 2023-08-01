@@ -14,7 +14,7 @@ https://www.synthesized.io/post/test-data-generation-there-and-back
 - [TDK + PostgreSQL](postgres/README.md)
 - [TDK + MySQL](mysql/README.md)
 - [TDK + Oracle]()
-- [TDK + PostgreSQL+Vault](postgres-vault/README.md)
+- [TDK + PostgreSQL + Vault](vault/README.md)
 
 
 ## Tools
