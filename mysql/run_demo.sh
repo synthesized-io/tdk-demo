@@ -22,6 +22,5 @@ pe "usql mysql://root:admin@localhost:6001/sakila -f control_query.sql"
 p ""
 
 docker-compose down &> /dev/null
-sleep 20 &> /dev/null
 
 exit
