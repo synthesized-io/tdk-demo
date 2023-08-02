@@ -1,7 +1,7 @@
 # tdk-vault-demo
 
 Run Vault server and databases:
-```
+```shell
 docker-compose run databases
 ``` 
 

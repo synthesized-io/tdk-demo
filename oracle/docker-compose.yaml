@@ -1,0 +1,115 @@
+version: '3'
+
+services: 
+
+  oracle_source:
+    image: gvenzl/oracle-xe
+    container_name: oracle_source
+    networks:
+      - simple-network
+    ports:
+      - 1521:1521
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_USER:-secret_password}
+    volumes:
+      - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
+      - ./sakila-schema.sql:/container-entrypoint-initdb.d/2.sql
+      - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/3.sql
+    healthcheck:
+      test: "${ORACLE_BASE}/healthcheck.sh"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
+
+  oracle_target:
+    image: gvenzl/oracle-xe
+    container_name: oracle_target
+    networks:
+      - simple-network
+    ports:
+      - 1522:1521
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_USER:-secret_password}
+    volumes:
+      - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
+    healthcheck:
+      test: "${ORACLE_BASE}/healthcheck.sh"
+      interval: "3s"
+      timeout: "3s"
+      start_period: "3s"
+      retries: 30
+
+  databases:
+    container_name: databases
+    image: docker/whalesay
+    command: >
+      cowsay
+        "Both databases have been started and are ready for TDK exercises!"
+    depends_on:
+      oracle_source:
+        condition: service_healthy
+      oracle_target:
+        condition: service_healthy
+
+
+  tdk:
+    container_name: tdk
+    image: synthesizedio/synthesized-tdk-cli:latest
+    networks:
+      - simple-network
+    environment:
+      SYNTHESIZED_INPUT_URL: jdbc:oracle:thin:@oracle_source:1521:xe
+      SYNTHESIZED_INPUT_USERNAME: test
+      SYNTHESIZED_INPUT_PASSWORD: test
+      SYNTHESIZED_OUTPUT_URL: jdbc:oracle:thin:@oracle_target:1521:xe
+      SYNTHESIZED_OUTPUT_USERNAME: test
+      SYNTHESIZED_OUTPUT_PASSWORD: test
+      SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+      TDK_WORKINGDIRECTORY_PATH: /app/data
+      SYNTHESIZED_KEY: ${SYNTHESIZED_KEY}
+      # TDK_WORKINGDIRECTORY_ENABLED: "true"
+      JAVA_TOOL_OPTIONS: >
+        -Dlogging.level.io.synthesized.testingsuite.executor.lite.LiteTransformer=INFO
+        -Dlogging.level.io.synthesized.testingsuite=WARN
+        -Dlogging.level.com.zaxxer.hikari=WARN
+        -Dlogging.level.org.reflections=WARN
+        -XX:+UseContainerSupport
+        -XX:MaxRAMPercentage=80.0
+        -Dspring.main.banner-mode=CONSOLE
+        -Dspring.banner.location=file:/app/banner.txt
+    volumes:
+      - ./config.tdk.yaml:/app/config.yaml
+      - ./banner.txt:/app/banner.txt
+
+
+  ora2pg:
+    image: georgmoser/ora2pg
+    networks:
+      - simple-network
+    container_name: ora2pg
+    volumes:
+      - ./postgres_output_data:/data
+      - ./ora2pg.conf:/config/ora2pg.conf
+    environment:
+      - CONFIG_LOCATION=config/ora2pg.conf
+
+
+  postgres_masked:
+    image: postgres:15
+    container_name: postgres_masked
+    networks:
+      - simple-network
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./postgres_output_data/TABLE_TEST_output.sql:/docker-entrypoint-initdb.d/1.sql
+      - ./postgres_output_data/VIEW_TEST_output.sql:/docker-entrypoint-initdb.d/2.sql
+      - ./postgres_output_data/SEQUENCE_TEST_output.sql:/docker-entrypoint-initdb.d/3.sql
+      - ./postgres_output_data/COPY_TEST_output.sql:/docker-entrypoint-initdb.d/4.sql
+    ports: [ "5432:5432" ]
+
+
+networks:
+  simple-network:
