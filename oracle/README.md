@@ -1,6 +1,6 @@
 # TDK Oracle Demo
 
-[Sakila for Oracle](https://github.com/jOOQ/sakila/tree/main/oracle-sakila-dba) is an Oracle port of the legendary MySQL sample database.
+[Sakila for Oracle](https://github.com/jOOQ/sakila/tree/main/oracle-sakila-dba) is an Oracle port of the legendary MySQL [Sakila](https://dev.mysql.com/doc/sakila/en) sample database.
 
 ```shell
 git clone https://github.com/synthesized-io/pagila-tdk-demo

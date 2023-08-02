@@ -7,8 +7,6 @@ git clone https://github.com/synthesized-io/pagila-tdk-demo
 cd pagila-tdk-demo/mysql
 ```
 
-Prepare an [inventory file](https://docs.synthesized.io/tdk/latest/user_guide/reference/inventory) - [inventory.yaml](inventory.yaml).
-
 
 ## Masking of the existing data
 

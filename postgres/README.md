@@ -1,14 +1,12 @@
 # TDK PostgreSQL Demo
 
+[Pagila](https://github.com/devrimgunduz/pagila) is a PostgreSQL version of the well-known MySQL [Sakila](https://dev.mysql.com/doc/sakila/en) sample database.
 
-[Pagila](https://github.com/devrimgunduz/pagila) is a sample database schema that can be used in MySQL tutorials, articles, demos, etc.
 
 ```shell
 git clone https://github.com/synthesized-io/pagila-tdk-demo
 cd pagila-tdk-demo/postgres
 ```
-
-Prepare an [inventory file](https://docs.synthesized.io/tdk/latest/user_guide/reference/inventory) - [inventory.yaml](inventory.yaml).
 
 
 ## Generation based on the empty schema
