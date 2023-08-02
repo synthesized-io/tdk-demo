@@ -1,6 +1,6 @@
 # TDK MySQL Demo
 
-[Sakila](https://dev.mysql.com/doc/sakila/en/) is a sample database schema that can be used in MySQL tutorials, articles, demos, etc.
+[Sakila](https://dev.mysql.com/doc/sakila/en) is a sample database schema that can be used in MySQL tutorials, articles, demos, etc.
 
 ```shell
 git clone https://github.com/synthesized-io/pagila-tdk-demo
