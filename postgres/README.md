@@ -11,7 +11,7 @@ cd pagila-tdk-demo/postgres
 Prepare an [inventory file](https://docs.synthesized.io/tdk/latest/user_guide/reference/inventory) - [inventory.yaml](inventory.yaml).
 
 
-## Generation of the empty database from scratch
+## Generation based on the empty schema
 
 ![generation from scratch demo](generation_from_scratch.gif)
 
