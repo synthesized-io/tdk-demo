@@ -14,7 +14,7 @@ pe "usql -q pg://postgres:postgres@localhost:6000/postgres -f control_query.sql"
 
 pe "# Run the TDK transformation ..."
 pe "export CONFIG_FILE=${CONFIG_FILE}"
-pe "docker-compose -f docker-compose.yaml run tdk 2> /dev/null"
+pe "docker-compose -f docker-compose.yaml run tdk &> /dev/null"
 
 pe "# Check the RESULTED database with control sql-query ..."
 pe "usql -q pg://postgres:postgres@localhost:6001/postgres -f control_query.sql"
