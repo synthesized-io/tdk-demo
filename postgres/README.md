@@ -98,6 +98,16 @@ tdk \
     --config-file ./config_generation.tdk.yaml
 ```
 
+Execute `control_query.sql` script on the original database:
+```shell
+usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
+```
+
+Execute `control_query.sql` script on the masked database:
+```shell
+usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
+```
+
 
 ## Masking of the existing data
 
@@ -118,29 +128,13 @@ tdk \
 ```
 
 Execute `control_query.sql` script on the original database:
-
 ```shell
 usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
-
- first_name | last_name |              email              | payments | amount
-------------+-----------+---------------------------------+----------+--------
- ELEANOR    | HUNT      | ELEANOR.HUNT@sakilacustomer.org |       46 | 216.54
- KARL       | SEAL      | KARL.SEAL@sakilacustomer.org    |       45 | 221.55
- CLARA      | SHAW      | CLARA.SHAW@sakilacustomer.org   |       42 | 195.58
-(3 rows)
 ```
 
 Execute `control_query.sql` script on the masked database:
-
 ```shell
 usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
-
- first_name | last_name |              email              | payments | amount 
-------------+-----------+---------------------------------+----------+--------
- NVTPDAF    | VTKI      | HOEDJRR.RWAA@jczrgdfhirscic.kko |       46 | 296.23 
- MGPI       | AMKL      | QYBQ.VMFS@kywmemvfqskdwg.tqx    |       45 | 297.42 
- BKNOQJ     | ZWDQ      | ZFALHK.JDGW@iiczrtrkgemxtr.lmy  |       42 | 252.13
-(3 rows)
 ```
 
 
@@ -163,27 +157,11 @@ tdk \
 ```
 
 Execute `control_query.sql` script on the original database:
-
 ```shell
 usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
-
- first_name | last_name |              email              | payments | amount
-------------+-----------+---------------------------------+----------+--------
- ELEANOR    | HUNT      | ELEANOR.HUNT@sakilacustomer.org |       46 | 216.54
- KARL       | SEAL      | KARL.SEAL@sakilacustomer.org    |       45 | 221.55
- CLARA      | SHAW      | CLARA.SHAW@sakilacustomer.org   |       42 | 195.58
-(3 rows)
 ```
 
 Execute `control_query.sql` script on the masked database:
-
 ```shell
 usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
-
- first_name | last_name |              email               | payments | amount 
-------------+-----------+----------------------------------+----------+--------
- JUSTIN     | NGO       | JUSTIN.NGO@sakilacustomer.org    |        8 | 23.92 
- CLYDE      | TOBIAS    | CLYDE.TOBIAS@sakilacustomer.org  |        7 | 29.93 
- THEODORE   | CULP      | THEODORE.CULP@sakilacustomer.org |        7 | 28.93 
-(3 rows)
 ```

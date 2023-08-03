@@ -2,6 +2,8 @@
 
 This repository contains a collection of demo projects for data generation, masking, and subsetting for various databases and integrations using [Synthesized TDK](https://docs.synthesized.io/tdk/latest/?utm_source=github&utm_medium=devrel&utm_campaign=datagen).
 
+![generation from scratch demo](postgres/generation_from_scratch.gif)
+
 
 ## Demos
 - [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database. 
