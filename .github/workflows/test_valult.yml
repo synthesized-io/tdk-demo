@@ -1,0 +1,58 @@
+name: test_vault
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./vault
+
+jobs:
+
+  simple_secret:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export INVENTORY_FILE=inventory_simple_secret.yaml
+          docker-compose run tdk
+
+  static_users:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export INVENTORY_FILE=inventory_static_users.yaml
+          docker-compose run tdk
+
+  dynamic_users:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export INVENTORY_FILE=inventory_dynamic_users.yaml
+          docker-compose run tdk
