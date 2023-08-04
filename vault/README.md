@@ -20,7 +20,6 @@ docker-compose run tdk
 
 ![static users](static_users.gif)
 
-
 ```shell
 export INVENTORY_FILE=inventory_static_users.yaml
 docker-compose run tdk
@@ -29,7 +28,7 @@ docker-compose run tdk
 
 ### 3. Run TDK with simple Vault secrets
 
-![simple users](simple_secret.gif)
+![simple secret](simple_secret.gif)
 
 ```shell
 export INVENTORY_FILE=inventory_simple_secret.yaml
