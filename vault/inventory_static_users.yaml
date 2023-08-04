@@ -1,0 +1,25 @@
+data_sources:
+  default_source:
+    jdbc_url: jdbc:postgresql://input_db:5432/postgres
+    user:
+      type: vault
+      storage: database
+      path: static-creds/postgres-source-static-role
+      secret: username
+    password:
+      type: vault
+      storage: database
+      path: static-creds/postgres-source-static-role
+      secret: password
+  default_target:
+    jdbc_url: jdbc:postgresql://output_db:5432/postgres
+    user:
+      type: vault
+      storage: database
+      path: static-creds/postgres-target-static-role
+      secret: username
+    password:
+      type: vault
+      storage: database
+      path: static-creds/postgres-target-static-role
+      secret: password

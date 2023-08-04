@@ -1,0 +1,112 @@
+default_config:
+  mode: GENERATION
+  target_row_number: 1000
+
+tables:
+  - table_name_with_schema: "sakila.country"
+    target_row_number: 200
+    transformations:
+      - columns: [ "country" ]
+        params:
+          type: address_generator
+          column_templates: [ "${country}" ]
+
+  - table_name_with_schema: "sakila.language"
+    target_row_number: 100
+
+  - table_name_with_schema: "sakila.city"
+    target_row_number: 500
+    transformations:
+      - columns: [ "city" ]
+        params:
+          type: address_generator
+          column_templates: [ "${city}" ]
+
+  - table_name_with_schema: "sakila.address"
+    target_row_number: 1_000
+    transformations:
+      - columns: [ "address", "address2" ]
+        params:
+          type: address_generator
+          column_templates:
+            - "${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
+            - >
+              ${country}, ${city}, ${street_name}, ${house_number},
+              ${flat_number}, ${zip_code}
+
+  - table_name_with_schema: "sakila.store"
+    target_row_number: 1_000
+
+  - table_name_with_schema: "sakila.staff"
+    target_row_number: 5_000
+    transformations:
+      - columns: ["first_name", "last_name", "email"]
+        params:
+          type: person_generator
+          column_templates: ["${first_name}", "${last_name}", "${email}"]
+
+  - table_name_with_schema: "sakila.customer"
+    target_row_number: 10_000
+    transformations:
+      - columns: ["first_name", "last_name", "email"]
+        params:
+          type: person_generator
+          column_templates: ["${first_name}", "${last_name}", "${email}"]
+      - columns: [ "create_date" ]
+        params:
+          type: "date_generator"
+          mean: 2022-03-01T12:00:00Z
+          std: 7776000000
+          min: 2022-01-01T12:00:00Z
+          max: 2022-07-01T12:00:00Z
+
+  - table_name_with_schema: "sakila.film"
+    target_row_number: 3_000
+    # transformations:
+    #   - columns: ["rating"]
+    #     mapping:
+    #       read: "?::text"
+    #       write: "?::mpaa_rating"
+    #     params:
+    #       type: "categorical_generator"
+    #       categories:
+    #         type: string
+    #         values: ["PG-13", "NC-17", "R", "PG", "G"]
+    #       probabilities: [0.223, 0.21, 0.195, 0.194, 0.178]
+
+
+  - table_name_with_schema: "sakila.rental"
+    target_row_number: 20_000
+    transformations:
+      - columns: [ "return_date" ]
+        params:
+          type: "date_generator"
+          mean: 2022-03-01T12:00:00Z
+          std: 7776000000
+          min: 2022-01-01T12:00:00Z
+          max: 2022-07-01T12:00:00Z
+      - columns: [ "rental_date" ]
+        params:
+          type: "date_generator"
+          mean: 2022-03-01T12:00:00Z
+          std: 7776000000
+          min: 2022-01-01T12:00:00Z
+          max: 2022-07-01T12:00:00Z
+
+
+  - table_name_with_schema: "sakila.payment"
+    target_row_number: 20_000
+    transformations:
+      - columns: [ "payment_date" ]
+        params:
+          type: "date_generator"
+          mean: 2022-03-01T12:00:00Z
+          std: 7776000000
+          min: 2022-01-01T12:00:00Z
+          max: 2022-07-01T12:00:00Z
+
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: "DO_NOT_CREATE"
+cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+safety_mode: "RELAXED"

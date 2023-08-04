@@ -2,3 +2,6 @@
 /.cache
 *.bak
 data
+
+postgres/logs
+mysql/logs

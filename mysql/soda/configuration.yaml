@@ -1,0 +1,15 @@
+data_source input_db:
+  type: mysql
+  host: input_db
+  port: '3306'
+  username: root
+  password: admin
+  database: sakila
+
+data_source output_db:
+  type: mysql
+  host: output_db
+  port: '3306'
+  username: root
+  password: admin
+  database: sakila

@@ -1,0 +1,8 @@
+default_config:
+  mode: GENERATION
+  target_row_number: 100
+
+cycle_resolution_strategy: DELETE_NOT_REQUIRED
+table_truncation_mode: TRUNCATE
+schema_creation_mode: CREATE_IF_NOT_EXISTS
+safety_mode: "RELAXED"

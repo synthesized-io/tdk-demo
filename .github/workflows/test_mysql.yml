@@ -1,0 +1,69 @@
+name: test_mysql
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./mysql
+
+jobs:
+
+  masking:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_masking.tdk.yaml
+          docker-compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_masking.yaml
+
+  subsetting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Run the workflow
+        run: |
+          export CONFIG_FILE=config_subsetting.tdk.yaml
+          docker-compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker-compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker-compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_subsetting.yaml
