@@ -2,6 +2,17 @@ default_config:
   mode: GENERATION
   target_row_number: 100
 
+tables:
+  - table_name_with_schema: "foo.test_table"
+
+    transformations:
+      - columns: ["user_name"]
+        mapping:
+          read: "?::text"
+          write: "current_user"
+        params:
+          type: null_generator
+
 cycle_resolution_strategy: DELETE_NOT_REQUIRED
 table_truncation_mode: TRUNCATE
 schema_creation_mode: CREATE_IF_NOT_EXISTS
