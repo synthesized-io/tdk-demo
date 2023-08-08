@@ -1,0 +1,8 @@
+default_config:
+  mode: MASKING
+
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: DROP_AND_CREATE
+cycle_resolution_strategy: "DEFER_FOREIGN_KEY"
+safety_mode: "RELAXED"
