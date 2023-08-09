@@ -5,7 +5,7 @@ Spin up databases:
 docker-compose up input_db output_db -d
 ```
 
-Set up the license key:
+Set up the TDK license key:
 ```shell
 export SYNTHESIZED_KEY=kDpeQB...
 ```
