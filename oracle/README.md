@@ -10,10 +10,13 @@ cd pagila-tdk-demo/oracle
 
 ## Masking of the existing data
 
-Set up the license key:
+Set up the TDK license key:
 ```shell
 export SYNTHESIZED_KEY=kDpeQB...
 ```
+> **Note**
+>
+> [Please contact us to obtain an enterprise license key.](https://www.synthesized.io/contact-sales)
 
 Spin up Oracle databases:
 ```shell

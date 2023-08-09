@@ -9,7 +9,7 @@ services:
     environment:
       LICENSE: accept
       DB2INST1_PASSWORD: test
-      SAMPLEDB: true
+      SAMPLEDB: "true"
       DBNAME: testdb
     ports: [ "6000:50000" ]
     healthcheck:
@@ -26,7 +26,7 @@ services:
     environment:
       LICENSE: accept
       DB2INST1_PASSWORD: test
-      SAMPLEDB: false
+      SAMPLEDB: "false"
       DBNAME: testdb
     ports: [ "6001:50000" ]
     healthcheck:
