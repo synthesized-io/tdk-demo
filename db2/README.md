@@ -1,8 +1,13 @@
-# TDK DB2 Demo
+# TDK DB2 LUW Demo
 
-Spin up databses:
+Spin up databases:
 ```shell
 docker-compose up input_db output_db -d
+```
+
+Set up the license key:
+```shell
+export SYNTHESIZED_KEY=kDpeQB...
 ```
 
 Run sql-query on the source DB:

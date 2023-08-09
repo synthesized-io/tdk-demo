@@ -9,6 +9,7 @@ This repository contains a collection of demo projects for data generation, mask
 - [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database. 
 - [TDK + MySQL](mysql/README.md) – masking and subsetting for the MySQL sample database.
 - [TDK + Oracle](oracle/README.md) – an example of how to mask the Oracle sample database and import it into Postgres. 
+- [TDK + DB2](db2/README.md) – an example of how to mask the emdedded DB2 sample database.
 - [TDK + PostgreSQL + Vault](vault/README.md) – how to use TDK with Hashicorp Vault secret manager for Postgres database.
 
 
