@@ -5,10 +5,14 @@ Spin up databases:
 docker-compose up input_db output_db -d
 ```
 
-Set up the license key:
+Set up the TDK license key:
 ```shell
 export SYNTHESIZED_KEY=kDpeQB...
 ```
+> **Note**
+>
+> [Please contact us to obtain an enterprise license key.](https://www.synthesized.io/contact-sales)
+
 
 Run sql-query on the source DB:
 ```sql
