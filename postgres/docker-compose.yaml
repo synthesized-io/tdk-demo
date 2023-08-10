@@ -58,7 +58,7 @@ services:
       output_db:
         condition: service_healthy
 
-  tdk:
+  tdk: &tdk
     container_name: tdk
     image: synthesizedio/synthesized-tdk-cli:latest
     environment:
@@ -88,6 +88,17 @@ services:
     depends_on:
       databases:
         condition: service_completed_successfully
+
+
+  tdk_admin:
+    <<: *tdk
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+      pgadmin:
+        condition: service_started
 
   check:
     container_name: check
