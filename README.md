@@ -41,8 +41,9 @@ TDK requires at least 2GB RAM, check your Docker memory settings:
 
 ## Articles and other demos
 
+- [Project: Synthesized TDK and Testcontainers integration](https://github.com/synthesized-io/tdk-tc)
 - [Article: Test data generation: There and back](https://www.synthesized.io/post/test-data-generation-there-and-back)
 - [Article: How Synthesized TDK can help populate your Testcontainers databases](https://www.synthesized.io/post/how-synthesized-can-help-populate-your-testcontainers-databases)
 - [Demo: Synthesized TDK with microservices](https://github.com/synthesized-io/tdk-microservices-demo)
 - [Demo: Flyway, Spawn, and Synthesized TDK to test database migrations](https://github.com/synthesized-io/flyway-spawn-demo)
-- [Demo: SpringBoot, Testcontainers, and Synthesized TDK](https://github.com/synthesized-io/springjdbc-tc-tdk)
+- [Demo: SpringBoot, Testcontainers, and Synthesized TDK example](https://github.com/synthesized-io/springjdbc-tc-tdk)
