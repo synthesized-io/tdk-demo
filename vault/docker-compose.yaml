@@ -31,7 +31,7 @@ services:
 
   input_db:
     container_name: input_db
-    image: postgres:16
+    image: postgres:15
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
@@ -48,7 +48,7 @@ services:
 
   output_db:
     container_name: output_db
-    image: postgres:16
+    image: postgres:15
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
