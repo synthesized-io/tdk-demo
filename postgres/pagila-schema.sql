@@ -1137,8 +1137,8 @@ ALTER TABLE ONLY public.customer
 -- Name: film_actor film_actor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.film_actor
-    ADD CONSTRAINT film_actor_pkey PRIMARY KEY (actor_id, film_id);
+-- ALTER TABLE ONLY public.film_actor
+--     ADD CONSTRAINT film_actor_pkey PRIMARY KEY (actor_id, film_id);
 
 
 --

@@ -23,7 +23,7 @@ checks for film:
       distribution reference file: /sodacl/film_rating_distribution.yml
 
 checks for film_actor:
-  - row_count = 10771
+  - row_count = 10924
 
 checks for film_category:
   - row_count = 2000
