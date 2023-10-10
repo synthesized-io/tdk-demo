@@ -18,7 +18,7 @@ checks for customer:
 
 checks for film:
   - row_count = 3000
-  - distribution_difference(rating) > 0.4:
+  - distribution_difference(rating) < 0.3:
       method: chi_square
       distribution reference file: /sodacl/film_rating_distribution.yml
 

@@ -19,12 +19,16 @@ tables:
         params:
           type: "categorical_generator"
           categories:
-            type: string
-            values: ["PG-13", "NC-17", "R", "PG", "G"]
-          probabilities: [0.223, 0.21, 0.195, 0.194, 0.178]
-
+            type: STRING
+            value_source: PROVIDED
+            values:
+              "PG-13": 0.223
+              "NC-17": 0.21
+              "R": 0.195
+              "PG": 0.194
+              "G": 0.178
 
 table_truncation_mode: "TRUNCATE"
-schema_creation_mode: "DO_NOT_CREATE"
+schema_creation_mode: "CREATE_IF_NOT_EXISTS"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
 safety_mode: "RELAXED"

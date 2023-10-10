@@ -46,4 +46,4 @@ checks for staff:
       valid format: email
 
 checks for store:
-  - row_count = 2
+  - row_count = 4
