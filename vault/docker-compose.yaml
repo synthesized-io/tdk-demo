@@ -93,10 +93,11 @@ services:
         -XX:MaxRAMPercentage=80.0
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
+        -Dspring.config.additional-location=/app/custom_application.properties
     volumes:
       - ./config.tdk.yaml:/app/config.yaml
       - ./${INVENTORY_FILE}:/app/inventory.yaml
-      - ./application.properties:/app/application.properties
+      - ./application.properties:/app/custom_application.properties
       - ../banner.txt:/app/banner.txt
       - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
     depends_on:
