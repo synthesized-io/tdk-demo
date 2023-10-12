@@ -62,7 +62,7 @@ services:
       SYNTHESIZED_INPUT_URL: jdbc:mysql://input_db:3306/sakila
       SYNTHESIZED_INPUT_USERNAME: root
       SYNTHESIZED_INPUT_PASSWORD: admin
-      SYNTHESIZED_OUTPUT_URL: jdbc:mysql://output_db:3306/sakila
+      SYNTHESIZED_OUTPUT_URL: jdbc:mysql://output_db:3306/sakila?sessionVariables=sql_mode='NO_AUTO_VALUE_ON_ZERO'
       SYNTHESIZED_OUTPUT_USERNAME: root
       SYNTHESIZED_OUTPUT_PASSWORD: admin
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml

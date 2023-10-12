@@ -22,17 +22,22 @@ jobs:
           docker-compose pull
           docker-compose build
 
-      - name: Run the workflow
+      - name: Run databases
         run: |
-          export CONFIG_FILE=config_masking.tdk.yaml
           docker-compose -f docker-compose.yaml \
-            -f docker-compose-input-db.yaml run tdk
+            -f docker-compose-input-db.yaml run databases
 
       - name: Verify input data
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_input_db.yaml
+
+      - name: Run TDK
+        run: |
+          export CONFIG_FILE=config_masking.tdk.yaml
+          docker-compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run tdk
 
       - name: Verify output data
         run: >
@@ -50,17 +55,22 @@ jobs:
           docker-compose pull
           docker-compose build
 
-      - name: Run the workflow
+      - name: Run databases
         run: |
-          export CONFIG_FILE=config_subsetting.tdk.yaml
           docker-compose -f docker-compose.yaml \
-            -f docker-compose-input-db.yaml run tdk
+            -f docker-compose-input-db.yaml run databases
 
       - name: Verify input data
         run: >
           docker-compose run check scan -d input_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_input_db.yaml
+
+      - name: Run TDK
+        run: |
+          export CONFIG_FILE=config_subsetting.tdk.yaml
+          docker-compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run tdk
 
       - name: Verify output data
         run: >
