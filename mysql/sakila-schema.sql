@@ -1,7 +1,7 @@
 -- Sakila Sample Database Schema
 -- Version 1.4
 
--- Copyright (c) 2006, 2022, Oracle and/or its affiliates.
+-- Copyright (c) 2006, 2023, Oracle and/or its affiliates.
 
 -- Redistribution and use in source and binary forms, with or without
 -- modification, are permitted provided that the following conditions are
@@ -64,7 +64,7 @@ CREATE TABLE address (
   phone VARCHAR(20) NOT NULL,
   -- Add GEOMETRY column for MySQL 5.7.5 and higher
   -- Also include SRID attribute for MySQL 8.0.3 and higher
-  /*!50705 location GEOMETRY */ /*!80003 SRID 0 */ /*!50705 ,*/
+  /*!50705 location GEOMETRY */ /*!80003 SRID 0 */ /*!50705 NOT NULL,*/
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (address_id),
   KEY idx_fk_city_id (city_id),
@@ -209,30 +209,30 @@ SET @@default_storage_engine = @old_default_storage_engine;
 -- Triggers for loading film_text from film
 --
 
--- DELIMITER ;;
--- CREATE TRIGGER `ins_film` AFTER INSERT ON `film` FOR EACH ROW BEGIN
---     INSERT INTO film_text (film_id, title, description)
---         VALUES (new.film_id, new.title, new.description);
---   END;;
+DELIMITER ;;
+CREATE TRIGGER `ins_film` AFTER INSERT ON `film` FOR EACH ROW BEGIN
+    INSERT INTO film_text (film_id, title, description)
+        VALUES (new.film_id, new.title, new.description);
+  END;;
 
 
--- CREATE TRIGGER `upd_film` AFTER UPDATE ON `film` FOR EACH ROW BEGIN
---     IF (old.title != new.title) OR (old.description != new.description) OR (old.film_id != new.film_id)
---     THEN
---         UPDATE film_text
---             SET title=new.title,
---                 description=new.description,
---                 film_id=new.film_id
---         WHERE film_id=old.film_id;
---     END IF;
---   END;;
+CREATE TRIGGER `upd_film` AFTER UPDATE ON `film` FOR EACH ROW BEGIN
+    IF (old.title != new.title) OR (old.description != new.description) OR (old.film_id != new.film_id)
+    THEN
+        UPDATE film_text
+            SET title=new.title,
+                description=new.description,
+                film_id=new.film_id
+        WHERE film_id=old.film_id;
+    END IF;
+  END;;
 
 
--- CREATE TRIGGER `del_film` AFTER DELETE ON `film` FOR EACH ROW BEGIN
---     DELETE FROM film_text WHERE film_id = old.film_id;
---   END;;
+CREATE TRIGGER `del_film` AFTER DELETE ON `film` FOR EACH ROW BEGIN
+    DELETE FROM film_text WHERE film_id = old.film_id;
+  END;;
 
--- DELIMITER ;
+DELIMITER ;
 
 --
 -- Table structure for table `inventory`
@@ -361,11 +361,11 @@ FROM customer AS cu JOIN address AS a ON cu.address_id = a.address_id JOIN city 
 CREATE VIEW film_list
 AS
 SELECT film.film_id AS FID, film.title AS title, film.description AS description, category.name AS category, film.rental_rate AS price,
-film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8mb4' ', actor.last_name) SEPARATOR ', ') AS actors
+	film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8mb4' ', actor.last_name) SEPARATOR ', ') AS actors
 FROM film LEFT JOIN film_category ON film_category.film_id = film.film_id
 LEFT JOIN category ON category.category_id = film_category.category_id LEFT
 JOIN film_actor ON film.film_id = film_actor.film_id LEFT JOIN actor ON
-film_actor.actor_id = actor.actor_id
+  film_actor.actor_id = actor.actor_id
 GROUP BY film.film_id, category.name;
 
 --
@@ -448,25 +448,25 @@ a.actor_id,
 a.first_name,
 a.last_name,
 GROUP_CONCAT(DISTINCT CONCAT(c.name, ': ',
-(SELECT GROUP_CONCAT(f.title ORDER BY f.title SEPARATOR ', ')
-FROM sakila.film f
-INNER JOIN sakila.film_category fc
-ON f.film_id = fc.film_id
-INNER JOIN sakila.film_actor fa
-ON f.film_id = fa.film_id
-WHERE fc.category_id = c.category_id
-AND fa.actor_id = a.actor_id
-)
+		(SELECT GROUP_CONCAT(f.title ORDER BY f.title SEPARATOR ', ')
+                    FROM sakila.film f
+                    INNER JOIN sakila.film_category fc
+                      ON f.film_id = fc.film_id
+                    INNER JOIN sakila.film_actor fa
+                      ON f.film_id = fa.film_id
+                    WHERE fc.category_id = c.category_id
+                    AND fa.actor_id = a.actor_id
+                 )
              )
              ORDER BY c.name SEPARATOR '; ')
 AS film_info
 FROM sakila.actor a
 LEFT JOIN sakila.film_actor fa
-ON a.actor_id = fa.actor_id
+  ON a.actor_id = fa.actor_id
 LEFT JOIN sakila.film_category fc
-ON fa.film_id = fc.film_id
+  ON fa.film_id = fc.film_id
 LEFT JOIN sakila.category c
-ON fc.category_id = c.category_id
+  ON fc.category_id = c.category_id
 GROUP BY a.actor_id, a.first_name, a.last_name;
 
 --
