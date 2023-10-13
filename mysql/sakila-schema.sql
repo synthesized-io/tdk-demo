@@ -160,10 +160,10 @@ CREATE TABLE film (
 --
 
 CREATE TABLE film_actor (
-  actor_id SMALLINT UNSIGNED, -- NOT NULL,
-  film_id SMALLINT UNSIGNED, -- NOT NULL,
+  actor_id SMALLINT UNSIGNED NOT NULL,
+  film_id SMALLINT UNSIGNED NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY  (actor_id,film_id),
+  -- PRIMARY KEY  (actor_id,film_id),
   KEY idx_fk_film_id (`film_id`),
   CONSTRAINT fk_film_actor_actor FOREIGN KEY (actor_id) REFERENCES actor (actor_id) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_film_actor_film FOREIGN KEY (film_id) REFERENCES film (film_id) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -199,8 +199,8 @@ CREATE TABLE film_text (
   film_id SMALLINT NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  PRIMARY KEY  (film_id),
-  FULLTEXT KEY idx_title_description (title,description)
+  PRIMARY KEY  (film_id)
+  -- FULLTEXT KEY idx_title_description (title,description)
 ) DEFAULT CHARSET=utf8mb4;
 
 SET @@default_storage_engine = @old_default_storage_engine;
@@ -361,11 +361,11 @@ FROM customer AS cu JOIN address AS a ON cu.address_id = a.address_id JOIN city 
 CREATE VIEW film_list
 AS
 SELECT film.film_id AS FID, film.title AS title, film.description AS description, category.name AS category, film.rental_rate AS price,
-	film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8mb4' ', actor.last_name) SEPARATOR ', ') AS actors
+film.length AS length, film.rating AS rating, GROUP_CONCAT(CONCAT(actor.first_name, _utf8mb4' ', actor.last_name) SEPARATOR ', ') AS actors
 FROM film LEFT JOIN film_category ON film_category.film_id = film.film_id
 LEFT JOIN category ON category.category_id = film_category.category_id LEFT
 JOIN film_actor ON film.film_id = film_actor.film_id LEFT JOIN actor ON
-  film_actor.actor_id = actor.actor_id
+film_actor.actor_id = actor.actor_id
 GROUP BY film.film_id, category.name;
 
 --
@@ -448,25 +448,25 @@ a.actor_id,
 a.first_name,
 a.last_name,
 GROUP_CONCAT(DISTINCT CONCAT(c.name, ': ',
-		(SELECT GROUP_CONCAT(f.title ORDER BY f.title SEPARATOR ', ')
-                    FROM sakila.film f
-                    INNER JOIN sakila.film_category fc
-                      ON f.film_id = fc.film_id
-                    INNER JOIN sakila.film_actor fa
-                      ON f.film_id = fa.film_id
-                    WHERE fc.category_id = c.category_id
-                    AND fa.actor_id = a.actor_id
-                 )
+(SELECT GROUP_CONCAT(f.title ORDER BY f.title SEPARATOR ', ')
+FROM sakila.film f
+INNER JOIN sakila.film_category fc
+ON f.film_id = fc.film_id
+INNER JOIN sakila.film_actor fa
+ON f.film_id = fa.film_id
+WHERE fc.category_id = c.category_id
+AND fa.actor_id = a.actor_id
+)
              )
              ORDER BY c.name SEPARATOR '; ')
 AS film_info
 FROM sakila.actor a
 LEFT JOIN sakila.film_actor fa
-  ON a.actor_id = fa.actor_id
+ON a.actor_id = fa.actor_id
 LEFT JOIN sakila.film_category fc
-  ON fa.film_id = fc.film_id
+ON fa.film_id = fc.film_id
 LEFT JOIN sakila.category c
-  ON fc.category_id = c.category_id
+ON fc.category_id = c.category_id
 GROUP BY a.actor_id, a.first_name, a.last_name;
 
 --

@@ -7,6 +7,22 @@ git clone https://github.com/synthesized-io/pagila-tdk-demo
 cd pagila-tdk-demo/mysql
 ```
 
+## Generation based on the empty schema
+
+Run TDK using Docker image:
+```shell
+export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
+docker-compose run tdk
+```
+
+## Generation based on the existing data
+
+Run TDK using Docker image:
+```shell
+export CONFIG_FILE=config_generation.tdk.yaml
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+```
+
 
 ## Masking of the existing data
 
