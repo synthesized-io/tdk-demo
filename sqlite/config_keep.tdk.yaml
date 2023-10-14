@@ -1,0 +1,5 @@
+default_config:
+  mode: KEEP
+
+table_truncation_mode: TRUNCATE
+schema_creation_mode: DROP_AND_CREATE

@@ -1,0 +1,10 @@
+default_config:
+  mode: GENERATION
+  target_ratio: 0
+
+tables:
+  - table_name_with_schema: "crime_scene_report"
+    target_ratio: 10.0
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: DROP_AND_CREATE
