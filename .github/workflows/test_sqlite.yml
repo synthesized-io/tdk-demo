@@ -22,7 +22,12 @@ jobs:
           docker-compose pull
           docker-compose build
 
-      - name: Run the workflow
+      - name: Run the KEEP mode
         run: |
           export CONFIG_FILE=config_keep.tdk.yaml
+          docker-compose run tdk
+
+      - name: Run the GENERATION mode
+        run: |
+          export CONFIG_FILE=config_generation.tdk.yaml
           docker-compose run tdk
