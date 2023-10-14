@@ -23,7 +23,7 @@ jobs:
           docker-compose build
 
       - name: Make writable
-        run: chmod +w ./output/output.db
+        run: chmod +rwx ./output/output.db
 
       - name: Run the KEEP mode
         run: |
