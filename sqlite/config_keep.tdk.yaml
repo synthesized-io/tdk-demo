@@ -1,5 +1,5 @@
 default_config:
   mode: KEEP
 
-table_truncation_mode: DO_NOT_TRUNCATE
+table_truncation_mode: TRUNCATE
 schema_creation_mode: CREATE_IF_NOT_EXISTS
