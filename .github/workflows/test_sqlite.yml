@@ -25,6 +25,9 @@ jobs:
       - name: Make writable
         run: chmod -R 775 ./output
 
+      - name: Make writable
+        run: chown $USER:$USER ./output/output.db
+
       - name: LS
         run: ls -l
 
