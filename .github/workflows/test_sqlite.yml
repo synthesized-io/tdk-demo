@@ -22,17 +22,10 @@ jobs:
           docker-compose pull
           docker-compose build
 
-      - name: user
-        run: echo $USER
-
-      - name: Chown
-        run: sudo chown $USER:$USER ./output/output.db
-
-      - name: Make writable
-        run: chmod -R 777 ./output/output.db
-
-      - name: LS
-        run: ls -l
+      - name: Make the database file writable
+        run: |
+          sudo chown $USER:$USER ./output/output.db
+          chmod -R 775 ./output/output.db
 
       - name: Run the KEEP mode
         run: |
