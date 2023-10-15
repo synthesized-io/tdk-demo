@@ -25,7 +25,7 @@ jobs:
       - name: Make the database file writable
         run: |
           sudo chown $USER:$USER ./output/output.db
-          chmod -R 775 ./output/output.db
+          chmod -R 777 ./output/output.db
 
       - name: Run the KEEP mode
         run: |
