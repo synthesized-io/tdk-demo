@@ -28,6 +28,9 @@ jobs:
       - name: LS
         run: ls -l
 
+      - name: user
+        run: echo $USER
+
       - name: Run the KEEP mode
         run: |
           export CONFIG_FILE=config_keep.tdk.yaml
