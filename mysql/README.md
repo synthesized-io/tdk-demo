@@ -11,6 +11,8 @@ cd pagila-tdk-demo/mysql
 
 ## Generation based on the empty schema
 
+![generation from scratch demo](generation_from_scratch.gif)
+
 Run TDK:
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
@@ -29,6 +31,8 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 
 
 ## Generation based on the existing data
+
+![generation demo](generation.gif)
 
 Run TDK:
 ```shell
