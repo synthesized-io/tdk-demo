@@ -3,6 +3,7 @@ select c.first_name
      , c.email 
      , COUNT(1) as payments
      , sum(p.amount) as amount
+     , count(1) over() as total_payments
   from payment p
   join customer c using (customer_id)
  group by c.customer_id 
