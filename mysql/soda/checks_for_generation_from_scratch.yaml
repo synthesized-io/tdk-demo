@@ -2,37 +2,39 @@ checks for actor:
   - row_count = 1000
 
 checks for address:
-  - row_count = 1000
+  - row_count = 5000
 
 checks for category:
-  - row_count = 1000
+  - row_count = 256
 
 checks for city:
-  - row_count = 500
+  - row_count = 1000
 
 checks for country:
-  - row_count = 200
+  - row_count = 256
 
 checks for customer:
   - row_count = 10000
+  - invalid_percent(email) = 0:
+      valid format: email
 
 checks for film:
   - row_count = 3000
-  - distribution_difference(rating) > 0.4:
+  - distribution_difference(rating) < 0.3:
       method: chi_square
       distribution reference file: /sodacl/film_rating_distribution.yml
 
 checks for film_actor:
-  - row_count = 1000
+  - row_count = 10000
 
 checks for film_category:
-  - row_count = 1000
+  - row_count = 256
 
 checks for inventory:
-  - row_count = 1000
+  - row_count = 10000
 
 checks for language:
-  - row_count = 100
+  - row_count = 256
 
 checks for payment:
   - row_count = 20000
@@ -41,9 +43,9 @@ checks for rental:
   - row_count = 20000
 
 checks for staff:
-  - row_count = 5000
+  - row_count = 256
   - invalid_percent(email) = 0:
       valid format: email
 
 checks for store:
-  - row_count = 1000
+  - row_count = 256
