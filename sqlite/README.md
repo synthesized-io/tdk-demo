@@ -32,4 +32,4 @@ usql -q sqlite3://output/output.db -f control_query.sql
 
 As a result, the number of crime scenes will increase to 13508, with 12280 new crime scenes. Additionally, there will be 10 different types of crime and 11935 different cities. Furthermore, the `crime_scene_report` table still contains the records of the concrete investigated crime scenes. This expansion will add to the intrigue of our investigation.
 
-Now we have more data in the database, and we can try to find out who committed the murder! We also have a small notice: "The Butler Didn't Do It" :smirk:
+Now we have more data in the database, and we can try to find out who committed the murder! We also have a small clue: "The Butler Didn't Do It" :smirk:
