@@ -4,7 +4,29 @@ default_config:
 
 tables:
   - table_name_with_schema: "crime_scene_report"
-    target_ratio: 10.0
+    target_ratio: 10
+    transformations:
+      - columns: ["type"]
+        params:
+          type: "categorical_generator"
+          categories:
+            type: STRING
+            value_source: PROVIDED
+            values:
+              "arson": 0.1
+              "assault": 0.1
+              "blackmail": 0.1
+              "bribery": 0.1
+              "fraud": 0.1
+              "murder": 0.1
+              "robbery": 0.1
+              "smuggling": 0.1
+              "theft": 0.1
+              "cyber crimes": 0.1
+      - columns: [ "city" ]
+        params:
+          type: address_generator
+          column_templates: [ "${city}" ]
 
-table_truncation_mode: TRUNCATE
-schema_creation_mode: DROP_AND_CREATE
+table_truncation_mode: IGNORE
+schema_creation_mode: DO_NOT_CREATE
