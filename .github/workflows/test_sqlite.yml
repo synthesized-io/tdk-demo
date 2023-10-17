@@ -1,0 +1,38 @@
+name: test_sqlite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./sqlite
+
+jobs:
+
+  generation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker-compose
+        run: |
+          docker-compose pull
+          docker-compose build
+
+      - name: Make the database file writable
+        run: |
+          sudo chown $USER:$USER ./output/output.db
+          chmod -R 777 ./output/output.db
+
+      - name: Run the KEEP mode
+        run: |
+          export CONFIG_FILE=config_keep.tdk.yaml
+          docker-compose run tdk
+
+      - name: Run the GENERATION mode
+        run: |
+          export CONFIG_FILE=config_generation.tdk.yaml
+          docker-compose run tdk
