@@ -70,8 +70,8 @@ services:
       SYNTHESIZED_KEY: ${SYNTHESIZED_KEY}
       # TDK_WORKINGDIRECTORY_ENABLED: "true"
       JAVA_TOOL_OPTIONS: >
-        -Dlogging.level.io.synthesized.testingsuite.executor.lite.LiteTransformer=INFO
-        -Dlogging.level.io.synthesized.testingsuite=WARN
+        -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
+        -Dlogging.level.io.synthesized.tdk=WARN
         -Dlogging.level.com.zaxxer.hikari=WARN
         -Dlogging.level.org.reflections=WARN
         -XX:+UseContainerSupport
