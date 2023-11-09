@@ -21,7 +21,7 @@ docker-compose run tdk
 
 Execute [`control_query.sql`](control_query.sql) script on the original database and ensure that there is no data:
 ```shell
-usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
+usql pg://postgres:postgres@localhost:6000/postgres -f control_query.sql
 ```
 
 Execute the `control_query.sql` script on the resulting database to ensure that we have realistic and beautiful data:

@@ -79,6 +79,13 @@ tables:
           type: person_generator
           column_templates: ["${first_name}", "${last_name}", "${email}"]
 
+  - table_name_with_schema: "public.payment"
+    transformations:
+      - columns: ["customer_id"]
+        params:
+          type: "foreign_key_generator"
+          distribution: ORIGINAL
+
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "CREATE_IF_NOT_EXISTS"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"

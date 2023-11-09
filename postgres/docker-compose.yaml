@@ -34,6 +34,7 @@ services:
       start_period: "3s"
       retries: 30
 
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4
@@ -45,6 +46,12 @@ services:
       - ./pgadmin.json:/pgadmin4/servers.json
     ports:
       - "8888:80"
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
 
   databases:
     container_name: databases
@@ -57,6 +64,7 @@ services:
         condition: service_healthy
       output_db:
         condition: service_healthy
+
 
   tdk: &tdk
     container_name: tdk
@@ -72,8 +80,8 @@ services:
       TDK_WORKINGDIRECTORY_PATH: /app/data
       TDK_WORKINGDIRECTORY_ENABLED: "true"
       JAVA_TOOL_OPTIONS: >
-        -Dlogging.level.io.synthesized.testingsuite.executor.lite.LiteTransformer=INFO
-        -Dlogging.level.io.synthesized.testingsuite=WARN
+        -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
+        -Dlogging.level.io.synthesized.tdk=WARN
         -Dlogging.level.com.zaxxer.hikari=WARN
         -Dlogging.level.org.reflections=WARN
         -Dlogging.level.org.jooq=WARN
@@ -93,12 +101,9 @@ services:
   tdk_admin:
     <<: *tdk
     depends_on:
-      input_db:
-        condition: service_healthy
-      output_db:
-        condition: service_healthy
       pgadmin:
         condition: service_started
+
 
   check:
     container_name: check

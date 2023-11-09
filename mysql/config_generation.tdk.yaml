@@ -80,6 +80,13 @@ tables:
           min: 2022-01-01T12:00:00Z
           max: 2022-07-01T12:00:00Z
 
+  - table_name_with_schema: "sakila.payment"
+    transformations:
+      - columns: ["customer_id"]
+        params:
+          type: "foreign_key_generator"
+          distribution: ORIGINAL
+
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "DROP_AND_CREATE"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
