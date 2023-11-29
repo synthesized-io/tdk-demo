@@ -1827,7 +1827,6 @@ ALTER TABLE ONLY public.staff
 ALTER TABLE ONLY public.store
     ADD CONSTRAINT store_address_id_fkey FOREIGN KEY (address_id) REFERENCES public.address(address_id) ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE public.payment ADD CONSTRAINT payment_fk FOREIGN KEY (customer_id) REFERENCES public.customer(customer_id);
 
 --
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres

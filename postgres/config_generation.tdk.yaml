@@ -26,62 +26,8 @@ tables:
               "PG": 0.194
               "G": 0.178
 
-  - table_name_with_schema: "public.actor"
-    transformations:
-      - columns: ["first_name", "last_name"]
-        # An example how to preserve the uppercase
-        mapping:
-          read: "?"
-          write: "UPPER(?)"
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}"]
 
-  - table_name_with_schema: "public.country"
-    transformations:
-      - columns: [ "country" ]
-        params:
-          type: address_generator
-          column_templates: [ "${country}" ]
 
-  - table_name_with_schema: "public.city"
-    transformations:
-      - columns: [ "city" ]
-        params:
-          type: address_generator
-          column_templates: [ "${city}" ]
-
-  - table_name_with_schema: "public.address"
-    transformations:
-      - columns: [ "address", "address2" ]
-        params:
-          type: address_generator
-          column_templates:
-            - "${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
-            - >
-              ${country}, ${city}, ${street_name}, ${house_number},
-              ${flat_number}, ${zip_code}
-
-  - table_name_with_schema: "public.staff"
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
-
-  - table_name_with_schema: "public.customer"
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
-
-  - table_name_with_schema: "public.payment"
-    transformations:
-      - columns: ["customer_id"]
-        params:
-          type: "foreign_key_generator"
-          distribution: ORIGINAL
 
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "CREATE_IF_NOT_EXISTS"
