@@ -20,9 +20,6 @@ tables:
           type: formatted_string_generator
           pattern: "\\+44[0-9]{10}"
       - columns: ["rating"]
-        mapping:
-          read: "?::text"
-          write: "?::mpaa_rating"
         params:
           type: "categorical_generator"
           categories:
