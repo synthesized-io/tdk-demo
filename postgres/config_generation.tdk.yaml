@@ -6,6 +6,19 @@ tables:
 
   - table_name_with_schema: "public.film"
     transformations:
+      - columns: ["rating"]
+        params:
+          type: "categorical_generator"
+          categories:
+            type: STRING
+            value_source: CSV_FILE
+            path: /app/film_rating_distributions.csv
+            format:
+              columns:
+                column_accessor_type: NAME
+                categories: "rating"
+                weights: "value"
+              delimiter: ","
       - columns: ["fulltext"]
         mapping:
           read: "?::text"
