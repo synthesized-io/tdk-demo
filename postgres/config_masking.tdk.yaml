@@ -27,8 +27,7 @@ tables:
 
   - table_name_with_schema: "public.payment"
     transformations:
-      - columns:
-        - "customer_id"
+      - columns: ["customer_id"]
         params:
           type: "unique_hashing"
 

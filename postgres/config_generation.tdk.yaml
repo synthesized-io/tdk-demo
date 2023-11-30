@@ -26,9 +26,6 @@ tables:
               "PG": 0.194
               "G": 0.178
 
-
-
-
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "CREATE_IF_NOT_EXISTS"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
