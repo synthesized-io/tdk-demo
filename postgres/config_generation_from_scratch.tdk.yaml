@@ -94,7 +94,6 @@ tables:
           mean: 2022-03-01T12:00:00Z
           std: 2d 4h 45m 12s 434ms
 
-
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "CREATE_IF_NOT_EXISTS"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
