@@ -93,6 +93,7 @@ services:
       - ./${CONFIG_FILE}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
       - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
+      - ../film_rating_distributions.csv:/app/film_rating_distributions.csv
     depends_on:
       databases:
         condition: service_completed_successfully

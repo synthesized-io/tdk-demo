@@ -5,76 +5,41 @@ default_config:
 tables:
   - table_name_with_schema: "public.country"
     target_row_number: 200
-    transformations:
-      - columns: [ "country" ]
-        params:
-          type: address_generator
-          column_templates: [ "${country}" ]
 
   - table_name_with_schema: "public.language"
     target_row_number: 100
 
   - table_name_with_schema: "public.city"
     target_row_number: 500
-    transformations:
-      - columns: [ "city" ]
-        params:
-          type: address_generator
-          column_templates: [ "${city}" ]
 
   - table_name_with_schema: "public.address"
     target_row_number: 1_000
-    transformations:
-      - columns: [ "address", "address2" ]
-        params:
-          type: address_generator
-          column_templates:
-            - "${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
-            - >
-              ${country}, ${city}, ${street_name}, ${house_number},
-              ${flat_number}, ${zip_code}
 
   - table_name_with_schema: "public.store"
     target_row_number: 1_000
 
   - table_name_with_schema: "public.staff"
     target_row_number: 5_000
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
 
   - table_name_with_schema: "public.customer"
     target_row_number: 10_000
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
 
   - table_name_with_schema: "public.film"
     target_row_number: 3_000
     transformations:
-      - columns: ["fulltext"]
-        mapping:
-          read: "?::text"
-          write: "?::tsvector"
-        params:
-          type: formatted_string_generator
-          pattern: "\\+44[0-9]{10}"
       - columns: ["rating"]
         params:
           type: "categorical_generator"
           categories:
             type: STRING
-            value_source: PROVIDED
-            values:
-              "PG-13": 0.223
-              "NC-17": 0.21
-              "R": 0.195
-              "PG": 0.194
-              "G": 0.178
+            value_source: CSV_FILE
+            path: /app/film_rating_distributions.csv
+            format:
+              columns:
+                column_accessor_type: NAME
+                categories: "rating"
+                weights: "value"
+              delimiter: ","
 
   - table_name_with_schema: "public.rental"
     target_row_number: 20_000
