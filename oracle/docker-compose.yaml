@@ -55,7 +55,7 @@ services:
 
   tdk:
     container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    image: synthesizedio/synthesized-tdk-cli:v1.36.1
     networks:
       - simple-network
     environment:

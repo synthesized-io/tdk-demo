@@ -4,7 +4,7 @@ services:
 
   tdk:
     container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    image: synthesizedio/synthesized-tdk-cli:v1.36.1
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:sqlite:/app/input.db
       SYNTHESIZED_OUTPUT_URL: jdbc:sqlite:/app/output.db

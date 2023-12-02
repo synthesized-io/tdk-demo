@@ -68,7 +68,7 @@ services:
 
   tdk: &tdk
     container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    image: synthesizedio/synthesized-tdk-cli:v1.36.1
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:postgresql://input_db:5432/postgres
       SYNTHESIZED_INPUT_USERNAME: postgres
