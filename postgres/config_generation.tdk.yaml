@@ -11,14 +11,13 @@ tables:
           type: "categorical_generator"
           categories:
             type: STRING
-            value_source: CSV_FILE
-            path: /app/film_rating_distributions.csv
-            format:
-              columns:
-                column_accessor_type: NAME
-                categories: "rating"
-                weights: "value"
-              delimiter: ","
+            value_source: PROVIDED
+            values:
+              "PG-13": 0.223
+              "NC-17": 0.21
+              "R": 0.195
+              "PG": 0.194
+              "G": 0.178
       - columns: ["fulltext"]
         mapping:
           read: "?::text"
