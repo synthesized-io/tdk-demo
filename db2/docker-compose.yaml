@@ -37,8 +37,9 @@ services:
 
 
   tdk:
-    container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    extends:
+      file: ../parent-compose.yml
+      service: tdk
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:db2://input_db:50000/SAMPLE
       SYNTHESIZED_INPUT_USERNAME: DB2INST1

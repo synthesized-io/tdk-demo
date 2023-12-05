@@ -56,8 +56,9 @@ services:
         condition: service_healthy
 
   tdk:
-    container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    extends:
+      file: ../parent-compose.yml
+      service: tdk
     environment:
       SYNTHESIZED_INPUT_URL: jdbc:mysql://input_db:3306/sakila
       SYNTHESIZED_INPUT_USERNAME: root

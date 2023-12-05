@@ -76,8 +76,9 @@ services:
 
 
   tdk:
-    container_name: tdk
-    image: synthesizedio/synthesized-tdk-cli:latest
+    extends:
+      file: ../parent-compose.yml
+      service: tdk
     environment:
       SYNTHESIZED_INVENTORY_FILE: /app/inventory.yaml
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
