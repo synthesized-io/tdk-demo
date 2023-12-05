@@ -6,13 +6,6 @@ tables:
 
   - table_name_with_schema: "public.film"
     transformations:
-      - columns: ["fulltext"]
-        mapping:
-          read: "?::text"
-          write: "?::tsvector"
-        params:
-          type: formatted_string_generator
-          pattern: "\\+44[0-9]{10}"
       - columns: ["rating"]
         params:
           type: "categorical_generator"
@@ -25,9 +18,13 @@ tables:
               "R": 0.195
               "PG": 0.194
               "G": 0.178
-
-
-
+      - columns: ["fulltext"]
+        mapping:
+          read: "?::text"
+          write: "?::tsvector"
+        params:
+          type: formatted_string_generator
+          pattern: "\\+44[0-9]{10}"
 
 table_truncation_mode: "TRUNCATE"
 schema_creation_mode: "CREATE_IF_NOT_EXISTS"
