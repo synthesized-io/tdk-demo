@@ -59,6 +59,6 @@ tables:
           std: 2d 4h 45m 12s 434ms
 
 table_truncation_mode: "TRUNCATE"
-schema_creation_mode: "CREATE_IF_NOT_EXISTS"
+schema_creation_mode: "DROP_AND_CREATE"
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
 safety_mode: "RELAXED"
