@@ -1,0 +1,6 @@
+version: '3.5'
+
+services:
+  tdk:
+    container_name: tdk
+    image: synthesizedio/synthesized-tdk-cli:v1.37.0
