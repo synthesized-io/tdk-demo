@@ -1,0 +1,16 @@
+dataset: film
+column: rating
+distribution_type: categorical
+distribution_reference:
+  weights:
+  - 0.223
+  - 0.21
+  - 0.195
+  - 0.194
+  - 0.178
+  bins:
+  - QZ-54
+  - FX-15
+  - Z
+  - QZ
+  - F
