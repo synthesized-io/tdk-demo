@@ -17,6 +17,8 @@ Run TDK:
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
 docker-compose down; docker-compose run tdk
+
+docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
 Execute [`control_query.sql`](control_query.sql) script on the original database and ensure that there is no data:
@@ -37,7 +39,7 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_generation.tdk.yaml
-docker-compose down; docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker-compose run tdk
 ```
 
 Execute `control_query.sql` script on the original database:
@@ -58,7 +60,7 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_masking.tdk.yaml
-docker-compose down; docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker-compose run tdk
 ```
 
 Execute `control_query.sql` script on the original database:
@@ -79,7 +81,7 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_subsetting.tdk.yaml
-docker-compose down; docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker-compose run tdk
 ```
 
 Execute `control_query.sql` script on the original database:

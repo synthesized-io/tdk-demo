@@ -58,7 +58,5 @@ tables:
           mean: 2022-03-01T12:00:00Z
           std: 2d 4h 45m 12s 434ms
 
-table_truncation_mode: "TRUNCATE"
-schema_creation_mode: "DROP_AND_CREATE"
-cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"

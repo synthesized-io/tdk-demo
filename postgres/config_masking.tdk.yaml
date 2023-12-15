@@ -1,6 +1,5 @@
 default_config:
   mode: MASKING
 
-
 schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"
