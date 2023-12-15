@@ -16,8 +16,6 @@ cd pagila-tdk-demo/postgres
 Run TDK:
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
-docker-compose down; docker-compose run tdk
-
 docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
