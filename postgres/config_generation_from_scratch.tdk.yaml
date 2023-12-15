@@ -57,10 +57,6 @@ tables:
           type: "date_generator"
           mean: 2022-03-01T12:00:00Z
           std: 2d 4h 45m 12s 434ms
-      - columns: ["customer_id"]
-        params:
-          type: "foreign_key_generator"
-          distribution: POISSON
 
 schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"
