@@ -40,23 +40,5 @@ tables:
               "PG": 0.194
               "G": 0.178
 
-  - table_name_with_schema: "public.rental"
-    target_row_number: 20_000
-    transformations:
-      - columns: [ "rental_date" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 2d 4h 45m 12s 434ms
-
-  - table_name_with_schema: "public.payment"
-    target_row_number: 20_000
-    transformations:
-      - columns: [ "payment_date" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 2d 4h 45m 12s 434ms
-
 schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"
