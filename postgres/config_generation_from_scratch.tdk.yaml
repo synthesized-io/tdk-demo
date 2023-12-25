@@ -24,6 +24,12 @@ tables:
   - table_name_with_schema: "public.customer"
     target_row_number: 10_000
 
+  - table_name_with_schema: "public.rental"
+    target_row_number: 20_000
+
+  - table_name_with_schema: "public.payment"
+    target_row_number: 20_000
+
   - table_name_with_schema: "public.film"
     target_row_number: 3_000
     transformations:
