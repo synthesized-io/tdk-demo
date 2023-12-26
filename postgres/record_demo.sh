@@ -13,6 +13,8 @@ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg generation_from_scrat
 # export MESSAGE_AFTER="# Check the RESULTED database with control sql-query ..."
 # asciinema rec --rows=22 -c "./run_demo.sh" --idle-time-limit=1 --overwrite generation.cast
 # asciinema-agg --rows=22 --no-loop generation.cast generation.gif
+docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg generation.cast generation.gif --font-size 26 --no-loop
+
 
 # export CONFIG_FILE=config_masking.tdk.yaml
 # export SPIN_DATABASES_UP="docker-compose run tdk"
@@ -21,6 +23,8 @@ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg generation_from_scrat
 # export MESSAGE_AFTER="# Check the RESULTED database with control sql-query ..."
 # asciinema rec --rows=22 -c "./run_demo.sh" --idle-time-limit=1 --overwrite masking.cast
 # asciinema-agg --rows=22 --no-loop masking.cast masking.gif
+docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg masking.cast masking.gif --font-size 26 --no-loop
+
 
 # export CONFIG_FILE=config_subsetting.tdk.yaml
 # export SPIN_DATABASES_UP="docker-compose run tdk"
@@ -29,3 +33,4 @@ docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg generation_from_scrat
 # export MESSAGE_AFTER="# Check the RESULTED database with control sql-query ..."
 # asciinema rec --rows=22 -c "./run_demo.sh" --idle-time-limit=1 --overwrite subsetting.cast
 # asciinema-agg --rows=22 --no-loop subsetting.cast subsetting.gif
+docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg subsetting.cast subsetting.gif --font-size 26 --no-loop
