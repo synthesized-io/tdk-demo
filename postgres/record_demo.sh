@@ -4,7 +4,7 @@ export MESSAGE_BEFORE="# So, initially, our database only contains the schema, w
 export MESSAGE_START_TRANSFORMATION="# And this is the ideal time for the Synthesized TDK, and we are beginning the data generation process..."
 export MESSAGE_AFTER="# Finally, let's make sure we have robust, realistic, and production-like data ..."
 asciinema rec --rows=17 -c "./run_demo.sh" --idle-time-limit=1 --overwrite generation_from_scratch.cast
-asciinema-agg --rows=17 --no-loop generation_from_scratch.cast generation_from_scratch.gif
+docker run --rm -it -u $(id -u):$(id -g) -v $PWD:/data agg generation_from_scratch.cast generation_from_scratch.gif --font-size 26 --no-loop
 
 # export CONFIG_FILE=config_generation.tdk.yaml
 # export SPIN_DATABASES_UP="docker-compose run tdk"
