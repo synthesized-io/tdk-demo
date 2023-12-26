@@ -11,7 +11,7 @@ clear
 pe "${MESSAGE_BEFORE}"
 pe "usql -q pg://postgres:postgres@localhost:6000/postgres -f control_query.sql"
 
-pe "# Run the TDK transformation ..."
+pe "${MESSAGE_START_TRANSFORMATION}"
 pe "export CONFIG_FILE=${CONFIG_FILE}"
 pe "${SPIN_DATABASES_UP} tdk &> /dev/null"
 
