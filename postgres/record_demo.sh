@@ -1,8 +1,8 @@
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
 export SPIN_DATABASES_UP="docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run"
 export MESSAGE_BEFORE="# So, initially, our database only contains the schema, with zero data, let's check it ..."
-export MESSAGE_START_TRANSFORMATION="# Run Synthesized TDK against the database ..."
-export MESSAGE_AFTER="# For now, let's make sure we have robust, realistic, and production-like data ..."
+export MESSAGE_START_TRANSFORMATION="# And this is the ideal time for the Synthesized TDK, and we are beginning the data generation process..."
+export MESSAGE_AFTER="# Finally, let's make sure we have robust, realistic, and production-like data ..."
 asciinema rec --rows=17 -c "./run_demo.sh" --idle-time-limit=1 --overwrite generation_from_scratch.cast
 asciinema-agg --rows=17 --no-loop generation_from_scratch.cast generation_from_scratch.gif
 
