@@ -8,7 +8,7 @@ So, first, let's create a copy of a SQL Murder Mystery database using the [KEEP]
 
 ```shell
 export CONFIG_FILE=config_keep.tdk.yaml
-docker-compose run tdk
+docker compose run tdk
 
 usql -q sqlite3://sql-murder-mystery.db -f control_query.sql
 
@@ -21,7 +21,7 @@ Next, we can expand the `crime_scene_report` table by 10 times using the [GENERA
 
 ```shell
 export CONFIG_FILE=config_generation.tdk.yaml
-docker-compose run tdk
+docker compose run tdk
 
 usql -q sqlite3://output/output.db -f control_query.sql
 

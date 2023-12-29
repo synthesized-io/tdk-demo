@@ -18,6 +18,6 @@ pe "${SPIN_DATABASES_UP} tdk &> /dev/null"
 pe "${MESSAGE_AFTER}"
 pe "usql -q pg://postgres:postgres@localhost:6001/postgres -f control_query.sql"
 
-docker-compose down &> /dev/null
+docker compose down &> /dev/null
 
 exit

@@ -22,10 +22,10 @@ This repository contains a collection of demo projects for data generation, mask
 ## Requirements
 
 To run this demo, the following needs to be installed on your machine:
-- [Git](https://github.com/git-guides/install-git)
-- [usql](https://github.com/xo/usql)
 - [Docker](https://docs.docker.com/get-docker)
-- [Docker Compose](https://docs.docker.com/compose/install)
+- [Git](https://github.com/git-guides/install-git)
+- [usql](https://github.com/xo/usql) (Optionally)
+
 
 TDK requires at least 2GB RAM, check your Docker memory settings:
 - Docker Desktop ([Windows](https://docs.docker.com/desktop/settings/windows), [Mac](https://docs.docker.com/desktop/settings/mac))
