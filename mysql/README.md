@@ -16,7 +16,7 @@ cd pagila-tdk-demo/mysql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_generation_from_scratch.tdk.yaml
-docker-compose run tdk
+docker compose run tdk
 ```
 
 Check the ORIGINAL database with [`control sql-query`](control_query.sql):
@@ -37,7 +37,7 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_generation.tdk.yaml
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
 Check the ORIGINAL database with [`control sql-query`](control_query.sql):
@@ -58,7 +58,7 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 Run TDK:
 ```shell
 export CONFIG_FILE=config_masking.tdk.yaml
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
 Check the ORIGINAL database with [`control sql-query`](control_query.sql):
@@ -79,7 +79,7 @@ usql mysql://root:admin@localhost:6001/sakila -f control_query.sql
 Run TDK using Docker image:
 ```shell
 export CONFIG_FILE=config_subsetting.tdk.yaml
-docker-compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
+docker compose -f docker-compose.yaml -f docker-compose-input-db.yaml run tdk
 ```
 
 Check the ORIGINAL database with [`control sql-query`](control_query.sql):

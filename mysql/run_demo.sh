@@ -16,6 +16,6 @@ pe "usql -q mysql://root:admin@localhost:6000/sakila -f control_query.sql"
 pe "# Check the RESULTED database with control sql-query ..."
 pe "usql -q mysql://root:admin@localhost:6001/sakila -f control_query.sql"
 
-docker-compose down &> /dev/null
+docker compose down &> /dev/null
 
 exit

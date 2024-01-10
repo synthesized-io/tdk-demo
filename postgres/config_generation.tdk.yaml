@@ -2,29 +2,5 @@ default_config:
   mode: GENERATION
   target_ratio: 2.0
 
-tables:
-
-  - table_name_with_schema: "public.film"
-    transformations:
-      - columns: ["rating"]
-        params:
-          type: "categorical_generator"
-          categories:
-            type: STRING
-            value_source: PROVIDED
-            values:
-              "PG-13": 0.223
-              "NC-17": 0.21
-              "R": 0.195
-              "PG": 0.194
-              "G": 0.178
-      - columns: ["fulltext"]
-        mapping:
-          read: "?::text"
-          write: "?::tsvector"
-        params:
-          type: formatted_string_generator
-          pattern: "\\+44[0-9]{10}"
-
 schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"

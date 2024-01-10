@@ -2,7 +2,7 @@
 
 Run Vault server and databases:
 ```shell
-docker-compose run databases
+docker compose run databases
 ``` 
 
 
@@ -12,7 +12,7 @@ docker-compose run databases
 
 ```shell
 export INVENTORY_FILE=inventory_dynamic_users.yaml
-docker-compose run tdk
+docker compose run tdk
 ```
 
 
@@ -22,7 +22,7 @@ docker-compose run tdk
 
 ```shell
 export INVENTORY_FILE=inventory_static_users.yaml
-docker-compose run tdk
+docker compose run tdk
 ```
 
 
@@ -32,7 +32,7 @@ docker-compose run tdk
 
 ```shell
 export INVENTORY_FILE=inventory_simple_secret.yaml
-docker-compose run tdk
+docker compose run tdk
 ```
 
 

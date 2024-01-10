@@ -20,24 +20,24 @@ export SYNTHESIZED_KEY=kDpeQB...
 
 Spin up Oracle databases:
 ```shell
-docker-compose up oracle_source oracle_target -d
+docker compose up oracle_source oracle_target -d
 ```
 
 Run TDK:
 ```shell
-docker-compose run tdk
+docker compose run tdk
 ```
 
 ## Export to PostgreSQL
 
 Run `ora2pg` to export the masked Oracle database to set of PostgreSQL sql-files:
 ```shell
-docker-compose run ora2pg
+docker compose run ora2pg
 ```
 
 Run the PostgreSQL database:
 ```shell
-docker-compose up postgres_masked -d
+docker compose up postgres_masked -d
 ```
 
 
