@@ -8,5 +8,5 @@ select c.first_name
   from payment p
   join customer c using (customer_id)
  group by c.customer_id 
- order by 4 desc
+ order by 5 desc
  limit 3;

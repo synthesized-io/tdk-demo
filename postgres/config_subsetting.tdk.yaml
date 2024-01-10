@@ -10,6 +10,5 @@ tables:
   - table_name_with_schema: "public.payment"
     target_ratio: 0.1
 
-table_truncation_mode: "TRUNCATE"
-schema_creation_mode: "CREATE_IF_NOT_EXISTS"
+schema_creation_mode: "DROP_AND_CREATE"
 safety_mode: "RELAXED"

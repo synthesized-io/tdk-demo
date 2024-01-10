@@ -24,6 +24,12 @@ tables:
   - table_name_with_schema: "public.customer"
     target_row_number: 10_000
 
+  - table_name_with_schema: "public.rental"
+    target_row_number: 20_000
+
+  - table_name_with_schema: "public.payment"
+    target_row_number: 20_000
+
   - table_name_with_schema: "public.film"
     target_row_number: 3_000
     transformations:
@@ -40,25 +46,5 @@ tables:
               "PG": 0.194
               "G": 0.178
 
-  - table_name_with_schema: "public.rental"
-    target_row_number: 20_000
-    transformations:
-      - columns: [ "rental_date" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 2d 4h 45m 12s 434ms
-
-  - table_name_with_schema: "public.payment"
-    target_row_number: 20_000
-    transformations:
-      - columns: [ "payment_date" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 2d 4h 45m 12s 434ms
-
-table_truncation_mode: "TRUNCATE"
-schema_creation_mode: "CREATE_IF_NOT_EXISTS"
-cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
+schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"

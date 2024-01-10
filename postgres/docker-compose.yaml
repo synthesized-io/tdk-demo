@@ -4,12 +4,10 @@ services:
 
   input_db:
     container_name: input_db
-    image: postgres:16
+    image: synthesizedio/pagila
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    volumes:
-      - ./pagila-schema.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6000:5432" ]
     healthcheck:
       test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
@@ -18,14 +16,13 @@ services:
       start_period: "3s"
       retries: 30
 
+
   output_db:
     container_name: output_db
     image: postgres:16
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-    volumes:
-      - ./pagila-output-db-scripts.sql:/docker-entrypoint-initdb.d/1.sql
     ports: [ "6001:5432" ]
     healthcheck:
       test: "pg_isready -d postgres -q -U ${POSTGRES_USER:-postgres}"
