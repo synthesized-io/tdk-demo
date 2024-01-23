@@ -2,9 +2,9 @@ name: test_postgres
 
 on:
   push:
-    branches: [ main ]
+    branches: [ 'main' ]
   pull_request:
-    branches: [ main ]
+    branches: [ '*' ]
 
 defaults:
   run:
