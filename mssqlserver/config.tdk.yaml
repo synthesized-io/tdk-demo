@@ -1,8 +1,0 @@
-default_config:
-  mode: MASKING
-  # target_row_number: 100_000
-
-
-table_truncation_mode: "TRUNCATE"
-schema_creation_mode: DO_NOT_CREATE
-safety_mode: "RELAXED"
