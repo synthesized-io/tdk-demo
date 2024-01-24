@@ -5,57 +5,21 @@ default_config:
 tables:
 
   - table_name_with_schema: "sakila.country"
-    transformations:
-      - columns: [ "country" ]
-        params:
-          type: address_generator
-          column_templates: [ "${country}" ]
 
   - table_name_with_schema: "sakila.city"
     target_row_number: 1_000
-    transformations:
-      - columns: [ "city" ]
-        params:
-          type: address_generator
-          column_templates: [ "${city}" ]
 
   - table_name_with_schema: "sakila.address"
     target_row_number: 5_000
-    transformations:
-      - columns: [ "address", "address2" ]
-        params:
-          type: address_generator
-          column_templates:
-            - "${street_name}, ${house_number}, ${flat_number}, ${zip_code}"
-            - >
-              ${country}, ${city}, ${street_name}, ${house_number},
-              ${flat_number}, ${zip_code}
-          length_exceeded_mode: "TRUNCATE"
 
   - table_name_with_schema: "sakila.staff"
     target_row_number: 256
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
 
   - table_name_with_schema: "sakila.customer"
     target_row_number: 10_000
-    transformations:
-      - columns: ["first_name", "last_name", "email"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}", "${email}"]
-          length_exceeded_mode: "TRUNCATE"
 
   - table_name_with_schema: "sakila.actor"
     target_row_number: 1_000
-    transformations:
-      - columns: ["first_name", "last_name"]
-        params:
-          type: person_generator
-          column_templates: ["${first_name}", "${last_name}"]
 
   - table_name_with_schema: "sakila.film"
     target_row_number: 3_000
@@ -75,14 +39,6 @@ tables:
 
   - table_name_with_schema: "sakila.rental"
     target_row_number: 20_000
-    transformations:
-      - columns: [ "rental_date" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
 
   - table_name_with_schema: "sakila.payment"
     target_row_number: 20_000
