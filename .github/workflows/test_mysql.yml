@@ -59,17 +59,17 @@ jobs:
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run databases
 
-      - name: Verify input data
-        run: >
-          docker compose run check scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
       - name: Run TDK
         run: |
           export CONFIG_FILE=config_generation.tdk.yaml
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
 
       - name: Verify output data
         run: >
@@ -93,17 +93,17 @@ jobs:
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run databases
 
-      - name: Verify input data
-        run: >
-          docker compose run check scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
       - name: Run TDK
         run: |
           export CONFIG_FILE=config_masking.tdk.yaml
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
 
       - name: Verify output data
         run: >
@@ -127,17 +127,17 @@ jobs:
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run databases
 
-      - name: Verify input data
-        run: >
-          docker compose run check scan -d input_db
-          -c /sodacl/configuration.yaml
-          /sodacl/checks_for_input_db.yaml
-
       - name: Run TDK
         run: |
           export CONFIG_FILE=config_subsetting.tdk.yaml
           docker compose -f docker-compose.yaml \
             -f docker-compose-input-db.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
 
       - name: Verify output data
         run: >
