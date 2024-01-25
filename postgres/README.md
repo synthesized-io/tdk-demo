@@ -1,4 +1,6 @@
-# TDK PostgreSQL Demo
+# Synthesized TDK PostgreSQL Demo
+
+![test postgres](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml/badge.svg)
 
 [Pagila](https://github.com/devrimgunduz/pagila) is a PostgreSQL version of the well-known MySQL [Sakila](https://dev.mysql.com/doc/sakila/en) sample database.
 
