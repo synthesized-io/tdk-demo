@@ -295,6 +295,7 @@ CREATE TABLE rental (
   staff_id TINYINT UNSIGNED, -- NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (rental_id),
+  -- TODO https://github.com/synthesized-io/tdk/issues/2228#issuecomment-1752025347
   -- UNIQUE KEY  (rental_date,inventory_id,customer_id),
   KEY idx_fk_inventory_id (inventory_id),
   KEY idx_fk_customer_id (customer_id),
