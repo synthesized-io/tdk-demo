@@ -35,7 +35,7 @@ checks for language:
   - row_count = 6
 
 checks for payment:
-  - row_count = 48147
+  - row_count = 16049
 
 checks for rental:
   - row_count = 16044
