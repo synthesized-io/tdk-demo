@@ -295,7 +295,8 @@ CREATE TABLE rental (
   staff_id TINYINT UNSIGNED, -- NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (rental_id),
-  UNIQUE KEY  (rental_date,inventory_id,customer_id),
+  -- TODO https://github.com/synthesized-io/tdk/issues/2228#issuecomment-1752025347
+  -- UNIQUE KEY  (rental_date,inventory_id,customer_id),
   KEY idx_fk_inventory_id (inventory_id),
   KEY idx_fk_customer_id (customer_id),
   KEY idx_fk_staff_id (staff_id),
@@ -337,7 +338,8 @@ CREATE TABLE store (
   address_id SMALLINT UNSIGNED, -- NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (store_id),
-  UNIQUE KEY idx_unique_manager (manager_staff_id),
+  -- TODO https://github.com/synthesized-io/tdk/issues/2228#issuecomment-1752025347
+  -- UNIQUE KEY idx_unique_manager (manager_staff_id),
   KEY idx_fk_address_id (address_id),
   CONSTRAINT fk_store_staff FOREIGN KEY (manager_staff_id) REFERENCES staff (staff_id) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT fk_store_address FOREIGN KEY (address_id) REFERENCES address (address_id) ON DELETE RESTRICT ON UPDATE CASCADE

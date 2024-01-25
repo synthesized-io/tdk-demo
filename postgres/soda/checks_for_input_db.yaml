@@ -16,8 +16,8 @@ checks for country:
 checks for customer:
   - row_count = 599
 
-# checks for film:
-#   - row_count = 1000
+checks for film:
+  - row_count = 1000
 #   - distribution_difference(rating) < 0.01:
 #       method: chi_square
 #       distribution reference file: /sodacl/film_rating_distribution.yml
@@ -26,7 +26,7 @@ checks for film_actor:
   - row_count = 5462
 
 checks for film_category:
-  - row_count = 1000
+  - row_count = 2367
 
 checks for inventory:
   - row_count = 4581
@@ -41,9 +41,9 @@ checks for rental:
   - row_count = 16044
 
 checks for staff:
-  - row_count = 2
+  - row_count = 1500
   - invalid_percent(email) = 0:
       valid format: email
 
 checks for store:
-  - row_count = 2
+  - row_count = 500

@@ -26,7 +26,7 @@ checks for film_actor:
   - row_count = 10924
 
 checks for film_category:
-  - row_count = 2000
+  - row_count = 4638
 
 checks for inventory:
   - row_count = 9162
@@ -41,9 +41,9 @@ checks for rental:
   - row_count = 32088
 
 checks for staff:
-  - row_count = 4
+  - row_count = 3000
   - invalid_percent(email) = 0:
       valid format: email
 
 checks for store:
-  - row_count = 4
+  - row_count = 1000
