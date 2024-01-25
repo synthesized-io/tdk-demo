@@ -96,3 +96,4 @@ usql pg://postgres:postgres@localhost:6001/postgres -f control_query.sql
 ## Advanced
 
 Alternatively, you can use the embedded [pgAdmin 4](https://www.pgadmin.org/download). Simply go to http://localhost:8888/browser and explore the two preconfigured database connections (use `postgres` as the password).
+
