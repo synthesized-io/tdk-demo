@@ -40,7 +40,7 @@ checks for language:
   - row_count same as language in input_db
 
 checks for payment:
-  - row_count = 4815
+  - row_count = 1605
 
 checks for rental:
   - row_count = 1605
