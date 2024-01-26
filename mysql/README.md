@@ -1,4 +1,6 @@
-# TDK MySQL Demo
+# Synthesized TDK MySQL Demo
+
+![test mysql](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mysql.yml/badge.svg)
 
 [Sakila](https://dev.mysql.com/doc/sakila/en) is a sample database schema that can be used in MySQL tutorials, articles, demos, etc.
 

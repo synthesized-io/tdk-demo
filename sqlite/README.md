@@ -1,4 +1,6 @@
-# TDK SQLite Demo
+# Synthesized TDK SQLite Demo
+
+![test sqlite](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_sqlite.yml/badge.svg)
 
 [SQL Murder Mystery](https://mystery.knightlab.com) is an interactive online game that allows users to learn and practice SQL skills while solving a murder mystery. With the help of TDK, we will enhance your investigation in SQL City, making it even more interesting and sophisticated.
 

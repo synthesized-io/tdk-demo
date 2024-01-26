@@ -6,11 +6,12 @@ This repository contains a collection of demo projects for data generation, mask
 
 
 ## Demos
-- [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database. 
-- [TDK + MySQL](mysql/README.md) – masking and subsetting for the MySQL sample database.
+- [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database ![test postgres](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml/badge.svg)
+- [TDK + MySQL](mysql/README.md) – masking and subsetting for the MySQL sample database ![test mysql](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mysql.yml/badge.svg)
+- [TDK + SQLite](sqlite/README.md) - Investigate the SQL Murder Mystery with Stnthesized TDK ![test sqlite](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_sqlite.yml/badge.svg)
 - [TDK + Oracle](oracle/README.md) – an example of how to mask the Oracle sample database and import it into Postgres. 
 - [TDK + DB2](db2/README.md) – an example of how to mask the emdedded DB2 sample database.
-- [TDK + PostgreSQL + Vault](vault/README.md) – how to use TDK with Hashicorp Vault secret manager for Postgres database.
+- [TDK + PostgreSQL + Vault](vault/README.md) – how to use TDK with Hashicorp Vault secret manager for Postgres database ![test vault](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_vault.yml/badge.svg)
 
 
 ## Tools

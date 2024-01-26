@@ -1,4 +1,4 @@
-# TDK DB2 LUW Demo
+# Synthesized TDK DB2 LUW Demo
 
 Spin up databases:
 ```shell

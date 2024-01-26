@@ -1,4 +1,6 @@
-# tdk-vault-demo
+# Synthesized TDK Vault Demo
+
+![test vault](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_vault.yml/badge.svg)
 
 Run Vault server and databases:
 ```shell
