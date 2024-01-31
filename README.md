@@ -6,7 +6,7 @@ This repository contains a collection of demo projects for data generation, mask
 
 
 ## Demos
-- [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database ![test postgres](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml/badge.svg)
+- [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database [![test postgres](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml/badge.svg)](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml)
 - [TDK + MySQL](mysql/README.md) – masking and subsetting for the MySQL sample database ![test mysql](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mysql.yml/badge.svg)
 - [TDK + SQLite](sqlite/README.md) - Investigate the SQL Murder Mystery with Stnthesized TDK ![test sqlite](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_sqlite.yml/badge.svg)
 - [TDK + Oracle](oracle/README.md) – an example of how to mask the Oracle sample database and import it into Postgres. 
