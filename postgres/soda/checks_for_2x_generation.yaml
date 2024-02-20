@@ -26,7 +26,7 @@ checks for film_actor:
   - row_count = 10924
 
 checks for film_category:
-  - row_count = 4638
+  - row_count = 4734
 
 checks for inventory:
   - row_count = 9162
