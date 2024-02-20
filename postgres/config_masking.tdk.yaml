@@ -1,5 +1,14 @@
 default_config:
-  mode: MASKING
+  mode: KEEP
 
-schema_creation_mode: DROP_AND_CREATE
+# tables:
+#   - table_name_with_schema: "public.staff"
+#     transformations:
+#       - columns:
+#           - "first_name"
+#         params:
+          
+
+schema_creation_mode: CREATE_IF_NOT_EXISTS
 safety_mode: "RELAXED"
+table_truncation_mode: TRUNCATE

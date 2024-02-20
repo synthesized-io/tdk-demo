@@ -1,8 +1,50 @@
 default_config:
-  mode: MASKING
+  mode: KEEP
+  use_working_directory: true
+  # mode: GENERATION
+  # target_row_number: 5_000_000
+  target_ratio: 0.0
+  insert_batch_size: 50000
 
 
-table_truncation_mode: "TRUNCATE"
-schema_creation_mode: DROP_AND_CREATE
-cycle_resolution_strategy: "DEFER_FOREIGN_KEY"
+tables:
+  - table_name_with_schema: "PADT_ORS.C_PADT_ACCOUNT"
+    target_ratio: 0.01
+  #   filter: "ROWID_OBJECT BETWEEN '0' AND '111I6'"
+
+  - table_name_with_schema: "PADT_ORS.C_PADT_PARTY"
+    target_ratio: 0.01
+  #   filter: "ROWID_OBJECT IN (SELECT act.ROWID_PARTY FROM PADT_ORS.C_PTY_TO_ACCT act WHERE act.ROWID_ACCT BETWEEN '0' AND '111I6')"
+
+  - table_name_with_schema: "PADT_ORS.C_PTY_TO_ACCT"
+    target_ratio: 0.01
+
+table_truncation_mode: DO_NOT_TRUNCATE
+schema_creation_mode: DO_NOT_CREATE
 safety_mode: "RELAXED"
+schemas:
+  - "PADT_ORS"
+
+
+
+metadata:
+  tables:
+  - table_name_with_schema: "PADT_ORS.C_PTY_TO_ACCT"
+    foreign_keys:
+     fk_party:
+      referred_schema: "PADT_ORS"
+      referred_table: "C_PADT_PARTY"
+      columns:
+      - column: "ROWID_PARTY"
+        referred_column: "ROWID_OBJECT"
+     fk_account:
+      referred_schema: "PADT_ORS"
+      referred_table: "C_PADT_ACCOUNT"
+      columns:
+      - column: "ROWID_ACCT"
+        referred_column: "ROWID_OBJECT"
+
+
+
+
+

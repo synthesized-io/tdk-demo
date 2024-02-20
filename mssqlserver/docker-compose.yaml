@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+
+  input_db:
+    container_name: input_db
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - 6000:1433
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
+      ACCEPT_EULA: Y
+    healthcheck:
+      test: >
+        echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+
+  output_db:
+    container_name: output_db
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - 6001:1433
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
+      ACCEPT_EULA: Y
+    healthcheck:
+      test: >
+        echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+
+  databases:
+    container_name: databases
+    image: docker/whalesay
+    command: >
+      cowsay
+        "Both databases have been started and are ready for TDK exercises!"
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
+
+  tdk:
+    extends:
+      file: ../parent-compose.yml
+      service: tdk
+    environment:
+      SYNTHESIZED_INPUT_URL: jdbc:sqlserver://output_db:1433;databaseName=sakila;encrypt=false
+      SYNTHESIZED_INPUT_USERNAME: sa
+      SYNTHESIZED_INPUT_PASSWORD: Secret_password_1
+      SYNTHESIZED_OUTPUT_URL: jdbc:sqlserver://input_db:1433;databaseName=sakila;encrypt=false
+      SYNTHESIZED_OUTPUT_USERNAME: sa
+      SYNTHESIZED_OUTPUT_PASSWORD: Secret_password_1
+    volumes:
+      - ./config.tdk.yaml:/app/config.yaml

@@ -36,15 +36,28 @@ services:
       start_period: 10s
 
 
+  databases:
+    container_name: databases
+    image: docker/whalesay
+    command: >
+      cowsay
+        "Both databases have been started and are ready for TDK exercises!"
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
+
   tdk:
     extends:
       file: ../parent-compose.yml
       service: tdk
     environment:
-      SYNTHESIZED_INPUT_URL: jdbc:db2://input_db:50000/SAMPLE
+      SYNTHESIZED_INPUT_URL: jdbc:db2://output_db:50000/testdb
       SYNTHESIZED_INPUT_USERNAME: DB2INST1
       SYNTHESIZED_INPUT_PASSWORD: test
-      SYNTHESIZED_OUTPUT_URL: jdbc:db2://output_db:50000/testdb
+      SYNTHESIZED_OUTPUT_URL: jdbc:db2://input_db:50000/SAMPLE
       SYNTHESIZED_OUTPUT_USERNAME: DB2INST1
       SYNTHESIZED_OUTPUT_PASSWORD: test
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
@@ -52,11 +65,6 @@ services:
       TDK_WORKINGDIRECTORY_ENABLED: "true"
       SYNTHESIZED_KEY: ${SYNTHESIZED_KEY}
       JAVA_TOOL_OPTIONS: >
-        -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
-        -Dlogging.level.io.synthesized.tdk=WARN
-        -Dlogging.level.com.zaxxer.hikari=WARN
-        -Dlogging.level.org.reflections=WARN
-        -Dlogging.level.org.jooq=WARN
         -XX:+UseContainerSupport
         -XX:MaxRAMPercentage=80.0
         -Dspring.main.banner-mode=CONSOLE
@@ -64,4 +72,4 @@ services:
     volumes:
       - ./${CONFIG_FILE:-config_masking.tdk.yaml}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
-      - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
+      # - ../logback-lite-executor.xml:/app/logback-lite-executor.xml

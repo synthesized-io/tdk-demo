@@ -4,3 +4,24 @@ services:
   tdk:
     container_name: tdk
     image: synthesizedio/synthesized-tdk-cli:v1.44.0
+    environment:
+      SYNTHESIZED_KEY: ${SYNTHESIZED_KEY}
+      SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+      TDK_WORKINGDIRECTORY_PATH: /app/data
+      # SYNTHESIZED_COMMAND: dry-run
+      JAVA_TOOL_OPTIONS: >
+        -Dlogging.level.io.synthesized.tdk.executor.lite.AssistedTableLookupFilter=DEBUG
+      #   -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
+      #   -Dlogging.level.io.synthesized.tdk=WARN
+      #   -Dlogging.level.com.zaxxer.hikari=WARN
+      #   -Dlogging.level.org.reflections=WARN
+      #   -XX:+UseContainerSupport
+      #   -XX:MaxRAMPercentage=80.0
+      #   -Dspring.main.banner-mode=CONSOLE
+      #   -Dspring.banner.location=file:/app/banner.txt
+    volumes:
+      - ./banner.txt:/app/banner.txt
+      # - ./logback-lite-executor.xml:/app/logback-lite-executor.xml
+    # depends_on:
+    #   databases:
+    #     condition: service_completed_successfully

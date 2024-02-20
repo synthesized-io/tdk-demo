@@ -36,23 +36,23 @@ CREATE SEQUENCE actor_sequence;
 
 
 
--- CREATE OR REPLACE TRIGGER actor_before_trigger 
--- BEFORE INSERT ON actor FOR EACH ROW 
--- BEGIN
---   IF (:NEW.actor_id IS NULL) THEN
---     SELECT actor_sequence.nextval INTO :NEW.actor_id
---     FROM DUAL;
---   END IF;
---   :NEW.last_update:=current_date;
--- END;
--- /
+CREATE OR REPLACE TRIGGER actor_before_trigger 
+BEFORE INSERT ON actor FOR EACH ROW 
+BEGIN
+  IF (:NEW.actor_id IS NULL) THEN
+    SELECT actor_sequence.nextval INTO :NEW.actor_id
+    FROM DUAL;
+  END IF;
+  :NEW.last_update:=current_date;
+END;
+/
 
--- CREATE OR REPLACE TRIGGER actor_before_update
--- BEFORE UPDATE ON actor FOR EACH ROW 
--- BEGIN
---   :NEW.last_update:=current_date;
--- END;
--- /
+CREATE OR REPLACE TRIGGER actor_before_update
+BEFORE UPDATE ON actor FOR EACH ROW 
+BEGIN
+  :NEW.last_update:=current_date;
+END;
+/
 
 
 --
@@ -519,7 +519,7 @@ END;
 --
 
 CREATE TABLE store (
-  store_id INT, --NOT NULL,
+  store_id INT NOT NULL,
   manager_staff_id INT NOT NULL,
   address_id INT NOT NULL,
   last_update DATE NOT NULL,

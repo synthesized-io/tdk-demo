@@ -1,0 +1,27 @@
+default_config:
+  # mode: MASKING
+  mode: GENERATION
+  # target_row_number: 10
+  target_ratio: 2
+
+
+# tables:
+#   - table_name_with_schema: "dbo.test_date_types_table"
+#     transformations:
+#       - columns:
+#         - "datetime_column"
+#         params:
+#           type: "date_time_unique_hashing"
+#           min: "1926-04-08T03:17:17.786Z"
+#           max: "2054-03-30T16:54:42.16Z"
+#       - columns:
+#         - "datetime2_column"
+#         params:
+#           type: "date_time_unique_hashing"
+#           min: "1926-04-08T03:17:17.786Z"
+#           max: "2054-03-30T16:54:42.16Z"
+
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: DO_NOT_CREATE
+safety_mode: "RELAXED"

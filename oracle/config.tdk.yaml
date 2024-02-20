@@ -1,18 +1,21 @@
 default_config:
-  mode: MASKING
+  mode: KEEP
+  # mode: GENERATION
+  # target_ratio: 0
 
 tables:
-  - table_name_with_schema: "TEST.CITY"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.CITY"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
   - table_name_with_schema: "TEST.CUSTOMER"
+    # target_row_number: 5000
     transformations:
       - columns: [ "CREATE_DATE" ]
         params:
@@ -29,85 +32,88 @@ tables:
           min: 2022-01-01T12:00:00Z
           max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.FILM"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.STORE"
+  #   target_row_number: 5000
 
-  - table_name_with_schema: "TEST.FILM_ACTOR"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.FILM"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.ACTOR"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.FILM_ACTOR"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.FILM_CATEGORY"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.ACTOR"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.INVENTORY"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.FILM_CATEGORY"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.PAYMENT"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.INVENTORY"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.RENTAL"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.PAYMENT"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
-  - table_name_with_schema: "TEST.ADDRESS"
-    transformations:
-      - columns: [ "LAST_UPDATE" ]
-        params:
-          type: "date_generator"
-          mean: 2022-03-01T12:00:00Z
-          std: 7776000000
-          min: 2022-01-01T12:00:00Z
-          max: 2022-07-01T12:00:00Z
+  # - table_name_with_schema: "TEST.RENTAL"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
+
+  # - table_name_with_schema: "TEST.ADDRESS"
+  #   transformations:
+  #     - columns: [ "LAST_UPDATE" ]
+  #       params:
+  #         type: "date_generator"
+  #         mean: 2022-03-01T12:00:00Z
+  #         std: 7776000000
+  #         min: 2022-01-01T12:00:00Z
+  #         max: 2022-07-01T12:00:00Z
 
 
 cycle_resolution_strategy: DEFER_FOREIGN_KEY
