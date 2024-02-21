@@ -4,7 +4,7 @@ services:
 
   input_db:
     container_name: input_db
-    image: synthesizedio/pagila:1.5
+    image: synthesizedio/pagila:1.3
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
