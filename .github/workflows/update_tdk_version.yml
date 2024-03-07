@@ -16,7 +16,8 @@ jobs:
         env:
           IMAGE_VERSION: synthesizedio/synthesized-tdk-cli:v${{ env.RELEASE_VERSION }}
         run: |
-          yq -i '.services.tdk.image = strenv(IMAGE_VERSION)' ./parent-compose.yml
+          yq -i '.services.tdk.image = strenv(IMAGE_VERSION)' \
+            ./parent-compose.yml
 
       - name: Push and commit changes
         run: |
@@ -31,4 +32,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --base main --head "update-release-version-v${RELEASE_VERSION}" --title "Update image version to v${RELEASE_VERSION}" --body 'Created by Github action'
+          gh pr create --base main \
+            --head "update-release-version-v${RELEASE_VERSION}" \
+            --title "Update image version to v${RELEASE_VERSION}" \
+            --body 'Created by Github action'
