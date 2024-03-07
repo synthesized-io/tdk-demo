@@ -1,0 +1,33 @@
+name: Update TDK version
+on:
+  repository_dispatch:
+    types: [update-tdk-version]
+
+jobs:
+  update-tdk-version:
+    name: Update TDK image version
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_VERSION: ${{ github.event.client_payload.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update image version
+        env:
+          IMAGE_VERSION: synthesizedio/synthesized-tdk-cli:v${{ env.RELEASE_VERSION }}
+        run: yq -i '.services.tdk.image = strenv(IMAGE_VERSION)' ./parent-compose.yml
+
+      - name: Push and commit changes
+        run: |
+          branch="update-release-version-v${RELEASE_VERSION}"
+          git config user.name "github_actions"
+          git checkout -b $branch
+          git add parent-compose.yml
+          git commit -m "Update image version to v${RELEASE_VERSION}"
+          git push origin $branch
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create --base main --head "update-release-version-v${RELEASE_VERSION}" --title "Update image version to v${RELEASE_VERSION}" --body 'Created by Github action'
