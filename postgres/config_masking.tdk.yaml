@@ -1,5 +1,16 @@
 default_config:
-  mode: MASKING
+  mode: KEEP
+
+tables:
+  - table_name_with_schema: "public.customer"
+    transformations:
+      - columns: ["first_name", "last_name", "email"]
+        mode: MASKING
+
+  - table_name_with_schema: "public.staff"
+    transformations:
+      - columns: ["first_name", "last_name", "email", "username", "password"]
+        mode: MASKING
 
 schema_creation_mode: DROP_AND_CREATE
 safety_mode: "RELAXED"
