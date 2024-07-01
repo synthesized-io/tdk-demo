@@ -15,7 +15,7 @@ checks for country:
 
 checks for customer:
   - row_count = 10000
-  - invalid_count(email) = 1:
+  - invalid_count(email) = 0:
       valid format: email
 
 checks for film:
