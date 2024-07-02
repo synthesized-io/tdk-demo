@@ -52,7 +52,7 @@ services:
 
   databases:
     container_name: databases
-    image: docker/whalesay
+    image: synthesizedio/whalesay
     command: >
       cowsay
         "Both databases have been started and are ready for TDK exercises!"
