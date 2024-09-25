@@ -15,7 +15,7 @@ jobs:
       - name: Update image version
         env:
           IMAGE_VERSION: |-
-            "synthesizedio/synthesized-tdk-cli:v${{ env.RELEASE_VERSION }}"
+            synthesizedio/synthesized-tdk-cli:v${{ env.RELEASE_VERSION }}
         run: |
           yq -i '.services.tdk.image = strenv(IMAGE_VERSION)' \
             ./parent-compose.yml
