@@ -1,0 +1,19 @@
+default_config:
+  mode: KEEP
+  # mode: MASKING
+  # mode: GENERATION
+  # target_ratio: 2.0
+
+
+tables:
+
+  - table_name_with_schema: "dbo.Customers"
+    transformations:
+      - columns: ["CompanyName", "Address", "ContactName", "Phone", "Fax"]
+        mode: MASKING
+
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: DROP_AND_CREATE
+safety_mode: "RELAXED"
+cycle_resolution_strategy: DEFER_FOREIGN_KEY
