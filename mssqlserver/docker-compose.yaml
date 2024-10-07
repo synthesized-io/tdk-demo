@@ -15,7 +15,7 @@ services:
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
       interval: 3s
       timeout: 3s
-      retries: 40
+      retries: 10
 
 
   output_db:
@@ -31,7 +31,7 @@ services:
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
       interval: 3s
       timeout: 3s
-      retries: 40
+      retries: 10
 
 
   databases:
@@ -76,7 +76,7 @@ services:
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./config.tdk.yaml:/app/config.yaml
+      - ./${CONFIG_FILE}:/app/config.yaml
       - ../banner.txt:/app/banner.txt
       - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
     depends_on:
