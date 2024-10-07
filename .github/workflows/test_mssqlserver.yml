@@ -22,6 +22,10 @@ jobs:
           docker compose pull
           docker compose build
 
+      - name: Run databases test
+        run: |
+          docker run mcr.microsoft.com/mssql/server:2017-latest
+
       - name: Run databases
         run: |
           docker compose run databases
