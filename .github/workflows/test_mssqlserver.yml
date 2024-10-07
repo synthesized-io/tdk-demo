@@ -24,7 +24,7 @@ jobs:
 
       - name: Run databases test
         run: |
-          docker run mcr.microsoft.com/mssql/server:2017-latest
+          docker compose run input_db
 
       - name: Run databases
         run: |
