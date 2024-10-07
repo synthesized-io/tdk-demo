@@ -1,0 +1,33 @@
+name: test_mssqlserver
+
+on:
+  push:
+    branches: [ 'main' ]
+  pull_request:
+    branches: [ '*' ]
+
+defaults:
+  run:
+    working-directory: ./mssqlserver
+
+jobs:
+
+  masking:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker compose
+        run: |
+          docker compose pull
+          docker compose build
+
+      - name: Run databases
+        run: |
+          docker compose -f docker-compose.yaml \
+            -f docker-compose-input-db.yaml run databases
+
+      - name: Run TDK
+        run: |
+          export CONFIG_FILE=config_masking.tdk.yaml
+          docker compose run tdk
