@@ -24,8 +24,7 @@ jobs:
 
       - name: Run databases
         run: |
-          docker compose -f docker-compose.yaml \
-            -f docker-compose-input-db.yaml run databases
+          docker compose run databases
 
       - name: Run TDK
         run: |
