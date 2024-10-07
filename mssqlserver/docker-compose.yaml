@@ -10,6 +10,9 @@ services:
     environment:
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
       ACCEPT_EULA: Y
+    volumes:
+      - ./mssql/input/data:/var/opt/mssql/data
+      - ./mssql/input/log:/var/opt/mssql/log
     healthcheck:
       test: >
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
@@ -26,6 +29,9 @@ services:
     environment:
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
       ACCEPT_EULA: Y
+    volumes:
+      - ./mssql/input/data:/var/opt/mssql/data
+      - ./mssql/input/log:/var/opt/mssql/log
     healthcheck:
       test: >
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
