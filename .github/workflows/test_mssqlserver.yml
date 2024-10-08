@@ -34,6 +34,18 @@ jobs:
         run: |
           docker compose run tdk
 
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_masking.yaml
+
 
   generation:
     runs-on: ubuntu-latest
