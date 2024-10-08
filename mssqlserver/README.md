@@ -8,7 +8,7 @@ cd tdk-demo/mssqlserver
 
 ## Masking of the existing data
 
-<!-- ![masking demo](masking.gif) -->
+![masking demo](masking.gif)
 
 Run TDK:
 ```shell
@@ -29,7 +29,7 @@ usql ms://sa:Secret_password_1@localhost:6001/northwind -f control_query.sql
 
 ## Generation based on the existing data
 
-<!-- ![generation demo](generation.gif) -->
+![generation demo](generation.gif)
 
 Run TDK:
 ```shell
