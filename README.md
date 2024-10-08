@@ -6,6 +6,7 @@ This repository contains a collection of demo projects for data generation, mask
 
 
 ## Demos
+- [TDK + Microsoft SQL Server](mssqlserver/README.md) – masking and generation for the classic [Northwind](https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/northwind-pubs) sample database [![test ms sql server](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mssqlserver.yml/badge.svg)](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mssqlserver.yml)
 - [TDK + PostgreSQL](postgres/README.md) – generation for an empty database, generation based on existing data, masking, and subsetting for the Postgres sample database [![test postgres](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml/badge.svg)](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_postgres.yml)
 - [TDK + MySQL](mysql/README.md) – masking and subsetting for the MySQL sample database [![test mysql](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mysql.yml/badge.svg)](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_mysql.yml)
 - [TDK + SQLite](sqlite/README.md) - Investigate the SQL Murder Mystery with Stnthesized TDK [![test sqlite](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_sqlite.yml/badge.svg)](https://github.com/synthesized-io/tdk-demo/actions/workflows/test_sqlite.yml)
