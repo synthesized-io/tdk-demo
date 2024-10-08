@@ -5,6 +5,7 @@ services:
   input_db:
     container_name: input_db
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     ports:
       - 6000:1433
     environment:
@@ -21,6 +22,7 @@ services:
   output_db:
     container_name: output_db
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     ports:
       - 6001:1433
     environment:
