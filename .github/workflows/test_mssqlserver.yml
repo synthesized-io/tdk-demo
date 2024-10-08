@@ -24,31 +24,6 @@ jobs:
 
       - name: Run databases test
         continue-on-error: true
-        timeout-minutes: 5
-        run: |
-          docker compose run databases
-
-      - name: Run databases ls
-        continue-on-error: true
-        run: |
-          docker ps -a
-
-      - name: Run databases logs
-        continue-on-error: true
-        run: |
-          docker compose logs
-
-      - name: Run databases ls 2
-        continue-on-error: true
-        run: |
-          docker inspect input_db
-
-      - name: Run databases ls 3
-        continue-on-error: true
-        run: |
-          docker inspect output_db
-
-      - name: Run databases
         run: |
           docker compose run databases
 
