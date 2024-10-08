@@ -41,7 +41,7 @@ jobs:
       - name: Run databases ls 2
         continue-on-error: true
         run: |
-          docker ps -a
+          docker inspect --format='{{json .State.Health.Status}}' input_db
 
       - name: Run databases
         run: |
