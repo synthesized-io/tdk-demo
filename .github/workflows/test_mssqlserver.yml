@@ -22,6 +22,10 @@ jobs:
           docker compose pull
           docker compose build
 
+      - name: Run databases test
+        run: |
+          docker compose run input_db
+
       - name: Run databases
         run: |
           docker compose run databases
