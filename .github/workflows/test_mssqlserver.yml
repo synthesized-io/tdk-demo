@@ -27,10 +27,20 @@ jobs:
         run: |
           docker compose run databases
 
+      - name: Run databases ls
+        continue-on-error: true
+        run: |
+          docker compose ls
+
       - name: Run databases logs
         continue-on-error: true
         run: |
           docker compose logs
+
+      - name: Run databases ls 2
+        continue-on-error: true
+        run: |
+          docker compose ls
 
       - name: Run databases
         run: |
