@@ -84,3 +84,10 @@ services:
     depends_on:
       databases:
         condition: service_completed_successfully
+
+
+  check:
+    container_name: check
+    image: sodadata/soda-core
+    volumes:
+      - ./soda:/sodacl
