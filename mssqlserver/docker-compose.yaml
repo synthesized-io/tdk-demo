@@ -65,7 +65,7 @@ services:
       SYNTHESIZED_OUTPUT_URL: jdbc:sqlserver://output_db:1433;databaseName=northwind;encrypt=false
       SYNTHESIZED_OUTPUT_USERNAME: SA
       SYNTHESIZED_OUTPUT_PASSWORD: Secret_password_1
-      SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+      SYNTHESIZED_KEY: "${{ secrets.SYNTHESIZED_LICENSE_KEY }}"
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
       JAVA_TOOL_OPTIONS: >
         -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
