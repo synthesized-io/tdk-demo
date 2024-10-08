@@ -30,7 +30,7 @@ jobs:
       - name: Run databases ls
         continue-on-error: true
         run: |
-          docker compose ls
+          docker ps -a
 
       - name: Run databases logs
         continue-on-error: true
@@ -40,7 +40,7 @@ jobs:
       - name: Run databases ls 2
         continue-on-error: true
         run: |
-          docker compose ls
+          docker ps -a
 
       - name: Run databases
         run: |
