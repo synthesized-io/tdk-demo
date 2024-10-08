@@ -5,7 +5,7 @@ tables:
 
   - table_name_with_schema: "dbo.Customers"
     transformations:
-      - columns: [ "CompanyName", "Address", "ContactName", "Phone", "Fax" ]
+      - columns: [ "CompanyName", "Address", "CustomerID", "ContactName", "Phone", "Fax" ]
         mode: MASKING
 
   - table_name_with_schema: "dbo.Employees"

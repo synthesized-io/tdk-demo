@@ -1,14 +1,15 @@
+-- sqlfluff:dialect:tsql
 select
     companyname,
     contactname,
-    contacttitle,
     customerid,
-    [sum]
+    [sum],
+    (select count(*) from [Orders]) as total_orders,
+    (select count(*) from [Order Details]) as total_order_details
 from (
     select
         c.companyname,
         c.contactname,
-        c.contacttitle,
         c.customerid,
         sum(od.quantity * od.unitprice) as [sum],
         row_number() over (order by sum(od.quantity * od.unitprice) desc) as [row_number]
