@@ -1,0 +1,17 @@
+default_config:
+  mode: KEEP
+
+tables:
+
+  - table_name_with_schema: "dbo.Orders"
+    mode: GENERATION
+    target_row_number: 10000
+
+  - table_name_with_schema: "dbo.Order Details"
+    mode: GENERATION
+    target_row_number: 20000
+
+table_truncation_mode: "TRUNCATE"
+schema_creation_mode: DROP_AND_CREATE
+safety_mode: "RELAXED"
+cycle_resolution_strategy: DEFER_FOREIGN_KEY

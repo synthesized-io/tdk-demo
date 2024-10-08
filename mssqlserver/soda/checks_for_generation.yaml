@@ -1,0 +1,38 @@
+checks for Categories:
+  - row_count = 8
+
+checks for CustomerCustomerDemo:
+  - row_count = 0
+
+checks for CustomerDemographics:
+  - row_count = 0
+
+checks for Customers:
+  - row_count = 91
+
+checks for EmployeeTerritories:
+  - row_count = 49
+
+checks for Employees:
+  - row_count = 9
+
+checks for [Order Details]:
+  - row_count = 20000
+
+checks for Orders:
+  - row_count = 10000
+
+checks for Products:
+  - row_count = 77
+
+checks for Region:
+  - row_count = 4
+
+checks for Shippers:
+  - row_count = 3
+
+checks for Suppliers:
+  - row_count = 29
+
+checks for Territories:
+  - row_count = 53

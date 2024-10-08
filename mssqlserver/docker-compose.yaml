@@ -1,0 +1,93 @@
+version: '3.6'
+
+services:
+
+  input_db:
+    container_name: input_db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    ports:
+      - 6000:1433
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
+      ACCEPT_EULA: Y
+    healthcheck:
+      test: >
+        echo 'select 1;' | /opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1 -C
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+
+  output_db:
+    container_name: output_db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
+    ports:
+      - 6001:1433
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Secret_password_1}
+      ACCEPT_EULA: Y
+    healthcheck:
+      test: >
+        echo 'select 1;' | /opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1 -C
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+
+  databases:
+    container_name: databases
+    build: .
+    command: >
+      bash -c "/opt/mssql-tools/bin/sqlcmd -S input_db -U SA -P Secret_password_1 -i /opt/init.sql
+      && /opt/mssql-tools/bin/sqlcmd -S input_db -U SA -P Secret_password_1 -d northwind -i /opt/instnwnd.sql
+      && /opt/mssql-tools/bin/sqlcmd -S input_db -U SA -P Secret_password_1 -d northwind -i /opt/prepare_source_db.sql
+      && /opt/mssql-tools/bin/sqlcmd -S output_db -U SA -P Secret_password_1 -i /opt/init.sql"
+    volumes:
+      - ./init.sql:/opt/init.sql
+      - ./prepare_source_db.sql:/opt/prepare_source_db.sql
+    depends_on:
+      input_db:
+        condition: service_healthy
+      output_db:
+        condition: service_healthy
+
+
+  tdk:
+    extends:
+      file: ../parent-compose.yml
+      service: tdk
+    environment:
+      SYNTHESIZED_INPUT_URL: jdbc:sqlserver://input_db:1433;databaseName=northwind;encrypt=false
+      SYNTHESIZED_INPUT_USERNAME: SA
+      SYNTHESIZED_INPUT_PASSWORD: Secret_password_1
+      SYNTHESIZED_OUTPUT_URL: jdbc:sqlserver://output_db:1433;databaseName=northwind;encrypt=false
+      SYNTHESIZED_OUTPUT_USERNAME: SA
+      SYNTHESIZED_OUTPUT_PASSWORD: Secret_password_1
+      SYNTHESIZED_KEY: ${SYNTHESIZED_KEY}
+      SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
+      JAVA_TOOL_OPTIONS: >
+        -Dlogging.level.io.synthesized.tdk.executor.lite.LiteTransformer=INFO
+        -Dlogging.level.io.synthesized.tdk=WARN
+        -Dlogging.level.com.zaxxer.hikari=WARN
+        -Dlogging.level.org.reflections=WARN
+        -Dlogging.level.org.jooq=WARN
+        -XX:+UseContainerSupport
+        -XX:MaxRAMPercentage=80.0
+        -Dspring.main.banner-mode=CONSOLE
+        -Dspring.banner.location=file:/app/banner.txt
+    volumes:
+      - ./${CONFIG_FILE}:/app/config.yaml
+      - ../banner.txt:/app/banner.txt
+      - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
+    depends_on:
+      databases:
+        condition: service_completed_successfully
+
+
+  check:
+    container_name: check
+    image: sodadata/soda-core
+    volumes:
+      - ./soda:/sodacl

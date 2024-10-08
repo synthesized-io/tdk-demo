@@ -25,4 +25,4 @@ jobs:
 
       - name: Verify yamls
         run: |
-          yamllint -sd relaxed .
+          yamllint .
