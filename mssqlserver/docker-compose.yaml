@@ -4,7 +4,7 @@ services:
 
   input_db:
     container_name: input_db
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
     user: root
     ports:
       - 6000:1433
@@ -21,7 +21,7 @@ services:
 
   output_db:
     container_name: output_db
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2017-latest
     user: root
     ports:
       - 6001:1433
