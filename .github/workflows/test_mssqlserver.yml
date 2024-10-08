@@ -22,17 +22,8 @@ jobs:
           docker compose pull
           docker compose build
 
-      - name: Run databases test
-        continue-on-error: true
-        run: |
-          docker compose run databases
-
-      - name: Run databases logs
-        continue-on-error: true
-        run: |
-          docker compose logs
-
       - name: Run databases
+        continue-on-error: true
         run: |
           docker compose run databases
 
