@@ -16,7 +16,7 @@ services:
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
       interval: 3s
       timeout: 3s
-      retries: 10
+      retries: 30
 
 
   output_db:
@@ -33,7 +33,7 @@ services:
         echo 'select 1;' | /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Secret_password_1
       interval: 3s
       timeout: 3s
-      retries: 10
+      retries: 30
 
 
   databases:
