@@ -43,6 +43,11 @@ jobs:
         run: |
           docker inspect input_db
 
+      - name: Run databases ls 3
+        continue-on-error: true
+        run: |
+          docker inspect output_db
+
       - name: Run databases
         run: |
           docker compose run databases
