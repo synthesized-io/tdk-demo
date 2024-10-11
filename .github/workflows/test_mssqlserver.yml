@@ -1,0 +1,82 @@
+name: test_mssqlserver
+
+on:
+  push:
+    branches: [ 'main' ]
+  pull_request:
+    branches: [ '*' ]
+
+defaults:
+  run:
+    working-directory: ./mssqlserver
+
+jobs:
+
+  masking:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker compose
+        run: |
+          docker compose pull
+          docker compose build
+
+      - name: Run databases
+        continue-on-error: true
+        run: |
+          docker compose run databases
+
+      - name: Run TDK
+        env:
+          SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+          CONFIG_FILE: config_masking.tdk.yaml
+        run: |
+          docker compose run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_masking.yaml
+
+
+  generation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker compose
+        run: |
+          docker compose pull
+          docker compose build
+
+      - name: Run databases
+        continue-on-error: true
+        run: |
+          docker compose run databases
+
+      - name: Run TDK
+        env:
+          SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+          CONFIG_FILE: config_generation.tdk.yaml
+        run: |
+          docker compose run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_generation.yaml

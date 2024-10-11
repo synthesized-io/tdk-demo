@@ -1,0 +1,21 @@
+data_source input_db:
+  type: sqlserver
+  connection:
+    host: input_db
+    port: '1433'
+    username: sa
+    password: Secret_password_1
+    trust_server_certificate: true
+  database: northwind
+  schema: dbo
+
+data_source output_db:
+  type: sqlserver
+  connection:
+    host: output_db
+    port: '1433'
+    username: sa
+    password: Secret_password_1
+    trust_server_certificate: true
+  database: northwind
+  schema: dbo
