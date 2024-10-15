@@ -1,6 +1,6 @@
 data_sources:
   default_source:
-    jdbc_url: jdbc:postgresql://localhost:6000/postgres
+    url: jdbc:postgresql://localhost:6000/postgres
     user:
       type: raw
       value: postgres
@@ -8,7 +8,7 @@ data_sources:
       type: raw
       value: postgres
   default_target:
-    jdbc_url: jdbc:postgresql://localhost:6001/postgres
+    url: jdbc:postgresql://localhost:6001/postgres
     user:
       type: raw
       value: postgres
