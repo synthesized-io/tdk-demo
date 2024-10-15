@@ -33,7 +33,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --base main \
+          pr=$(gh pr create --base main \
             --head "update-release-version-v${RELEASE_VERSION}" \
             --title "Update image version to v${RELEASE_VERSION}" \
-            --body 'Created by Github action'
+            --body 'Created by Github action')
+          gh pr merge $pr --auto
