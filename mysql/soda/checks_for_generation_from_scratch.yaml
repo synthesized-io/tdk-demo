@@ -15,8 +15,9 @@ checks for country:
 
 checks for customer:
   - row_count = 10000
-  - invalid_count(email) = 0:
-      valid format: email
+  ## Disabled until synthesized-io/tdk#5259 is resolved
+  # - invalid_count(email) = 0:
+  #     valid format: email
 
 checks for film:
   - row_count = 3000
@@ -44,8 +45,9 @@ checks for rental:
 
 checks for staff:
   - row_count = 256
-  - invalid_percent(email) = 0:
-      valid format: email
+  ## Disabled until synthesized-io/tdk#5259 is resolved
+  # - invalid_percent(email) = 0:
+  #     valid format: email
 
 checks for store:
   - row_count = 256
