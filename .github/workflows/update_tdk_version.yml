@@ -10,6 +10,12 @@ jobs:
     env:
       RELEASE_VERSION: ${{ github.event.client_payload.version }}
     steps:
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.TDK_GOVERNOR_RELEASE_APP_ID }}
+          private-key: ${{ secrets.TDK_GOVERNOR_RELEASE_APP_PRIVATE_KEY }}
+
       - uses: actions/checkout@v4
 
       - name: Update image version
@@ -31,7 +37,7 @@ jobs:
 
       - name: Create PR
         env:
-          GH_TOKEN: ${{ secrets.FGT_FOR_RELEASE_COMMITS }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
         run: |
           pr=$(gh pr create --base main \
             --head "update-release-version-v${RELEASE_VERSION}" \
