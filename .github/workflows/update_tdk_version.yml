@@ -37,4 +37,4 @@ jobs:
             --head "update-release-version-v${RELEASE_VERSION}" \
             --title "Update image version to v${RELEASE_VERSION}" \
             --body 'Created by Github action')
-          gh pr merge $pr --auto
+          gh pr merge $pr --auto --squash
