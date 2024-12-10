@@ -12,9 +12,10 @@ services:
     environment:
       ORACLE_PASSWORD: ${ORACLE_USER:-secret_password}
     volumes:
-      - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
-      - ./sakila-schema.sql:/container-entrypoint-initdb.d/2.sql
-      - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/3.sql
+      - ./create_user.sql:/container-entrypoint-initdb.d/01_create_user.sql
+      - ./sakila-schema.sql:/container-entrypoint-initdb.d/02_sakila-schema.sql
+      - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/03_oracle-sakila-insert-data.sql
+      - ./create-triggers.sql:/container-entrypoint-initdb.d/04_post-insert.sql
     healthcheck:
       test: "/opt/oracle/healthcheck.sh"
       interval: "3s"
