@@ -1,0 +1,47 @@
+checks for staff:
+  - row_count same as staff in input_db
+
+checks for film:
+  - row_count same as film in input_db
+  - distribution_difference(rating) = 0.0:
+      method: swd
+      distribution reference file: /sodacl/masked_film_rating_distribution.yml
+
+checks for actor:
+  - row_count same as actor in input_db
+
+checks for address:
+  - row_count same as address in input_db
+
+checks for category:
+  - row_count same as category in input_db
+
+checks for city:
+  - row_count same as city in input_db
+
+checks for country:
+  - row_count same as country in input_db
+
+checks for customer:
+  - row_count same as customer in input_db
+
+checks for film_actor:
+  - row_count same as film_actor in input_db
+
+checks for film_category:
+  - row_count same as film_category in input_db
+
+checks for inventory:
+  - row_count same as inventory in input_db
+
+checks for language:
+  - row_count same as language in input_db
+
+checks for payment:
+  - row_count same as payment in input_db
+
+checks for rental:
+  - row_count same as rental in input_db
+
+checks for store:
+  - row_count same as store in input_db

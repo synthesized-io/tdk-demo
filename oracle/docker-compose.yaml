@@ -2,9 +2,9 @@ version: '3'
 
 services:
 
-  oracle_source:
+  input_db:
     image: gvenzl/oracle-xe
-    container_name: oracle_source
+    container_name: input_db
     networks:
       - simple-network
     ports:
@@ -15,16 +15,17 @@ services:
       - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
       - ./sakila-schema.sql:/container-entrypoint-initdb.d/2.sql
       - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/3.sql
+      - ./create_flag.sh:/container-entrypoint-initdb.d/4.sh
     healthcheck:
-      test: "/opt/oracle/healthcheck.sh"
-      interval: "3s"
-      timeout: "3s"
-      start_period: "3s"
-      retries: 30
+      test:  ["CMD", "sh", "-c", "if [ -e /opt/oracle/flag ]; then exit 0; else exit 1; fi"]
+      interval: "6s"
+      timeout: "6s"
+      start_period: "6s"
+      retries: 60
 
-  oracle_target:
+  output_db:
     image: gvenzl/oracle-xe
-    container_name: oracle_target
+    container_name: output_db
     networks:
       - simple-network
     ports:
@@ -42,14 +43,14 @@ services:
 
   databases:
     container_name: databases
-    image: docker/whalesay
+    image: synthesizedio/whalesay
     command: >
       cowsay
         "Both databases have been started and are ready for TDK exercises!"
     depends_on:
-      oracle_source:
+      input_db:
         condition: service_healthy
-      oracle_target:
+      output_db:
         condition: service_healthy
 
 
@@ -60,10 +61,10 @@ services:
     networks:
       - simple-network
     environment:
-      SYNTHESIZED_INPUT_URL: jdbc:oracle:thin:@oracle_source:1521:xe
+      SYNTHESIZED_INPUT_URL: jdbc:oracle:thin:@input_db:1521:xe
       SYNTHESIZED_INPUT_USERNAME: test
       SYNTHESIZED_INPUT_PASSWORD: test
-      SYNTHESIZED_OUTPUT_URL: jdbc:oracle:thin:@oracle_target:1521:xe
+      SYNTHESIZED_OUTPUT_URL: jdbc:oracle:thin:@output_db:1521:xe
       SYNTHESIZED_OUTPUT_USERNAME: test
       SYNTHESIZED_OUTPUT_PASSWORD: test
       SYNTHESIZED_USERCONFIG_FILE: /app/config.yaml
@@ -82,7 +83,9 @@ services:
     volumes:
       - ./config.tdk.yaml:/app/config.yaml
       - ./banner.txt:/app/banner.txt
-
+    depends_on:
+      databases:
+        condition: service_completed_successfully
 
   ora2pg:
     image: georgmoser/ora2pg
@@ -111,6 +114,13 @@ services:
       - ./postgres_output_data/COPY_TEST_output.sql:/docker-entrypoint-initdb.d/4.sql
     ports: [ "5432:5432" ]
 
+  check:
+    container_name: check
+    image: sodadata/soda-core
+    networks:
+      - simple-network
+    volumes:
+      - ./soda:/sodacl
 
 networks:
   simple-network:

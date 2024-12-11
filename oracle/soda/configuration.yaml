@@ -1,0 +1,11 @@
+data_source input_db:
+  type: oracle
+  username: test
+  password: test
+  connectstring: input_db:1521/XE
+
+data_source output_db:
+  type: oracle
+  username: test
+  password: test
+  connectstring: output_db:1521/XE
