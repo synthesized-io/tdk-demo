@@ -1,0 +1,47 @@
+checks for actor:
+  - row_count = 200
+
+checks for address:
+  - row_count = 603
+
+checks for category:
+  - row_count = 16
+
+checks for city:
+  - row_count = 600
+
+checks for country:
+  - row_count = 109
+
+checks for customer:
+  - row_count = 599
+
+checks for film:
+  - row_count = 1000
+#   - distribution_difference(rating) < 0.01:
+#       method: chi_square
+#       distribution reference file: /sodacl/film_rating_distribution.yml
+
+checks for film_actor:
+  - row_count = 5462
+
+checks for film_category:
+  - row_count = 1000
+
+checks for inventory:
+  - row_count = 4581
+
+checks for language:
+  - row_count = 6
+
+checks for payment:
+  - row_count = 16049
+
+checks for rental:
+  - row_count = 16044
+
+checks for staff:
+  - row_count = 2
+
+checks for store:
+  - row_count = 2
