@@ -17,7 +17,7 @@ services:
       - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/3.sql
       - ./create_flag.sh:/container-entrypoint-initdb.d/4.sh
     healthcheck:
-      test:  ["CMD", "sh", "-c", "if [ -e /opt/oracle/flag ]; then exit 0; else exit 1; fi"]
+      test: ["CMD", "sh", "-c", "if [ -e /opt/oracle/flag ]; then exit 0; else exit 1; fi"]
       interval: "6s"
       timeout: "6s"
       start_period: "6s"
