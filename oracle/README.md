@@ -20,7 +20,7 @@ export SYNTHESIZED_KEY=kDpeQB...
 
 Spin up Oracle databases:
 ```shell
-docker compose up oracle_source oracle_target -d
+docker compose run databases
 ```
 
 Run TDK:
