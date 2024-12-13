@@ -20,7 +20,7 @@ export SYNTHESIZED_KEY=kDpeQB...
 
 Spin up Oracle databases:
 ```shell
-docker compose up oracle_source oracle_target -d
+docker compose run databases
 ```
 
 Run TDK:
@@ -39,10 +39,3 @@ Run the PostgreSQL database:
 ```shell
 docker compose up postgres_masked -d
 ```
-
-
-## Knowing problems
-
-- get rid of `last_update` columns in the cofiguration file
-- truncate shcema with recursive FKs
-- mask the `film.description` column
