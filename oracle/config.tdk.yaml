@@ -7,14 +7,6 @@ tables:
       - columns: [ "RATING" ]
         params:
           type: "categorical_generator"
-          categories:
-            value_source: PROVIDED
-            values:
-              "PG-13": 223
-              "NC-17": 21
-              "R": 195
-              "PG": 194
-              "G": 178
       - columns: [ "SPECIAL_FEATURES" ]
         params:
           type: "categorical_generator"
