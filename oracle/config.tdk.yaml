@@ -4,16 +4,18 @@ default_config:
 tables: 
   - table_name_with_schema: "TEST.FILM"
     transformations:
-      - columns:
-          - rating
+      - columns: ["rating"]
         params:
-          type: categorical_generator
+          type: "categorical_generator"
           categories:
             value_source: PROVIDED
             values:
-              "PG-13": 0.5
-              "PG-17": 0.4
-            
+              "PG-13": 223
+              "NC-17": 21
+              "R": 195
+              "PG": 194
+              "G": 178
+
 cycle_resolution_strategy: DEFER_FOREIGN_KEY
 table_truncation_mode: TRUNCATE
 schema_creation_mode: CREATE_IF_NOT_EXISTS
