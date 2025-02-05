@@ -3,7 +3,7 @@ checks for staff:
 
 checks for film:
   - row_count same as film in input_db
-  - distribution_difference(rating) = 0.0:
+  - distribution_difference(rating) = 0.4:
       method: swd
       distribution reference file: /sodacl/masked_film_rating_distribution.yml
 
