@@ -1,6 +1,13 @@
 default_config:
   mode: MASKING
 
+tables:
+  - table_name_with_schema: "TEST.FILM"
+    transformations:
+      - columns: [ "RATING", "SPECIAL_FEATURES" ]
+        params:
+          type: "categorical_generator"
+
 cycle_resolution_strategy: DEFER_FOREIGN_KEY
 table_truncation_mode: TRUNCATE
 schema_creation_mode: CREATE_IF_NOT_EXISTS
