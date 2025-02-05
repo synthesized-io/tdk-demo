@@ -1,6 +1,19 @@
 default_config:
   mode: MASKING
 
+tables: 
+  - table_name_with_schema: "TEST.FILM"
+    transformations:
+      - columns:
+          - rating
+        params:
+          type: categorical_generator
+          categories:
+            value_source: PROVIDED
+            values:
+              "PG-13": 0.5
+              "PG-17": 0.4
+            
 cycle_resolution_strategy: DEFER_FOREIGN_KEY
 table_truncation_mode: TRUNCATE
 schema_creation_mode: CREATE_IF_NOT_EXISTS
