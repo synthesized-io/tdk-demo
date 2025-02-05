@@ -1,10 +1,10 @@
 default_config:
   mode: MASKING
 
-tables: 
+tables:
   - table_name_with_schema: "TEST.FILM"
     transformations:
-      - columns: ["rating"]
+      - columns: [ "RATING" ]
         params:
           type: "categorical_generator"
           categories:
