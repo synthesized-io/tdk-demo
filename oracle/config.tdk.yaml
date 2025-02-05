@@ -15,6 +15,16 @@ tables:
               "R": 195
               "PG": 194
               "G": 178
+      - columns: [ "SPECIAL_FEATURES" ]
+        params:
+          type: "categorical_generator"
+          categories:
+            value_source: PROVIDED
+            values:
+              "Trailers": 223
+              "Commentaries": 21
+              "Deleted Scenes": 195
+              "Behind the Scenes": 194
 
 cycle_resolution_strategy: DEFER_FOREIGN_KEY
 table_truncation_mode: TRUNCATE
