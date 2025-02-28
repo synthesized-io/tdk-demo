@@ -1,0 +1,5 @@
+services:
+  input_db:
+    volumes:
+      - ./sakila-schema.sql:/container-entrypoint-initdb.d/2.sql
+      - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/4.sql

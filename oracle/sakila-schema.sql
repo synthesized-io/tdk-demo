@@ -524,6 +524,7 @@ CREATE TABLE store (
   address_id INT NOT NULL,
   last_update DATE NOT NULL,
   CONSTRAINT pk_store PRIMARY KEY  (store_id),
+  -- 
   CONSTRAINT fk_store_staff FOREIGN KEY (manager_staff_id) REFERENCES staff (staff_id) ,
   CONSTRAINT fk_store_address FOREIGN KEY (address_id) REFERENCES address (address_id)
 );
