@@ -81,7 +81,7 @@ services:
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./config.tdk.yaml:/app/config.yaml
+      - ./${CONFIG_FILE}:/app/config.yaml
       - ./banner.txt:/app/banner.txt
     depends_on:
       databases:

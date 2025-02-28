@@ -1,0 +1,4 @@
+services:
+  input_db:
+    volumes:
+      - ./sakila-clear-data.sql:/docker-entrypoint-initdb.d/22.sql

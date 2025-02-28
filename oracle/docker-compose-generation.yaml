@@ -1,0 +1,4 @@
+services:
+  input_db:
+    volumes:
+      - ./sakila-schema-generation.sql:/docker-entrypoint-initdb.d/21.sql
