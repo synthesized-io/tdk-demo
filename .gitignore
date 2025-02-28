@@ -9,3 +9,4 @@ postgres/logs
 mysql/logs
 
 sqlite/output/output.db
+csv/datasets/output
