@@ -16,8 +16,6 @@ tables:
         params:
           type: formatted_string_generator
           pattern: POINT\(-?\d\d -?\d\d\)
-          
-        
 
   - table_name_with_schema: "sakila.staff"
     target_row_number: 256
