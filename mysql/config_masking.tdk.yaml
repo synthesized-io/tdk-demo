@@ -5,3 +5,11 @@ table_truncation_mode: "TRUNCATE"
 schema_creation_mode: DROP_AND_CREATE
 cycle_resolution_strategy: "DELETE_NOT_REQUIRED"
 safety_mode: "RELAXED"
+
+tables:
+  - table_name_with_schema: "sakila.address"
+    transformations:
+      - columns: [ "location" ]
+        params:
+          type: formatted_string_generator
+          pattern: POINT\(-?\d\d -?\d\d\)
