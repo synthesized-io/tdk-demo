@@ -33,7 +33,7 @@ tables:
   - table_name_with_schema: "TEST.FILM"
     target_row_number: 3_000
     transformations:
-      - columns: ["rating"]
+      - columns: ["RATING"]
         params:
           type: "categorical_generator"
           categories:
