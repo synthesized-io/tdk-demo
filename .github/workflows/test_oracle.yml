@@ -92,9 +92,9 @@ jobs:
       - name: Run databases
         continue-on-error: true
         run: >
-          docker compose -f docker-compose.yaml 
-          -f docker-compose-generation.yaml 
-          -f docker-compose-clear.yaml 
+          docker compose -f docker-compose.yaml
+          -f docker-compose-generation.yaml
+          -f docker-compose-clear.yaml
           run databases
 
       - name: Run TDK
