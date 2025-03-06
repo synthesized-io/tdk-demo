@@ -2,7 +2,7 @@ checks for actor:
   - row_count = 400
 
 checks for address:
-  - row_count = 1206
+  - row_count = 5000
 
 checks for category:
   - row_count = 32
