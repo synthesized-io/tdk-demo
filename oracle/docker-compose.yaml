@@ -13,9 +13,7 @@ services:
       ORACLE_PASSWORD: ${ORACLE_USER:-secret_password}
     volumes:
       - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
-      - ./sakila-schema.sql:/container-entrypoint-initdb.d/2.sql
-      - ./oracle-sakila-insert-data.sql:/container-entrypoint-initdb.d/3.sql
-      - ./create_flag.sh:/container-entrypoint-initdb.d/4.sh
+      - ./create_flag.sh:/container-entrypoint-initdb.d/9.sh
     healthcheck:
       test: ["CMD", "sh", "-c", "if [ -e /opt/oracle/flag ]; then exit 0; else exit 1; fi"]
       interval: "6s"
@@ -81,7 +79,7 @@ services:
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./config.tdk.yaml:/app/config.yaml
+      - ./${CONFIG_FILE}:/app/config.yaml
       - ./banner.txt:/app/banner.txt
     depends_on:
       databases:

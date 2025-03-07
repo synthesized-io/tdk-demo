@@ -5,7 +5,6 @@
 *.bak
 data
 
-postgres/logs
-mysql/logs
+*/logs
 
 sqlite/output/output.db

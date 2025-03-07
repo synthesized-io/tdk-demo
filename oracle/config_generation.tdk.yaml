@@ -1,0 +1,9 @@
+default_config:
+  mode: GENERATION
+  target_ratio: 2.0
+
+cycle_resolution_strategy: DEFER_FOREIGN_KEY
+table_truncation_mode: TRUNCATE
+schema_creation_mode: CREATE_IF_NOT_EXISTS
+safety_mode: "RELAXED"
+
