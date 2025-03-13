@@ -34,7 +34,6 @@ tables:
             values:
               "Y": 0.75
               "N": 0.25
-              
 
   - table_name_with_schema: "TEST.RENTAL"
     target_row_number: 20_000

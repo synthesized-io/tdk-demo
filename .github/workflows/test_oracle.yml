@@ -91,14 +91,14 @@ jobs:
       - name: Run databases
         continue-on-error: true
         run: |
-          docker compose -f docker-compose.yaml -f docker-compose-generation_from_scratch.yaml run databases
+          docker compose -f docker-compose.yaml -f docker-compose-generation-from-scratch.yaml run databases
 
       - name: Run TDK
         env:
           SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
           CONFIG_FILE: config_generation_from_scratch.tdk.yaml
         run: |
-          docker compose -f docker-compose.yaml -f docker-compose-generation_from_scratch.yaml run tdk
+          docker compose -f docker-compose.yaml -f docker-compose-generation-from-scratch.yaml run tdk
 
       - name: Verify input data
         run: >
