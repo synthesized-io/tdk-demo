@@ -1,0 +1,75 @@
+default_config:
+  mode: GENERATION
+  target_row_number: 1000
+
+tables:
+  - table_name_with_schema: "TEST.COUNTRY"
+    target_row_number: 200
+
+  - table_name_with_schema: "TEST.LANGUAGE"
+    target_row_number: 100
+
+  - table_name_with_schema: "TEST.CITY"
+    target_row_number: 500
+
+  - table_name_with_schema: "TEST.ADDRESS"
+    target_row_number: 1_000
+
+  - table_name_with_schema: "TEST.STORE"
+    target_row_number: 1_000
+
+  - table_name_with_schema: "TEST.STAFF"
+    target_row_number: 5_000
+
+  - table_name_with_schema: "TEST.CUSTOMER"
+    target_row_number: 10_000
+    transformations:
+      - columns:
+          - "ACTIVE"
+        params:
+          type: categorical_generator
+          categories:
+            value_source: PROVIDED
+            type: STRING
+            values:
+              "Y": 0.75
+              "N": 0.25
+
+  - table_name_with_schema: "TEST.RENTAL"
+    target_row_number: 20_000
+
+  - table_name_with_schema: "TEST.PAYMENT"
+    target_row_number: 20_000
+
+  - table_name_with_schema: "TEST.FILM"
+    target_row_number: 3_000
+    transformations:
+      - columns: ["RATING"]
+        params:
+          type: "categorical_generator"
+          categories:
+            type: STRING
+            value_source: PROVIDED
+            values:
+              "PG-13": 0.223
+              "NC-17": 0.21
+              "R": 0.195
+              "PG": 0.194
+              "G": 0.178
+
+      - columns: ["SPECIAL_FEATURES"]
+        params:
+          type: categorical_generator
+          categories:
+            type: STRING
+            value_source: PROVIDED
+            values:
+              "Trailers": 1
+              "Commentaries": 1
+              "Deleted Scenes": 1
+              "Behind the Scenes": 1
+              null: 1
+
+schema_creation_mode: CREATE_IF_NOT_EXISTS
+table_truncation_mode: TRUNCATE
+safety_mode: "RELAXED"

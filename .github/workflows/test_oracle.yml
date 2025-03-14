@@ -11,7 +11,6 @@ defaults:
     working-directory: ./oracle
 
 jobs:
-
   masking:
     runs-on: ubuntu-latest
     steps:
@@ -25,13 +24,14 @@ jobs:
       - name: Run databases
         continue-on-error: true
         run: |
-          docker compose run databases
+          docker compose -f docker-compose.yaml -f docker-compose-masking.yaml run databases
 
       - name: Run TDK
         env:
           SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+          CONFIG_FILE: config_masking.tdk.yaml
         run: |
-          docker compose run tdk
+          docker compose -f docker-compose.yaml -f docker-compose-masking.yaml run tdk
 
       - name: Verify input data
         run: >
@@ -44,3 +44,64 @@ jobs:
           docker compose run check scan -d output_db
           -c /sodacl/configuration.yaml
           /sodacl/checks_for_masking.yaml
+  generation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker compose
+        run: |
+          docker compose pull
+          docker compose build
+
+      - name: Run databases
+        continue-on-error: true
+        run: |
+          docker compose -f docker-compose.yaml -f docker-compose-generation.yaml run databases
+
+      - name: Run TDK
+        env:
+          SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+          CONFIG_FILE: config_generation.tdk.yaml
+        run: |
+          docker compose -f docker-compose.yaml -f docker-compose-generation.yaml run tdk
+
+      - name: Verify input data
+        run: >
+          docker compose run check scan -d input_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_input_db.yaml
+
+      - name: Verify output data
+        run: >
+          docker compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_2x_generation.yaml
+
+  generation_from_scratch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docker compose
+        run: |
+          docker compose pull
+          docker compose build
+
+      - name: Run databases
+        continue-on-error: true
+        run: |
+          docker compose -f docker-compose.yaml -f docker-compose-generation-from-scratch.yaml run databases
+
+      - name: Run TDK
+        env:
+          SYNTHESIZED_KEY: ${{ secrets.SYNTHESIZED_LICENSE_KEY }}
+          CONFIG_FILE: config_generation_from_scratch.tdk.yaml
+        run: |
+          docker compose -f docker-compose.yaml -f docker-compose-generation-from-scratch.yaml run tdk
+
+      - name: Verify output data
+        run: >
+          docker compose run check scan -d output_db
+          -c /sodacl/configuration.yaml
+          /sodacl/checks_for_generation_from_scratch.yaml
