@@ -1,5 +1,5 @@
 data_sources:
-  default_source:
+  input:
     url: jdbc:postgresql://input_db:5432/postgres
     user:
       type: vault
@@ -11,7 +11,7 @@ data_sources:
       storage: database
       path: static-creds/postgres-source-static-role
       secret: password
-  default_target:
+  output:
     url: jdbc:postgresql://output_db:5432/postgres
     user:
       type: vault
