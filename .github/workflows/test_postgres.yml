@@ -119,4 +119,4 @@ jobs:
         run: >
           docker compose run check scan -d output_db
           -c /sodacl/configuration.yaml
-          /sodacl/checks_for_2x_generation.yaml
+          /sodacl/checks_for_generation.yaml
