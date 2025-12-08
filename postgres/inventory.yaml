@@ -1,5 +1,5 @@
 data_sources:
-  default_source:
+  input:
     url: jdbc:postgresql://localhost:6000/postgres
     user:
       type: raw
@@ -7,7 +7,7 @@ data_sources:
     password:
       type: raw
       value: postgres
-  default_target:
+  output:
     url: jdbc:postgresql://localhost:6001/postgres
     user:
       type: raw

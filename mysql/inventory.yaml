@@ -1,5 +1,5 @@
 data_sources:
-  default_source:
+  input:
     url: jdbc:mysql://localhost:6000/sakila
     user:
       type: raw
@@ -7,7 +7,7 @@ data_sources:
     password:
       type: raw
       value: admin
-  default_target:
+  output:
     url: jdbc:mysql://localhost:6001/sakila
     user:
       type: raw
