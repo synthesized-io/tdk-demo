@@ -32,12 +32,13 @@ services:
       ORACLE_PASSWORD: ${ORACLE_USER:-secret_password}
     volumes:
       - ./create_user.sql:/container-entrypoint-initdb.d/1.sql
+      - ./create_flag.sh:/container-entrypoint-initdb.d/9.sh
     healthcheck:
-      test: "/opt/oracle/healthcheck.sh"
-      interval: "3s"
-      timeout: "3s"
-      start_period: "3s"
-      retries: 30
+      test: ["CMD", "sh", "-c", "if [ -e /opt/oracle/flag ]; then exit 0; else exit 1; fi"]
+      interval: "6s"
+      timeout: "6s"
+      start_period: "6s"
+      retries: 60
 
   databases:
     container_name: databases
