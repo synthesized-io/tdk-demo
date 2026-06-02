@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   vault:
-    image: hashicorp/vault
+    image: hashicorp/vault:1.21.4
     command: server -dev
     ports:
       - "9200:8200"
@@ -14,7 +14,7 @@ services:
 
 
   vault-client:
-    image: hashicorp/vault
+    image: hashicorp/vault:1.21.4
     command: sh /vault/run_vault.sh
     volumes:
       - ./run_vault.sh:/vault/run_vault.sh
