@@ -29,6 +29,14 @@ tables:
 
   - table_name_with_schema: "public.payment"
     target_row_number: 20_000
+    transformations:
+      - columns: ["payment_date"]
+        params:
+          type: "date_generator"
+          mean: "2022-04-15T00:00:00Z"
+          std: "90d"
+          min: "2022-01-02T00:00:00Z"
+          max: "2022-07-30T00:00:00Z"
 
   - table_name_with_schema: "public.film"
     target_row_number: 3_000
