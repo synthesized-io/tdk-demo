@@ -14,13 +14,15 @@ services:
     ports: [ "6000:3306" ]
     healthcheck:
       test: >
-        mysql $$MYSQL_DATABASE
+        mysql --protocol=tcp --host=127.0.0.1 --port=3306
+        $$MYSQL_DATABASE
         --user=$$MYSQL_USERNAME
         --password=$$MYSQL_ROOT_PASSWORD
         --execute "select 1;"
       interval: 3s
       timeout: 3s
-      retries: 10
+      start_period: 90s
+      retries: 30
 
   output_db:
     container_name: output_db
@@ -34,13 +36,15 @@ services:
     ports: [ "6001:3306" ]
     healthcheck:
       test: >
-        mysql $$MYSQL_DATABASE
+        mysql --protocol=tcp --host=127.0.0.1 --port=3306
+        $$MYSQL_DATABASE
         --user=$$MYSQL_USERNAME
         --password=$$MYSQL_ROOT_PASSWORD
         --execute "select 1;"
       interval: 3s
       timeout: 3s
-      retries: 10
+      start_period: 90s
+      retries: 30
 
 
   databases:
