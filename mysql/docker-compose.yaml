@@ -14,7 +14,7 @@ services:
     ports: [ "6000:3306" ]
     healthcheck:
       test: >
-        mysql --protocol=tcp --host=127.0.0.1 --port=3306
+        mysql --protocol=tcp
         $$MYSQL_DATABASE
         --user=$$MYSQL_USERNAME
         --password=$$MYSQL_ROOT_PASSWORD
@@ -36,7 +36,7 @@ services:
     ports: [ "6001:3306" ]
     healthcheck:
       test: >
-        mysql --protocol=tcp --host=127.0.0.1 --port=3306
+        mysql --protocol=tcp
         $$MYSQL_DATABASE
         --user=$$MYSQL_USERNAME
         --password=$$MYSQL_ROOT_PASSWORD
