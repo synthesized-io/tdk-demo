@@ -88,10 +88,14 @@ services:
         -Dspring.main.banner-mode=CONSOLE
         -Dspring.banner.location=file:/app/banner.txt
     volumes:
-      - ./${CONFIG_FILE}:/app/config.yaml
-      - ../banner.txt:/app/banner.txt
-      - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
-      - ../film_rating_distributions.csv:/app/film_rating_distributions.csv
+      # - ./${CONFIG_FILE}:/app/config.yaml
+      # - ../banner.txt:/app/banner.txt
+      # - ../logback-lite-executor.xml:/app/logback-lite-executor.xml
+      # - ../film_rating_distributions.csv:/app/film_rating_distributions.csv
+      - /root/src/tdk-demo/postgres/config_generation_from_scratch.tdk.yaml:/app/config.yaml
+      - /root/src/tdk-demo/banner.txt:/app/banner.txt
+      - /root/src/tdk-demo/logback-lite-executor.xml:/app/logback-lite-executor.xml
+      - /root/src/tdk-demo/film_rating_distributions.csv:/app/film_rating_distributions.csv
     depends_on:
       databases:
         condition: service_completed_successfully

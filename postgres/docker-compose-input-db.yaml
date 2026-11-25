@@ -3,4 +3,4 @@ version: '3.5'
 services:
   input_db:
     volumes:
-      - ./pagila-clear-data.sql:/docker-entrypoint-initdb.d/2.sql
+      - /root/src/tdk-demo/postgres/pagila-clear-data.sql:/docker-entrypoint-initdb.d/2.sql
